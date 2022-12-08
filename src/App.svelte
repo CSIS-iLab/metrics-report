@@ -12,12 +12,12 @@
     dataset = res
 
     const resSocialMediaData = await getSocialMediaData()
-    // socialMediaDataset = resSocialMediaData.values
+    socialMediaDataset = resSocialMediaData
 
 
-    // if (socialMediaDataset) {
-    //   console.log(socialMediaDataset)
-    // }
+    if (socialMediaDataset) {
+      console.log(socialMediaDataset)
+    }
   });
 </script>
 

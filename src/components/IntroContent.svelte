@@ -53,21 +53,16 @@
 <div class="wrapper">
   <main class="container intro-content">
     <p class="intro-content__overline--small">
-      Clean Resilient States Initiative
+      Metrics
     </p>
     <p class="intro-content__overline--regular">
-      by the Energy Security and Climate Change Program
+      by the Comms teams
     </p>
     <h1 class="intro-content__title">
-      Template for a database SPA
+      for X Program
     </h1>
     <p class="intro-content__introduction">
-      A curated database of state-level activities facilitating emissions
-      reductions, positive economic outcomes, and climate resilience—from the <a
-        class="intro-content__link"
-        href="https://www.csis.org/programs/energy-security-and-climate-change-program/projects/clean-resilient-states-initiative"
-        target="_blank">Clean Resilient States Initiative</a
-      >, created by the CSIS Energy Security & Climate Change Program.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod nisi porta lorem mollis. Id aliquet lectus proin nibh nisl condimentum.
     </p>
     <p class="intro-content__more">
       <a class="intro-content__link intro-content__link--more" href="#about"
@@ -78,22 +73,22 @@
     </p>
   </main>
   <div class="container">
-    <div class="intro-content__graphs ">
+    <!-- <div class="intro-content__graphs ">
       <div class="intro-bar">
         <div class="intro-bar__title">Most Referenced Authorities</div>
         <div class="intro-bar__content">
-          <div class="intro-bar__column--labels">
+          <div class="intro-bar__column--labels"> -->
             <!-- iterate and add the most refereced authorities -->
-            {#each mostReferencedAuhorities as authority}
+            <!-- {#each mostReferencedAuhorities as authority}
               <div><span>{Object.keys(authority)}</span></div>
             {/each}
           </div>
           <div
             class="intro-bar__column--bars"
             data-total-entries={totalEntries}
-          >
+          > -->
             <!-- iterate and add the most refereced authorities values -->
-            {#each mostReferencedAuhorities as authority}
+            <!-- {#each mostReferencedAuhorities as authority}
               <div class="bar">
                 <span
                   style="width: {(Object.values(authority) / totalEntries) *
@@ -108,18 +103,18 @@
       <div class="intro-bar">
         <div class="intro-bar__title">Top Tags</div>
         <div class="intro-bar__content">
-          <div class="intro-bar__column--labels">
+          <div class="intro-bar__column--labels"> -->
             <!-- iterate and add the top tags -->
-            {#each topTags as tag}
+            <!-- {#each topTags as tag}
               <div><span>{Object.keys(tag)}</span></div>
             {/each}
           </div>
           <div
             class="intro-bar__column--bars"
             data-total-entries={totalEntries}
-          >
+          > -->
             <!-- iterate and add the top tags values -->
-            {#each topTags as tag}
+            <!-- {#each topTags as tag}
               <div class="bar">
                 <span
                   style="width:  {(Object.values(tag) / totalEntries) * 100}%"
@@ -129,7 +124,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 
