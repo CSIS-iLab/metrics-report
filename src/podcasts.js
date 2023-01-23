@@ -1,17 +1,18 @@
 import * as d3Fetch from 'd3-fetch'
+import { getHelperData } from "./helper"
+
+let helperDataset = {}
 
 const googleAPIKey = "AIzaSyBXuQRRw4K4W8E4eGHoSFUSrK-ZwpD4Zz4";
 const googleSpreadsheetKey = "1Dz-3ajTk7Q3UGZqZoH-6zMT-5ynGOFmSNBuGe23pzSk";
-const googleSpreadsheetSocialMedia = "copy_of_social_media";
+const googleSpreadsheet = "podcasts";
 
-const socialMediaURL = `https://content-sheets.googleapis.com/v4/spreadsheets/${googleSpreadsheetKey}/values/${googleSpreadsheetSocialMedia}?key=${googleAPIKey}&majorDimension=ROWS`;
-let socialMediaDataset = {}
+const URL = `https://content-sheets.googleapis.com/v4/spreadsheets/${googleSpreadsheetKey}/values/${googleSpreadsheet}?key=${googleAPIKey}&majorDimension=ROWS`
 
-export async function getSocialMediaData() {
-  const response = await fetch(socialMediaURL)
+export async function getPodcastData() {
+  const response = await fetch(URL)
   const data = await response.json()
-  socialMediaDataset = formatData(data.values)
-  return socialMediaDataset;
+  return formatData(data.values)
 }
 
 function formatData(data) {
@@ -38,3 +39,5 @@ function formatColumnNames(columnNames) {
 function format(name) {
   return name.replaceAll("_", " ")
 }
+
+helperDataset = () => {}

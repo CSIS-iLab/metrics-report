@@ -2,10 +2,13 @@
   import { onMount } from "svelte"
   import { getData } from "./data"
   import { getSocialMediaData } from "./socialMediaData"
+  import { getPodcastData } from "./podcasts"
   import MainContainer from "./components/MainContainer.svelte"
 
   let dataset = {}
   let socialMediaDataset = {}
+  let podcastsDataset = {}
+
 
   onMount(async () => {
     const res = await getData()
@@ -14,9 +17,16 @@
     const resSocialMediaData = await getSocialMediaData()
     socialMediaDataset = resSocialMediaData
 
+    const resPodcasts = await getPodcastData()
+    podcastsDataset = resPodcasts
+
 
     if (socialMediaDataset) {
       console.log(socialMediaDataset)
+    }
+
+    if (podcastsDataset) {
+      console.log(podcastsDataset)
     }
   });
 </script>
