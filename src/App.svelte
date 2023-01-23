@@ -3,11 +3,13 @@
   import { getData } from "./data"
   import { getSocialMediaData } from "./socialMediaData"
   import { getPodcastData } from "./podcasts"
+  import { getHelperData } from "./helper"
   import MainContainer from "./components/MainContainer.svelte"
 
   let dataset = {}
   let socialMediaDataset = {}
   let podcastsDataset = {}
+  let helperDataset = {}
 
 
   onMount(async () => {
@@ -20,6 +22,8 @@
     const resPodcasts = await getPodcastData()
     podcastsDataset = resPodcasts
 
+    const resHelper = await getHelperData()
+    helperDataset = resHelper
 
     if (socialMediaDataset) {
       console.log(socialMediaDataset)

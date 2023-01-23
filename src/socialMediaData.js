@@ -22,7 +22,8 @@ function formatData(data) {
       program: row[0],
       numberOfPosts: row[1],
       impressions: row[2],
-      engagements: row[3]
+      engagements: row[3],
+      month: row[4]
     };
   })
   return {
