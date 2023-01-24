@@ -15,7 +15,12 @@ export async function getPodcastData() {
   return formatData(data.values)
 }
 
-function formatData(data) {
+async function formatData(data) {
+  helperDataset = await getHelperData()
+  if (helperDataset.dataFormmated.length > 1) {
+    console.log("we have something. inside here get the program name to format the podcasts dataset.")
+    console.log(helperDataset.dataFormmated)
+  }
   const columnNames = data.shift()
   const dataFormmated = data.map( ( row, index ) => {
     return {
@@ -40,4 +45,4 @@ function format(name) {
   return name.replaceAll("_", " ")
 }
 
-helperDataset = () => {}
+
