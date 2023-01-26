@@ -1,4 +1,4 @@
-import * as d3Fetch from 'd3-fetch'
+// import * as d3Fetch from 'd3-fetch'
 import { getHelperData } from "./helper"
 
 let helperDataset = {}
@@ -17,15 +17,13 @@ export async function getPodcastData() {
 
 async function formatData(data) {
   helperDataset = await getHelperData()
-  if (helperDataset.dataFormmated.length > 1) {
-    console.log("we have something. inside here get the program name to format the podcasts dataset.")
-    console.log(helperDataset.dataFormmated)
-  }
   const columnNames = data.shift()
   const dataFormmated = data.map( ( row, index ) => {
+
     return {
       id: index,
-      program: row[0],
+      program: getProgramName(row[0]),
+      productName: row[0],
       numberOfPosts: row[1],
       impressions: row[2],
       engagements: row[3]
@@ -45,4 +43,20 @@ function format(name) {
   return name.replaceAll("_", " ")
 }
 
-
+function getProgramName(productName) {
+  let programName
+  if (helperDataset.dataFormatted.length > 1) {
+    console.log(
+      "we have something. inside here get the program name to format the podcasts dataset."
+      );
+      helperDataset.dataFormatted.filter( (element) => {
+      console.log(productName)
+      console.log(element)
+      if (productName === element.productName) programName = element.program
+      // return element
+    })
+    console.log(helperDataset.dataFormatted);
+  }
+  // return 'GHPC'
+  return programName
+}

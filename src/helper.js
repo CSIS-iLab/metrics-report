@@ -14,7 +14,7 @@ export async function getHelperData() {
 
 function formatData(data) {
   const columnNames = data.shift()
-  const dataFormmated = data.map( ( row, index ) => {
+  const dataFormatted = data.map( ( row, index ) => {
     return {
       id: index,
       program: row[0],
@@ -23,7 +23,7 @@ function formatData(data) {
     }
   })
   return {
-    dataFormmated: dataFormmated,
+    dataFormatted: dataFormatted,
     columnNames: formatColumnNames(columnNames)
   };
 }
