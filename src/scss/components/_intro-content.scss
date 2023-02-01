@@ -5,6 +5,10 @@ main {
 }
 
 .intro-content {
+  h1 {
+    margin-bottom: 0;
+  }
+  
 	padding-top: rem(132);
 	max-width: $size__intro-content-wide-max-width;
 	text-align: center;
@@ -35,7 +39,7 @@ main {
 
 	&__title {
 		margin-top: rem(12);
-		margin-bottom: rem(48);
+		padding-bottom: rem(48);
 
 		@extend %text-style-heading-1;
 		color: $color-text-gray-500;
@@ -44,7 +48,7 @@ main {
 
 	&__introduction {
 		margin: 0 auto;
-		margin-bottom: rem(16);
+		padding-bottom: rem(16);
 		max-width: $size__content-max-width;
 		text-align: center;
 		@extend %text-style-paragraph-1;

@@ -12,16 +12,8 @@
         The activities included are derived from research conducted for the Clean Resilient State Initiative
         and are deemed novel, impactful, or otherwise significant by the researchers. 
       </p>
-      <p>
-        The 16 states highlighted in this database were selected to reflect the diversity in state
-        approaches to energy and emissions. Half of the states were selected due to their roles as the top U.S.
-        energy consumers (TX, CA, LA, FL, NY, PA, OH, IL), representing each census region of the country
-        (Northeast, Midwest, West, and South).  The other half (MA, MN, OR, NM, GA, SD, VA, WY) were selected to
-        ensure a diversity of regulatory and political environments for climate and energy issues. For more
-        details, see the appendices of the associated reports, below. 
-      </p>
     </div>
-    <div class="about__reports">
+    <!-- <div class="about__reports">
       <p class="about__reports__title">Associated Reports</p>
       <ul>
         <li><a class="about__reports__link" href="https://www.csis.org/analysis/insights-emissions-reduction-among-us-states" target="_blank">Insights on Emissions Reduction among U.S. States<span class="icon-container"><Icon class="icon__report" name="Icon-open-blank"/></span></a></li>
@@ -37,7 +29,7 @@
         papers are meant to provide guidance to policymakers, identify priorities for future
         research, and promote knowledge sharing among key stakeholders.
       </p>
-    </div>
+    </div> -->
     <div class="about__development">
       <h3 class="about__development__title">Development Team</h3>
       <p class="about__development__description">The database template is a product of the <a class="about__development__link" href="https://www.csis.org/programs/dracopoulos-ideas-lab" target="_blank">Andreas C. Dracopoulos iDeas Lab</a>, the in-house digital, multimedia, and design agency at the Center for Strategic and International Studies.</p>

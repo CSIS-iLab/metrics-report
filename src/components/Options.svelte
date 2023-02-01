@@ -167,7 +167,7 @@
 </script>
 
 <section class="table-container__header">
-  <h2 class="table-container__subtitle">Explore Policy Goals</h2>
+  <!-- <h2 class="table-container__subtitle">Explore Policy Goals</h2> -->
 </section>
 
 <section class="options__container">
