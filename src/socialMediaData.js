@@ -2,7 +2,7 @@ import * as d3Fetch from 'd3-fetch'
 
 const googleAPIKey = "AIzaSyBXuQRRw4K4W8E4eGHoSFUSrK-ZwpD4Zz4";
 const googleSpreadsheetKey = "1Dz-3ajTk7Q3UGZqZoH-6zMT-5ynGOFmSNBuGe23pzSk";
-const googleSpreadsheetSocialMedia = "copy_of_social_media";
+const googleSpreadsheetSocialMedia = "social_media";
 
 const socialMediaURL = `https://content-sheets.googleapis.com/v4/spreadsheets/${googleSpreadsheetKey}/values/${googleSpreadsheetSocialMedia}?key=${googleAPIKey}&majorDimension=ROWS`;
 let socialMediaDataset = {}
