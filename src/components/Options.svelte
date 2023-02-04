@@ -26,7 +26,7 @@
   const labelIdentifier = 'label';
 
   function updateActiveTab(val) {
-    const value = (val) ? val.split('_').join('-') : 'all'
+    const value = (val) ? val.split('_').join('-') : 'press'
     const spanCountActive = document.querySelector(`.options__count--active`);
     const spanCount = document.querySelector(`.options__count[data-count="${value}"]`);
     spanCountActive.classList.remove('options__count--active');
@@ -34,7 +34,7 @@
 
     const activeTab = document.querySelector(`.options__btn--tab--active`);
     const tabActivate = document.querySelector(`.options__btn--tab[data-tab="${value}"]`);
-    activeTab.classList.remove('options__btn--tab--active', 'options__btn--tab--Resilience--active', 'options__btn--tab--Economic-Development--active', 'options__btn--tab--Emissions-Reduction--active', 'options__btn--tab--all--active');
+    activeTab.classList.remove('options__btn--tab--active', 'options__btn--tab--Resilience--active', 'options__btn--tab--Economic-Development--active', 'options__btn--tab--Emissions-Reduction--active', 'options__btn--tab--press--active');
     tabActivate.classList.add('options__btn--tab--active', `options__btn--tab--${value}--active`);
   }
 
@@ -172,10 +172,10 @@
 
 <section class="options__container">
   <div class="options__header">
-    <button class="options__btn options__btn--tab options__btn--tab--all options__btn--tab--active options__btn--tab--all--active"
-      data-tab={"all"}
+    <button class="options__btn options__btn--tab options__btn--tab--press options__btn--tab--active options__btn--tab--press--active"
+      data-tab={"press"}
       on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >All <span data-count={"all"} class="options__count options__count--active">{policyGoalsTotal}</span>
+      >Press <span data-count={"press"} class="options__count options__count--active">{policyGoalsTotal}</span>
     </button>
     {#each dataset.policyGoals as policy}
       <button class="options__btn options__btn--tab options__btn--tab--{policy.split('_').join('-')} "
