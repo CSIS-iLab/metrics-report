@@ -18,6 +18,8 @@
   $: totalEntries =filteredData.length
 
   const policyGoalsTotal = dataset.data.length
+  const pressDataTotal = dataset.newData.press.data.dataFormmated.length
+
   function getPGCount(policyGoal) {
     return dataset.data.filter(row => row.policy_goals.includes(policyGoal)).length
   }
@@ -175,9 +177,9 @@
     <button class="options__btn options__btn--tab options__btn--tab--press options__btn--tab--active options__btn--tab--press--active"
       data-tab={"press"}
       on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >Press <span data-count={"press"} class="options__count options__count--active">{policyGoalsTotal}</span>
+      >Press <span data-count={"press"} class="options__count options__count--active">{pressDataTotal}</span>
     </button>
-    {#each dataset.policyGoals as policy}
+    {#each dataset.spreadsheetsTabs as policy}
       <button class="options__btn options__btn--tab options__btn--tab--{policy.split('_').join('-')} "
         data-tab={policy.split('_').join('-')}
         value="{policy}"

@@ -45,12 +45,12 @@ const URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSZbsWyNWxgbsJJd2AuaoNIJ2KkEplWSNK77gxcS_WndRrj1rNnPoxtPNl60HjlmdvQo4UvxBUMEi1S/pub?output=csv";
 
 const spreadsheetsTabs = [
-  "press",
-  "social_media",
-  "websites",
-  "podcasts",
-  "videos",
-  "publications",
+  "Press",
+  "Social_Media",
+  "Websites",
+  "Podcasts",
+  "Videos",
+  "Publications",
 ];
 const policyGoals = [
   "Emissions_Reduction",
