@@ -5,16 +5,16 @@ const googleSpreadsheetKey = "1Dz-3ajTk7Q3UGZqZoH-6zMT-5ynGOFmSNBuGe23pzSk";
 const googleSpreadsheetSocialMedia = "social_media";
 
 const socialMediaURL = `https://content-sheets.googleapis.com/v4/spreadsheets/${googleSpreadsheetKey}/values/${googleSpreadsheetSocialMedia}?key=${googleAPIKey}&majorDimension=ROWS`;
-let socialMediaDataset = {}
 
 export async function getSocialMediaData() {
   const response = await fetch(socialMediaURL)
   const data = await response.json()
-  socialMediaDataset = formatData(data.values)
-  return socialMediaDataset;
+  // socialMediaDataset = formatData(data.values)
+  // return socialMediaDataset;
+  return formatData(data.values)
 }
 
-function formatData(data) {
+async function formatData(data) {
   const columnNames = data.shift()
   const dataFormmated = data.map( ( row, index ) => {
     return {
@@ -27,9 +27,12 @@ function formatData(data) {
     };
   })
   return {
-    dataFormmated: dataFormmated,
-    columnNames: formatColumnNames(columnNames)
-  };
+    metrics: 'social_media',
+    data: {
+      dataFormmated: dataFormmated,
+      columnNames: formatColumnNames(columnNames)
+    }
+  }
 }
 
 function formatColumnNames(columnNames) {

@@ -56,6 +56,7 @@ export function getData() {
       authority: authority,
       resourceTypes: resourceTypes,
       policyGoals: policyGoals,
+      spreadsheetsTabs: spreadsheetsTabs
     }
   })
   return dataPromise

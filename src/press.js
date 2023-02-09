@@ -19,7 +19,6 @@ async function formatData(data) {
   helperDataset = await getHelperData()
   const columnNames = data.shift()
   const dataFormmated = data.map( ( row, index ) => {
-
     return {
       id: index,
       // program: getProgramName(row[0]),
@@ -31,8 +30,11 @@ async function formatData(data) {
     }
   })
   return {
-    dataFormmated: dataFormmated,
-    columnNames: formatColumnNames(columnNames)
+    metrics: 'press',
+    data: {
+      dataFormmated: dataFormmated,
+      columnNames: formatColumnNames(columnNames)
+    }
   };
 }
 

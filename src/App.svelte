@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte"
-  import { getData } from "./data"
+  import { getData } from "./newData"
   import { getSocialMediaData } from "./socialMediaData"
   import { getPodcastData } from "./podcasts"
   import { getPressData } from "./press"
@@ -39,13 +39,17 @@
     }
 
     if (pressDataset) {
-      console.log(pressDataset)
+      // console.log(pressDataset)
+    }
+
+    if (dataset) {
+      console.log(dataset)
     }
 
   });
 </script>
 
-{#if dataset.data && dataset.data.length > 0}
+{ #if dataset.data && dataset.data.length > 0 }
   <MainContainer {dataset} />
 {:else}
   <div class="loading-container">
