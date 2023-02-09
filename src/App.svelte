@@ -3,12 +3,14 @@
   import { getData } from "./data"
   import { getSocialMediaData } from "./socialMediaData"
   import { getPodcastData } from "./podcasts"
+  import { getPressData } from "./press"
   import { getHelperData } from "./helper"
   import MainContainer from "./components/MainContainer.svelte"
 
   let dataset = {}
   let socialMediaDataset = {}
   let podcastsDataset = {}
+  let pressDataset = {}
   let helperDataset = {}
 
 
@@ -22,6 +24,9 @@
     const resPodcasts = await getPodcastData()
     podcastsDataset = resPodcasts
 
+    const resPress = await getPressData()
+    pressDataset = resPress
+
     const resHelper = await getHelperData()
     helperDataset = resHelper
 
@@ -30,8 +35,13 @@
     }
 
     if (podcastsDataset) {
-      console.log(podcastsDataset)
+      // console.log(podcastsDataset)
     }
+
+    if (pressDataset) {
+      console.log(pressDataset)
+    }
+
   });
 </script>
 
