@@ -7,6 +7,9 @@
   import Footer from "./Footer.svelte";
 
   export let dataset;
+  export let newDataset;
+  let selectedYear = '';
+  let selectedMonth = ''
   let selectedState = "";
   let selectedResourceType = "";
   let selectedAuthority = "";
@@ -45,18 +48,38 @@
       }
     })
   }
+
+  $:filteredNewData = () => {
+    return newDataset.data.filtered.filter( row => {
+      // console.log(row);
+      // new Date().getFullYear()  // returns the current year
+      const filteredYear = selectedYear ? selectedYear : '2022'
+      const filteredMonth = selectedMonth ? selectedMonth : row.month
+
+      return (
+        row.year === filteredYear &&
+        row.month === filteredMonth
+      )
+    })
+  }
+
+  $: console.log('current filteredNewData: ', newDataset)
 </script>
 
 <div id="site-content">
   <Header />
 
-  <IntroContent filteredData={filteredData()} />
+  <IntroContent filteredData={filteredData()} showingProgram={newDataset.data.showingProgram}/>
 
   <section class="table-container">
       <Options
         {dataset}
+        {newDataset}
         filteredData={filteredData()}
+        filteredNewData={filteredNewData()}
         bind:row
+        bind:selectedYear
+        bind:selectedMonth
         bind:selectedAuthority
         bind:selectedResourceType
         bind:selectedState
@@ -64,8 +87,7 @@
         bind:selectedPolicyGoal
         bind:searchText
       />
-    
-    <Table filteredData={filteredData()} bind:row />
+    <Table filteredData={filteredData()} filteredNewData={filteredNewData()} headerNames={newDataset.data.columnNames}  bind:row />
   </section>
   <About />
   <Footer />

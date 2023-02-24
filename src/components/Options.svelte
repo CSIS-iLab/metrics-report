@@ -6,7 +6,11 @@
   import Icon from "./Icons.svelte";
   
   export let dataset;
+  export let newDataset;
   export let filteredData;
+  export let filteredNewData;
+  export let selectedYear;
+  export let selectedMonth;
   export let selectedState;
   export let selectedResourceType;
   export let selectedAuthority;
@@ -79,10 +83,13 @@
       removeExtraContentStyle()
       switchRowBottomLine()
     }
-    if (selectName === 'State') {
-      selectedState = event.detail.value
-    } else if (selectName === 'Authority') {
-      selectedAuthority = event.detail.value
+    if (selectName === 'Year') {
+      selectedYear = event.detail.value
+      console.log(selectedYear);
+      // selectedState = event.detail.value
+    } else if (selectName === 'Month') {
+      selectedMonth = event.detail.value
+      console.log(selectedMonth);
     } else if (selectName === 'Policy Goal') {
       updateActiveTab(event.target.value)
       selectedPolicyGoal = event.target.value
@@ -98,10 +105,10 @@
       removeExtraContentStyle()
       switchRowBottomLine()
     }
-    if (selectName === 'State') {
-      selectedState = ''
-    } else if (selectName === 'Authority') {
-      selectedAuthority = ''
+    if (selectName === 'Year') {
+      selectedYear = ''
+    } else if (selectName === 'Month') {
+      selectedMonth = ''
     } else {
       selectedResourceType = ''
     }
@@ -191,48 +198,27 @@
 </section>
 <div class="selects">
   <div class="select-container">
-    <div class="label">State</div>
+    <div class="label">Year</div>
     <Select
       indicatorSvg={chevron}
       showChevron={true}
       bind:listOpen={isListOpen}
-      {optionIdentifier} labelIdentifier={'name'} items={dataset.states}
-      placeholder="Select a state"
-      on:select={(event) => handleSelect(event, 'State')}
-      on:clear={() => handleClear('State')}
+      {optionIdentifier} {labelIdentifier} items={newDataset.data.years}
+      placeholder="Select a Year"
+      on:select={(event) => handleSelect(event, 'Year')}
+      on:clear={() => handleClear('Year')}
     />
   </div>
 
   <div class="select-container">
-    <div class="label">Authority</div>
+    <div class="label">Month</div>
     <Select
       indicatorSvg={chevron}
       showChevron={true}
-      {optionIdentifier} {labelIdentifier} items={dataset.authority}
-      placeholder="Select an authority"
-      on:select={(event) => handleSelect(event, 'Authority')}
-      on:clear={() => handleClear('Authority')}
-    />
-  </div>
-
-  <div class="select-container">
-    <div class="label">Resource Type</div>
-    <Select
-      indicatorSvg={chevron}
-      showChevron={true}
-      {optionIdentifier} {labelIdentifier} items={dataset.resourceTypes}
-      placeholder="Select a type"
-      on:select={(event) => handleSelect(event, 'ResourceType')}
-      on:clear={(event) => handleClear(event, 'ResourceType')}
-    />
-  </div>
-  
-  <div class="select-container">
-    <div class="label">Tags</div>
-    <SelectMultiple
-      bind:selectedValue={selectedTags}
-      options={dataset.tags}
-      selectName="tags"
+      {optionIdentifier} {labelIdentifier} items={newDataset.data.months}
+      placeholder="Select Month"
+      on:select={(event) => handleSelect(event, 'Month')}
+      on:clear={() => handleClear('Month')}
     />
   </div>
 </div>

@@ -8,7 +8,7 @@
   import { getHelperData } from "./helper"
   import MainContainer from "./components/MainContainer.svelte"
 
-  let datasett = {}
+  let newDataset = {}
   let dataset = {}
   let socialMediaDataset = {}
   let podcastsDataset = {}
@@ -19,7 +19,7 @@
 
   onMount(async () => {
     const ress = await getNewData()
-    datasett = ress
+    newDataset = ress
     
     const res = await getData()
     dataset = res
@@ -55,15 +55,15 @@
       // console.log(pressDatasetFor)
     }
 
-    if (datasett) {
-      console.log(datasett)
+    if (newDataset) {
+      console.log(newDataset)
     }
 
   });
 </script>
 
-{ #if dataset.data && dataset.data.length > 0 && datasett.data && datasett.data.filtered.length > 0}
-  <MainContainer {dataset} {datasett} />
+{ #if dataset.data && dataset.data.length > 0 && newDataset.data && newDataset.data.filtered.length > 0}
+  <MainContainer {dataset} {newDataset} />
 {:else}
   <div class="loading-container">
     <div class="loading" />

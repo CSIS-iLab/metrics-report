@@ -7,6 +7,7 @@ let socialMediaDataset = {}
 let data = {}
 
 const showingProgram = 'Africa' //to control who program
+// const showingProgram = "Americas"; //to control who program
 
 // const googleAPIKey = "AIzaSyAImbihK2tiRewSFzuJTF_lcgPlGSr7zcg";
 const googleAPIKey = "AIzaSyBXuQRRw4K4W8E4eGHoSFUSrK-ZwpD4Zz4";
@@ -46,8 +47,11 @@ function formatData(pressDataset, socialMediaDataset) {
   return {
     data: {
       filtered: dataFilteredByProgram,
+      showingProgram: showingProgram,
       metrics: pressDataset.metrics,
-      columnNames: pressDataset.columnNames
+      columnNames: pressDataset.columnNames,
+      years: pressDataset.years,
+      months: pressDataset.months
     }
   };
 }

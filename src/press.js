@@ -3,6 +3,8 @@ import { getHelperData } from "./helper"
 
 let helperDataset = {}
 let columnNames
+let years = []
+let months = []
 const googleAPIKey = "AIzaSyBXuQRRw4K4W8E4eGHoSFUSrK-ZwpD4Zz4";
 const googleSpreadsheetKey = "1Dz-3ajTk7Q3UGZqZoH-6zMT-5ynGOFmSNBuGe23pzSk";
 const googleSpreadsheet = "press";
@@ -25,7 +27,10 @@ async function fetchData(URL) {
     const data = res.map( (row, index ) => {
       if (index == 0) {
         columnNames = Object.keys(row)
+        console.log(row);
       }
+      years.push(row.Year)
+      months.push(row.Month)
       return {
         id: index,
         program: row.Program,
@@ -39,6 +44,8 @@ async function fetchData(URL) {
       metrics: "press",
       data: data,
       columnNames: formatColumnNames(columnNames),
+      years: [...new Set(years)],
+      months: [...new Set(months)]
     };
   })
   return dataPromise
