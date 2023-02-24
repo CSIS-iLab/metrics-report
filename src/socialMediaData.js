@@ -14,6 +14,34 @@ export async function getSocialMediaData() {
   return formatData(data.values)
 }
 
+export async function getSocialMediaDataa() {
+  const newURL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=833450828&single=true&output=csv"
+  return await fetchData(newURL)
+}
+
+async function fetchData(URL) {
+  const dataPromise = d3Fetch.csv( URL ).then( res => {
+    const data = res.map( (row, index ) => {
+      // console.log(row)
+      return {
+        id: index,
+        program: row.Program,
+        numberOfPosts: row.Number_of_Posts,
+        impressions: row.Impressions,
+        engagements: row.Engagements,
+        month: row.Month,
+        year: row.Year
+      }
+    })
+    return {
+      metrics: 'social_media',
+      data: data
+    }
+  })
+  return dataPromise
+}
+
 async function formatData(data) {
   const columnNames = data.shift()
   const dataFormmated = data.map( ( row, index ) => {

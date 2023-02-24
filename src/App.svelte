@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte"
+  import { getNewData } from "./data"
   import { getData } from "./newData"
   import { getSocialMediaData } from "./socialMediaData"
   import { getPodcastData } from "./podcasts"
@@ -7,6 +8,7 @@
   import { getHelperData } from "./helper"
   import MainContainer from "./components/MainContainer.svelte"
 
+  let datasett = {}
   let dataset = {}
   let socialMediaDataset = {}
   let podcastsDataset = {}
@@ -16,6 +18,9 @@
 
 
   onMount(async () => {
+    const ress = await getNewData()
+    datasett = ress
+    
     const res = await getData()
     dataset = res
 
@@ -43,22 +48,22 @@
     }
 
     if (pressDataset) {
-      console.log(pressDataset)
+      // console.log(pressDataset)
     }
 
     if (pressDatasetFor) {
-      console.log(pressDatasetFor)
+      // console.log(pressDatasetFor)
     }
 
-    if (dataset) {
-      // console.log(dataset)
+    if (datasett) {
+      console.log(datasett)
     }
 
   });
 </script>
 
-{ #if dataset.data && dataset.data.length > 0 }
-  <MainContainer {dataset} />
+{ #if dataset.data && dataset.data.length > 0 && datasett.data && datasett.data.filtered.length > 0}
+  <MainContainer {dataset} {datasett} />
 {:else}
   <div class="loading-container">
     <div class="loading" />

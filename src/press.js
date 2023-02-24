@@ -2,7 +2,7 @@ import * as d3Fetch from 'd3-fetch'
 import { getHelperData } from "./helper"
 
 let helperDataset = {}
-
+let columnNames
 const googleAPIKey = "AIzaSyBXuQRRw4K4W8E4eGHoSFUSrK-ZwpD4Zz4";
 const googleSpreadsheetKey = "1Dz-3ajTk7Q3UGZqZoH-6zMT-5ynGOFmSNBuGe23pzSk";
 const googleSpreadsheet = "press";
@@ -23,7 +23,9 @@ export async function gettPressData() {
 async function fetchData(URL) {
   const dataPromise = d3Fetch.csv( URL ).then( res => {
     const data = res.map( (row, index ) => {
-      // console.log(row)
+      if (index == 0) {
+        columnNames = Object.keys(row)
+      }
       return {
         id: index,
         program: row.Program,
@@ -34,9 +36,10 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: 'press',
-      data: data
-    }
+      metrics: "press",
+      data: data,
+      columnNames: formatColumnNames(columnNames),
+    };
   })
   return dataPromise
 }
