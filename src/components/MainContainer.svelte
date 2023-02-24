@@ -63,7 +63,7 @@
     })
   }
 
-  $: console.log('current filteredNewData: ', newDataset)
+  $: console.log('current filteredNewData: ', filteredNewData())
 </script>
 
 <div id="site-content">

@@ -19,10 +19,10 @@
   export let searchText = '';
   export let row;
 
-  $: totalEntries =filteredData.length
+  $: totalEntries =filteredNewData.length
 
   const policyGoalsTotal = dataset.data.length
-  const pressDataTotal = dataset.newData.press.data.dataFormmated.length
+  const dataTotal = dataset.newData.press.data.dataFormmated.length
 
   function getPGCount(policyGoal) {
     return dataset.data.filter(row => row.policy_goals.includes(policyGoal)).length
@@ -184,7 +184,7 @@
     <button class="options__btn options__btn--tab options__btn--tab--press options__btn--tab--active options__btn--tab--press--active"
       data-tab={"press"}
       on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >Press <span data-count={"press"} class="options__count options__count--active">{pressDataTotal}</span>
+      >Press <span data-count={"press"} class="options__count options__count--active">{dataTotal}</span>
     </button>
     {#each dataset.spreadsheetsTabs as policy}
       <button class="options__btn options__btn--tab options__btn--tab--{policy.split('_').join('-')} "

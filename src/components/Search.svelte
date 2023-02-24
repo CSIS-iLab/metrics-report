@@ -31,7 +31,7 @@ $: if (btnSearch) {
 
 </script>
 
-<div class="search">
+<div class="search search--hidden">
   <span class="search__icon">
     <Icon
       name="Icon-magnify"
