@@ -33,8 +33,10 @@
   const labelIdentifier = 'label';
 
   function updateActiveTab(val) {
-    const value = (val) ? val.split('_').join('-') : 'press'
-    const spanCountActive = document.querySelector(`.options__count--active`);
+    // const value = (val) ? val : 'press'
+    const value = val
+    const spanCountActive = document.querySelector(`.options__count--active`)
+    // const spanCountActive = document.querySelector(`.options__count`)
     const spanCount = document.querySelector(`.options__count[data-count="${value}"]`);
     spanCountActive.classList.remove('options__count--active');
     spanCount.classList.add(`options__count--active`);
@@ -88,7 +90,7 @@
       selectedYear = event.detail.value
     } else if (selectName === 'Month') {
       selectedMonth = event.detail.value
-    } else if (selectName === 'Policy Goal') {
+    } else if (selectName === 'Tab') {
       updateActiveTab(event.target.value)
       selectedPolicyGoal = event.target.value
     }  else {
@@ -179,17 +181,12 @@
 
 <section class="options__container">
   <div class="options__header">
-    <!-- <button class="options__btn options__btn--tab options__btn--tab--press options__btn--tab--active options__btn--tab--press--active"
-      data-tab={"press"}
-      on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >Press <span data-count={"press"} class="options__count options__count--active">{dataTotal}</span>
-    </button> -->
-    {#each dataset.data.spreadsheetsTabs as metric}
-      <button class="options__btn options__btn--tab options__btn--tab--{metric.split('_').join('-')} "
-        data-tab={metric.split('_').join('-')}
+    {#each dataset.data.spreadsheetsTabs as metric, index}
+      <button class="options__btn options__btn--tab options__btn--tab--{metric} {index == 0 ? `options__btn--tab--active options__btn--tab--${metric}--active` : '' }"
+        data-tab={metric}
         value="{metric}"
-        on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >{metric.split('_').join(' ')} <span data-count={metric.split('_').join('-')} class="options__count options__count--{metric.split('_').join('-')}">{getMetricCount(metric)}</span>
+        on:click={(event) => handleSelect(event, 'Tab')}
+      >{metric.split('_').join(' ')} <span data-count={metric} class="options__count {index == 0 ? 'options__count--active' : ''} options__count--{metric}">{getMetricCount(metric)}</span>
       </button>
     {/each}
   </div>

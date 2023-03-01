@@ -10,12 +10,6 @@ const googleSpreadsheetKey = "1Dz-3ajTk7Q3UGZqZoH-6zMT-5ynGOFmSNBuGe23pzSk";
 const googleSpreadsheet = "press";
 const URL = `https://content-sheets.googleapis.com/v4/spreadsheets/${googleSpreadsheetKey}/values/${googleSpreadsheet}?key=${googleAPIKey}&majorDimension=ROWS`
 
-// export async function getPressData() {
-//   const response = await fetch(URL)
-//   const data = await response.json()
-//   return formatData(data.values)
-// }
-
 export async function getPressData() {
   const newURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=71771517&single=true&output=csv"
@@ -50,45 +44,10 @@ async function fetchData(URL) {
   return dataPromise
 }
 
-async function formatData(data) {
-  helperDataset = await getHelperData()
-  const columnNames = data.shift()
-  const dataFormmated = data.map( ( row, index ) => {
-    return {
-      id: index,
-      // program: getProgramName(row[0]),
-      program: row[0],
-      totalMentions: row[1],
-      topTierMentions: row[2],
-      month: row[3],
-      year: row[4]
-    }
-  })
-  return {
-    metrics: 'press',
-    data: {
-      dataFormmated: dataFormmated,
-      columnNames: formatColumnNames(columnNames)
-    }
-  };
-}
-
 function formatColumnNames(columnNames) {
   return columnNames.map((name) => format(name))
 }
 
 function format(name) {
   return name.replaceAll("_", " ")
-}
-
-function getProgramName(productName) {
-  let programName
-  if (helperDataset.dataFormatted.length > 1) {
-      helperDataset.dataFormatted.filter( (element) => {
-      if (productName === element.productName) programName = element.program
-      // return element
-    })
-  }
-  // return 'GHPC'
-  return programName
 }

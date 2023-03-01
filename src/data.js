@@ -5,7 +5,20 @@ import { getSocialMediaDataa } from './socialMediaData'
 let pressDataset = {}
 let socialMediaDataset = {}
 let data = {}
-
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 const showingProgram = 'Africa' //to control who program
 // const showingProgram = "Americas"; //to control who program
 
@@ -30,7 +43,6 @@ export async function getNewData() {
   socialMediaDataset = await getSocialMediaDataa()
   if (pressDataset && socialMediaDataset) {
     data = formatData(pressDataset, socialMediaDataset)
-
   }
   // return await getPressData()
   return data
@@ -49,13 +61,27 @@ function formatData(pressDataset, socialMediaDataset) {
       filtered: dataFilteredByProgram,
       showingProgram: showingProgram,
       metrics: pressDataset.metrics,
+      tabs: unifiedData([pressDataset, socialMediaDataset]),
       columnNames: pressDataset.columnNames,
       years: pressDataset.years,
-      months: pressDataset.months,
+      months: months,
       spreadsheetsTabs: spreadsheetsTabs,
 
     }
   };
+}
+
+function unifiedData(params) {
+  console.log('unifiedData')
+  console.log(params)
+  const data = params.map(element => {
+    const tab = element.metrics
+    return {
+      tab: tab,
+      dataForm: element.data
+    }
+  });
+  return data
 }
 
 const URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSZbsWyNWxgbsJJd2AuaoNIJ2KkEplWSNK77gxcS_WndRrj1rNnPoxtPNl60HjlmdvQo4UvxBUMEi1S/pub?output=csv";
