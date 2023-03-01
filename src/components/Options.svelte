@@ -6,26 +6,27 @@
   import Icon from "./Icons.svelte";
   
   export let dataset;
-  export let newDataset;
   export let filteredData;
-  export let filteredNewData;
+  // export let filteredNewData;
   export let selectedYear;
   export let selectedMonth;
-  export let selectedState;
   export let selectedResourceType;
-  export let selectedAuthority;
-  export let selectedTags;
   export let selectedPolicyGoal;
   export let searchText = '';
   export let row;
 
-  $: totalEntries =filteredNewData.length
+  $: totalEntries =filteredData.length
+  $: console.log(dataset)
+  // const dataTotal = dataset.newData.press.data.dataFormmated.length
+  // const dataTotal = dataset.newData.press.data.dataFormmated.length
 
-  const policyGoalsTotal = dataset.data.length
-  const dataTotal = dataset.newData.press.data.dataFormmated.length
+  function getMetricCount(metric) {
 
-  function getPGCount(policyGoal) {
-    return dataset.data.filter(row => row.policy_goals.includes(policyGoal)).length
+    // metric = metric.toLowerCase()
+    // console.log(metric)
+    // // console.log(dataset.newData)
+    // return dataset.newData[metric].data.dataFormmated.length
+    return 2
   }
 
   const optionIdentifier = 'value';
@@ -85,11 +86,8 @@
     }
     if (selectName === 'Year') {
       selectedYear = event.detail.value
-      console.log(selectedYear);
-      // selectedState = event.detail.value
     } else if (selectName === 'Month') {
       selectedMonth = event.detail.value
-      console.log(selectedMonth);
     } else if (selectName === 'Policy Goal') {
       updateActiveTab(event.target.value)
       selectedPolicyGoal = event.target.value
@@ -181,17 +179,17 @@
 
 <section class="options__container">
   <div class="options__header">
-    <button class="options__btn options__btn--tab options__btn--tab--press options__btn--tab--active options__btn--tab--press--active"
+    <!-- <button class="options__btn options__btn--tab options__btn--tab--press options__btn--tab--active options__btn--tab--press--active"
       data-tab={"press"}
       on:click={(event) => handleSelect(event, 'Policy Goal')}
       >Press <span data-count={"press"} class="options__count options__count--active">{dataTotal}</span>
-    </button>
-    {#each dataset.spreadsheetsTabs as policy}
-      <button class="options__btn options__btn--tab options__btn--tab--{policy.split('_').join('-')} "
-        data-tab={policy.split('_').join('-')}
-        value="{policy}"
+    </button> -->
+    {#each dataset.data.spreadsheetsTabs as metric}
+      <button class="options__btn options__btn--tab options__btn--tab--{metric.split('_').join('-')} "
+        data-tab={metric.split('_').join('-')}
+        value="{metric}"
         on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >{policy.split('_').join(' ')} <span data-count={policy.split('_').join('-')} class="options__count options__count--{policy.split('_').join('-')}">{getPGCount(policy)}</span>
+      >{metric.split('_').join(' ')} <span data-count={metric.split('_').join('-')} class="options__count options__count--{metric.split('_').join('-')}">{getMetricCount(metric)}</span>
       </button>
     {/each}
   </div>
@@ -203,7 +201,7 @@
       indicatorSvg={chevron}
       showChevron={true}
       bind:listOpen={isListOpen}
-      {optionIdentifier} {labelIdentifier} items={newDataset.data.years}
+      {optionIdentifier} {labelIdentifier} items={dataset.data.years}
       placeholder="Select a Year"
       on:select={(event) => handleSelect(event, 'Year')}
       on:clear={() => handleClear('Year')}
@@ -215,7 +213,7 @@
     <Select
       indicatorSvg={chevron}
       showChevron={true}
-      {optionIdentifier} {labelIdentifier} items={newDataset.data.months}
+      {optionIdentifier} {labelIdentifier} items={dataset.data.months}
       placeholder="Select Month"
       on:select={(event) => handleSelect(event, 'Month')}
       on:clear={() => handleClear('Month')}

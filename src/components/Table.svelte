@@ -4,7 +4,6 @@
   import Icon from "./Icons.svelte"
 
   export let filteredData;
-  export let filteredNewData;
   export let headerNames;
   export let row;
 
@@ -48,7 +47,7 @@
   // ];
 
   // const headerNames = filteredNewData.
-  $:console.log(headerNames);
+  // $:console.log(headerNames);
   // $: sortBy = { col: "activity", ascending: true };
   
   // $: sort = (e, column) => {
@@ -141,7 +140,7 @@
   <div class="table__container" id="table-body">
     <table class="table table__body">
       <tbody>
-        {#each filteredNewData as rows}
+        {#each filteredData as rows}
           <tr class="title table__body__cell--border">
             <td class="table__body__cell table__body__cell--data"><div class="table__body__cell__title-container"><span class="icon-container"></span>{rows.program}</div></td>
             <td class="table__body__cell table__body__cell--data">{rows.topTierMentions}</td>
