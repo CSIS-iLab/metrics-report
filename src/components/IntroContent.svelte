@@ -1,53 +1,7 @@
 <script>
   import Icon from "./Icons.svelte";
 
-  export let filteredData;
-  let authorities = [];
-  let tags = [];
-  const totalEntries = filteredData.length;
-
-  function getMostReferencedAuthorities() {
-    filteredData.forEach((element) => {
-      authorities.push(element.authority);
-    });
-    return countOccurences(authorities);
-  }
-
-  function getTopTags() {
-    filteredData.forEach((element) => {
-      element.tags.forEach((tag) => {
-        tags.push(tag);
-      });
-    });
-    return countOccurences(tags);
-  }
-
-  function countOccurences(array) {
-    const counts = {};
-    array.forEach(function (x) {
-      counts[x] = (counts[x] || 0) + 1;
-    });
-    return getTopThree(counts);
-  }
-
-  function getTopThree(obj) {
-    const sortable = Object.fromEntries(
-      Object.entries(obj).sort(([, a], [, b]) => b - a)
-    );
-
-    let topThree = [];
-    let objNames = Object.keys(sortable);
-
-    objNames.forEach((name, i) => {
-      if (i < 3) {
-        topThree.push({ [name]: sortable[name] });
-      }
-    });
-    return topThree;
-  }
-
-  const topTags = getTopTags();
-  const mostReferencedAuhorities = getMostReferencedAuthorities();
+  export let showingProgram;
 </script>
 
 <div class="wrapper">
@@ -59,7 +13,7 @@
       by the Comms teams
     </p>
     <h1 class="intro-content__title">
-      for X Program
+      for {showingProgram}
     </h1>
     <!-- <p class="intro-content__introduction">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod nisi porta lorem mollis. Id aliquet lectus proin nibh nisl condimentum.
