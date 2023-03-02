@@ -1,27 +1,22 @@
 <script>
   import { onMount } from "svelte"
-  import { getData } from "./data"
-  import { getSocialMediaData } from "./socialMediaData"
+  import { getNewData } from "./data"
   import MainContainer from "./components/MainContainer.svelte"
 
   let dataset = {}
-  let socialMediaDataset = {}
 
   onMount(async () => {
-    const res = await getData()
+    const res = await getNewData()
     dataset = res
 
-    const resSocialMediaData = await getSocialMediaData()
-    socialMediaDataset = resSocialMediaData
-
-
-    if (socialMediaDataset) {
-      console.log(socialMediaDataset)
+    if (dataset) {
+      console.log(dataset)
     }
+
   });
 </script>
 
-{#if dataset.data && dataset.data.length > 0}
+{ #if dataset.data && dataset.data.filtered.length > 0}
   <MainContainer {dataset} />
 {:else}
   <div class="loading-container">

@@ -7,7 +7,7 @@
     <a href="https://www.csis.org" alt="CSIS website logo" title="Go home" aria-label="Go home">
       <span class="header__logo"></span>
     </a>
-    <SocialShare />
+    <!-- <SocialShare /> -->
   </div>
 </header>
 

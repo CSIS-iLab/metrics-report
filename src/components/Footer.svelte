@@ -18,7 +18,7 @@
     </p>
   </div>
   <div class="footer__social">
-    <SocialMediaShare />
+    <!-- <SocialMediaShare /> -->
   </div>
   <div class="footer__contact">
     <address class="footer__address">

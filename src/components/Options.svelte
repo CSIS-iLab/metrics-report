@@ -7,34 +7,43 @@
   
   export let dataset;
   export let filteredData;
-  export let selectedState;
+  // export let filteredNewData;
+  export let selectedYear;
+  export let selectedMonth;
   export let selectedResourceType;
-  export let selectedAuthority;
-  export let selectedTags;
   export let selectedPolicyGoal;
   export let searchText = '';
   export let row;
 
   $: totalEntries =filteredData.length
+  $: console.log(dataset)
+  // const dataTotal = dataset.newData.press.data.dataFormmated.length
+  // const dataTotal = dataset.newData.press.data.dataFormmated.length
 
-  const policyGoalsTotal = dataset.data.length
-  function getPGCount(policyGoal) {
-    return dataset.data.filter(row => row.policy_goals.includes(policyGoal)).length
+  function getMetricCount(metric) {
+
+    // metric = metric.toLowerCase()
+    // console.log(metric)
+    // // console.log(dataset.newData)
+    // return dataset.newData[metric].data.dataFormmated.length
+    return 2
   }
 
   const optionIdentifier = 'value';
   const labelIdentifier = 'label';
 
   function updateActiveTab(val) {
-    const value = (val) ? val.split('_').join('-') : 'all'
-    const spanCountActive = document.querySelector(`.options__count--active`);
+    // const value = (val) ? val : 'press'
+    const value = val
+    const spanCountActive = document.querySelector(`.options__count--active`)
+    // const spanCountActive = document.querySelector(`.options__count`)
     const spanCount = document.querySelector(`.options__count[data-count="${value}"]`);
     spanCountActive.classList.remove('options__count--active');
     spanCount.classList.add(`options__count--active`);
 
     const activeTab = document.querySelector(`.options__btn--tab--active`);
     const tabActivate = document.querySelector(`.options__btn--tab[data-tab="${value}"]`);
-    activeTab.classList.remove('options__btn--tab--active', 'options__btn--tab--Resilience--active', 'options__btn--tab--Economic-Development--active', 'options__btn--tab--Emissions-Reduction--active', 'options__btn--tab--all--active');
+    activeTab.classList.remove('options__btn--tab--active', 'options__btn--tab--Resilience--active', 'options__btn--tab--Economic-Development--active', 'options__btn--tab--Emissions-Reduction--active', 'options__btn--tab--press--active');
     tabActivate.classList.add('options__btn--tab--active', `options__btn--tab--${value}--active`);
   }
 
@@ -77,11 +86,11 @@
       removeExtraContentStyle()
       switchRowBottomLine()
     }
-    if (selectName === 'State') {
-      selectedState = event.detail.value
-    } else if (selectName === 'Authority') {
-      selectedAuthority = event.detail.value
-    } else if (selectName === 'Policy Goal') {
+    if (selectName === 'Year') {
+      selectedYear = event.detail.value
+    } else if (selectName === 'Month') {
+      selectedMonth = event.detail.value
+    } else if (selectName === 'Tab') {
       updateActiveTab(event.target.value)
       selectedPolicyGoal = event.target.value
     }  else {
@@ -96,10 +105,10 @@
       removeExtraContentStyle()
       switchRowBottomLine()
     }
-    if (selectName === 'State') {
-      selectedState = ''
-    } else if (selectName === 'Authority') {
-      selectedAuthority = ''
+    if (selectName === 'Year') {
+      selectedYear = ''
+    } else if (selectName === 'Month') {
+      selectedMonth = ''
     } else {
       selectedResourceType = ''
     }
@@ -167,70 +176,44 @@
 </script>
 
 <section class="table-container__header">
-  <h2 class="table-container__subtitle">Explore Policy Goals</h2>
+  <!-- <h2 class="table-container__subtitle">Explore Policy Goals</h2> -->
 </section>
 
 <section class="options__container">
   <div class="options__header">
-    <button class="options__btn options__btn--tab options__btn--tab--all options__btn--tab--active options__btn--tab--all--active"
-      data-tab={"all"}
-      on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >All <span data-count={"all"} class="options__count options__count--active">{policyGoalsTotal}</span>
-    </button>
-    {#each dataset.policyGoals as policy}
-      <button class="options__btn options__btn--tab options__btn--tab--{policy.split('_').join('-')} "
-        data-tab={policy.split('_').join('-')}
-        value="{policy}"
-        on:click={(event) => handleSelect(event, 'Policy Goal')}
-      >{policy.split('_').join(' ')} <span data-count={policy.split('_').join('-')} class="options__count options__count--{policy.split('_').join('-')}">{getPGCount(policy)}</span>
+    {#each dataset.data.spreadsheetsTabs as metric, index}
+      <button class="options__btn options__btn--tab options__btn--tab--{metric} {index == 0 ? `options__btn--tab--active options__btn--tab--${metric}--active` : '' }"
+        data-tab={metric}
+        value="{metric}"
+        on:click={(event) => handleSelect(event, 'Tab')}
+      >{metric.split('_').join(' ')} <span data-count={metric} class="options__count {index == 0 ? 'options__count--active' : ''} options__count--{metric}">{getMetricCount(metric)}</span>
       </button>
     {/each}
   </div>
 </section>
 <div class="selects">
   <div class="select-container">
-    <div class="label">State</div>
+    <div class="label">Year</div>
     <Select
       indicatorSvg={chevron}
       showChevron={true}
       bind:listOpen={isListOpen}
-      {optionIdentifier} labelIdentifier={'name'} items={dataset.states}
-      placeholder="Select a state"
-      on:select={(event) => handleSelect(event, 'State')}
-      on:clear={() => handleClear('State')}
+      {optionIdentifier} {labelIdentifier} items={dataset.data.years}
+      placeholder="Select a Year"
+      on:select={(event) => handleSelect(event, 'Year')}
+      on:clear={() => handleClear('Year')}
     />
   </div>
 
   <div class="select-container">
-    <div class="label">Authority</div>
+    <div class="label">Month</div>
     <Select
       indicatorSvg={chevron}
       showChevron={true}
-      {optionIdentifier} {labelIdentifier} items={dataset.authority}
-      placeholder="Select an authority"
-      on:select={(event) => handleSelect(event, 'Authority')}
-      on:clear={() => handleClear('Authority')}
-    />
-  </div>
-
-  <div class="select-container">
-    <div class="label">Resource Type</div>
-    <Select
-      indicatorSvg={chevron}
-      showChevron={true}
-      {optionIdentifier} {labelIdentifier} items={dataset.resourceTypes}
-      placeholder="Select a type"
-      on:select={(event) => handleSelect(event, 'ResourceType')}
-      on:clear={(event) => handleClear(event, 'ResourceType')}
-    />
-  </div>
-  
-  <div class="select-container">
-    <div class="label">Tags</div>
-    <SelectMultiple
-      bind:selectedValue={selectedTags}
-      options={dataset.tags}
-      selectName="tags"
+      {optionIdentifier} {labelIdentifier} items={dataset.data.months}
+      placeholder="Select Month"
+      on:select={(event) => handleSelect(event, 'Month')}
+      on:clear={() => handleClear('Month')}
     />
   </div>
 </div>
