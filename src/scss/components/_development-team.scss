@@ -1,0 +1,38 @@
+@use '../abstracts/' as *;
+
+.development {
+  margin-top: rem(42);
+  margin-bottom: rem(8);
+
+  &__title {
+    @extend %text-style-heading-4;
+    margin-bottom: rem(12);
+  }
+
+  &__description {
+    @extend %text-style-paragraph-2;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: rem(24);
+  }
+
+  &__link {
+    color: $color-brand-blue-600;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-brand-blue-700;
+    }
+
+    &:focus {
+      color: $color-brand-blue-700;
+      background-color: $color-background-light-blue-100;
+      outline: 0;
+    }
+
+    &:visited {
+      color: $color-brand-blue-870;
+    }
+  }
+}

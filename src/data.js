@@ -1,9 +1,12 @@
 import * as d3Fetch from 'd3-fetch'
 import { getPressData } from './press'
 import { getSocialMediaDataa } from './socialMediaData'
+import { getAboutContent } from './about'
+
 
 let pressDataset = {}
 let socialMediaDataset = {}
+let aboutDataset ={}
 let data = {}
 const months = [
   "January",
@@ -41,11 +44,16 @@ export async function getSocialMediaData() {
 export async function getNewData() {
   pressDataset = await getPressData()
   socialMediaDataset = await getSocialMediaDataa()
+  aboutDataset = await getAboutContent()
   if (pressDataset && socialMediaDataset) {
-    data = formatData(pressDataset, socialMediaDataset)
+    data = formatData(pressDataset, socialMediaDataset, aboutDataset)
   }
   // return await getPressData()
   return data
+}
+
+export async function getContentData() {
+  
 }
 
 function formatData(pressDataset, socialMediaDataset) {
@@ -61,6 +69,7 @@ function formatData(pressDataset, socialMediaDataset) {
       filtered: dataFilteredByProgram,
       showingProgram: showingProgram,
       metrics: pressDataset.metrics,
+      about: aboutDataset,
       tabs: unifiedData([pressDataset, socialMediaDataset]),
       columnNames: pressDataset.columnNames,
       years: pressDataset.years,
