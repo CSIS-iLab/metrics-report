@@ -5,6 +5,7 @@
   import Table from './Table.svelte'
   import About from './About.svelte'
   import Footer from './Footer.svelte'
+  import Login from './Login.svelte'
 
   export let dataset
   // export let dataset;
@@ -30,8 +31,10 @@
   }
 
   $: console.log('current filteredData: ', filteredData())
+  $: console.log(dataset.data.showingProgram)
 </script>
 
+{#if dataset.data.showingProgram !==  null}
 <div id="site-content">
   <Header />
 
@@ -60,6 +63,12 @@
   <About aboutContent={dataset.data.about.data[0]} />
   <Footer />
 </div>
+{:else }
+  <div>
+    <Login />
+  </div>
+{/if}
+
 
 <style lang="scss">
   @use '../scss/components/table-container';

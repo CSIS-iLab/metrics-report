@@ -22,7 +22,7 @@ const months = [
   "November",
   "December",
 ];
-const showingProgram = 'Africa' //to control who program
+const showingProgram = '' //to control who program
 // const showingProgram = "Americas"; //to control who program
 
 // const googleAPIKey = "AIzaSyAImbihK2tiRewSFzuJTF_lcgPlGSr7zcg";
@@ -59,6 +59,14 @@ export async function getContentData() {
 function formatData(pressDataset, socialMediaDataset) {
   // console.log(pressDataset)
   // console.log(socialMediaDataset)
+  if (!showingProgram) {
+    return {
+      data: {
+        filtered: ['no data'],
+        showingProgram: null,
+      }
+    }
+  }
   const dataFilteredByProgram = pressDataset.data.filter(
     (row) => row.program == showingProgram
   )
