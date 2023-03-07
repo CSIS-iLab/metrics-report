@@ -6,20 +6,11 @@
   let contrasena
   let userInput
 
-  auth.subscribe( value => {
-    console.log(value)
-    login = value.login
-    user = value.user
-  })
-
   function handleClick() {
     if (!userInput || !contrasena) {
       console.log("can't be empty")
       return
     }
-    console.log(userInput)
-    console.log('store is ', login)
-    console.log('store is ', user)
     handleLogIn()
     return {
       user: userInput,
@@ -28,7 +19,7 @@
 
   function handleLogIn() {
     if (!login) {
-    $auth.login = !login
+    $auth.login = !$auth.login
     $auth.user = userInput
     console.log('store is ', $auth.login)
     console.log('store is ', $auth.user)
@@ -52,7 +43,7 @@
   }
 </script>
 <div id="login">
-  {#if !login}
+  {#if !$auth.login}
     <input
       type="username"
       name="username"
@@ -73,8 +64,8 @@
     <button on:click={handleClear}>Clear</button>
   {/if}
 
-  {#if login}
+  {#if $auth.login}
     <button on:click={handleLogOut}>Log Out</button>
-    <h1>Welcome {user}</h1>
+    <h1>Welcome {$auth.user}</h1>
   {/if}
 </div>

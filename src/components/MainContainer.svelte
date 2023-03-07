@@ -5,7 +5,7 @@
   import Table from './Table.svelte'
   import About from './About.svelte'
   import Footer from './Footer.svelte'
-  import Login from './Login.svelte'
+  // import Login from './Login.svelte'
 
   export let dataset
   // export let dataset;
@@ -63,10 +63,6 @@
   <About aboutContent={dataset.data.about.data[0]} />
   <Footer />
 </div>
-{:else }
-  <div>
-    <Login />
-  </div>
 {/if}
 
 
