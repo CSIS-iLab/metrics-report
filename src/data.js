@@ -57,8 +57,6 @@ export async function getContentData() {
 }
 
 function formatData(pressDataset, socialMediaDataset) {
-  // console.log(pressDataset)
-  // console.log(socialMediaDataset)
   if (!showingProgram) {
     return {
       data: {
@@ -71,7 +69,6 @@ function formatData(pressDataset, socialMediaDataset) {
     (row) => row.program == showingProgram
   )
   console.log(dataFilteredByProgram)
-  // const dataFormatted
   return {
     data: {
       filtered: dataFilteredByProgram,
