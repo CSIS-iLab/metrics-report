@@ -42,25 +42,35 @@
     contrasena = ''
   }
 </script>
-<div id="login">
+<div id="login" class="login">
   {#if !$login}
-    <input
-      type="username"
-      name="username"
-      id="username"
-      placeholder="Username..."
-      bind:value={userInput}
-      required
-    />
-    <input
-      type="password"
-      name="password"
-      id="password"
-      placeholder="Password..."
-      bind:value={contrasena}
-      required
-    />
-    <button on:click={handleClick}>Login</button>
-    <button on:click={handleClear}>Clear</button>
+    <div class="login__content">
+      <input
+        type="username"
+        name="username"
+        id="username"
+        placeholder="Username..."
+        class="login__input"
+        bind:value={userInput}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password..."
+        class="login__input"
+        bind:value={contrasena}
+        required
+      />
+      <div class="login__content__button__container">
+        <button class="login__button" on:click={handleClick}>Login</button>
+        <button class="login__button" on:click={handleClear}>Clear</button>
+      </div>
+    </div>
   {/if}
 </div>
+
+<style lang="scss">
+  @use '../scss/components/login';
+</style>
