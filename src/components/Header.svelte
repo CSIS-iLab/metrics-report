@@ -1,5 +1,7 @@
 <script>
   import SocialShare from './SocialShare.svelte'
+  export let login
+  export let handleLogOut
 </script>
 
 <header class="header">
@@ -13,6 +15,7 @@
       <span class="header__logo" />
     </a>
     <!-- <SocialShare /> -->
+    <button on:click={handleLogOut}>Log Out</button>
   </div>
 </header>
 

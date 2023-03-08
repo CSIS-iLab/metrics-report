@@ -63,9 +63,4 @@
     <button on:click={handleClick}>Login</button>
     <button on:click={handleClear}>Clear</button>
   {/if}
-
-  {#if $login}
-    <button on:click={handleLogOut}>Log Out</button>
-    <h1>Welcome {$user}</h1>
-  {/if}
 </div>

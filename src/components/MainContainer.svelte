@@ -37,19 +37,32 @@
   $: console.log('current filteredData: ', filteredData())
   $: console.log(dataset.data.showingProgram)
   $: console.log(currentProgram)
+  
   onMount( async () => {
     console.log('is mounted')
   })
 
+  // function handleLogOut() {
+  //     $login = false
+  //     $user = ''
+  //     currentProgram = ''
+  //     handleClear()
+  // }
+  const handleLogOut = () => {
+    $login = false
+    $user = ''
+    currentProgram = ''
+    // handleClear() 
+  }
 </script>
 
 { #if !currentProgram }
-  <Login />
+  <Login login = {$login} />
 {:else}
   <!-- {#if dataset.data.showingProgram !==  null} -->
 
   <div id="site-content">
-    <Header />
+    <Header {handleLogOut}/>
 
     <!-- <IntroContent showingProgram={dataset.data.showingProgram} /> -->
     <IntroContent showingProgram={$user} />
