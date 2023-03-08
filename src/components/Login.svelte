@@ -1,8 +1,8 @@
 <script>
-  import { auth } from '../store'
+  import { login, user } from '../store'
   import Input from './Input.svelte'
-  let login
-  let user
+  // let login
+  let userName
   let contrasena
   let userInput
 
@@ -18,19 +18,19 @@
   }
 
   function handleLogIn() {
-    if (!login) {
-    $auth.login = !$auth.login
-    $auth.user = userInput
-    console.log('store is ', $auth.login)
-    console.log('store is ', $auth.user)
+    if (!$login) {
+    $login = !$login
+    $user = userInput
+    console.log('store is ', $login)
+    console.log('store is ', $user)
     handleClear()
     return
     }    
   }
   
   function handleLogOut() {
-      $auth.login = false
-      $auth.user = ''
+      $login = false
+      $user = ''
       handleClear()
   }
 
@@ -43,7 +43,7 @@
   }
 </script>
 <div id="login">
-  {#if !$auth.login}
+  {#if !$login}
     <input
       type="username"
       name="username"
@@ -64,8 +64,8 @@
     <button on:click={handleClear}>Clear</button>
   {/if}
 
-  {#if $auth.login}
+  {#if $login}
     <button on:click={handleLogOut}>Log Out</button>
-    <h1>Welcome {$auth.user}</h1>
+    <h1>Welcome {$user}</h1>
   {/if}
 </div>

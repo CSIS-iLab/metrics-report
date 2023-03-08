@@ -57,32 +57,34 @@ export async function getContentData() {
 }
 
 function formatData(pressDataset, socialMediaDataset) {
-  if (!showingProgram) {
-    return {
-      data: {
-        filtered: ['no data'],
-        showingProgram: null,
-      }
-    }
-  }
-  const dataFilteredByProgram = pressDataset.data.filter(
-    (row) => row.program == showingProgram
-  )
+  // if (!showingProgram) {
+  //   return {
+  //     data: {
+  //       filtered: ['no data'],
+  //       showingProgram: null,
+  //     }
+  //   }
+  // }
+  // const dataFilteredByProgram = pressDataset.data.filter(
+  //   (row) => row.program == showingProgram
+  // )
+  const dataFilteredByProgram = pressDataset.data
   console.log(dataFilteredByProgram)
   return {
     data: {
-      filtered: dataFilteredByProgram,
-      showingProgram: showingProgram,
+      filtered: pressDataset.data,
+      // to test the filter by program in the main container after doing the login
+      // filtered: dataFilteredByProgram,
+      // showingProgram: showingProgram,
       metrics: pressDataset.metrics,
       about: aboutDataset,
       tabs: unifiedData([pressDataset, socialMediaDataset]),
       columnNames: pressDataset.columnNames,
       years: pressDataset.years,
       months: months,
-      spreadsheetsTabs: spreadsheetsTabs,
-
+      spreadsheetsTabs: spreadsheetsTabs
     }
-  };
+  }
 }
 
 function unifiedData(params) {
