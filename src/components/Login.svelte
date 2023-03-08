@@ -1,14 +1,34 @@
 <script>
-  import { login, user } from '../store'
+  import * as d3Fetch from 'd3-fetch'
+  import { onMount } from 'svelte'
+  import { login, user, contrasena } from '../store'
   import Input from './Input.svelte'
-  // let login
-  let userName
-  let contrasena
+
+  let contrasenaInput
   let userInput
+  let allowed = {}
+  
+  async function fetchAllowed() {
+    const URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=1063007507&single=true&output=csv'
+    // return await fetch(allowedURL)
+    const dataPromise = d3Fetch.csv( URL ).then( res => {
+      const data = res.map( ( row, index ) => {
+        return {
+          id: index,
+          name: row.name,
+          word: row.word
+        }
+      })
+      return {
+        programs: data,
+      }
+    })
+    return dataPromise
+  }
 
   function handleClick() {
-    if (!userInput || !contrasena) {
-      console.log("can't be empty")
+    if (!userInput || !contrasenaInput) {
+      // console.log("can't be empty")
       return
     }
     handleLogIn()
@@ -18,19 +38,31 @@
   }
 
   function handleLogIn() {
+    console.log(allowed.programs)
     if (!$login) {
-    $login = !$login
-    $user = userInput
-    console.log('store is ', $login)
-    console.log('store is ', $user)
-    handleClear()
-    return
-    }    
+      const userAttemp = allowed.programs.filter( user => user.name === userInput)
+      const userWord = allowed.programs.filter( user => user.word === contrasenaInput)
+      console.log(userAttemp)
+      console.log(userWord)
+      if (userAttemp.length > 0 && userWord.length > 0) {
+          console.log('grant access')
+          $login = !$login
+          $user = userInput
+          $contrasena = contrasenaInput
+          handleClear()
+          return
+      }
+      // console.log('store is ', $login)
+      // console.log('store is ', $user)
+      alert('Wrong Credentials.')
+      return
+    }
   }
   
   function handleLogOut() {
       $login = false
       $user = ''
+      $contrasena = ''
       handleClear()
   }
 
@@ -39,8 +71,15 @@
       return
     }
     userInput = ''
-    contrasena = ''
+    contrasenaInput = ''
   }
+
+  onMount( async () => {
+    console.log('fetch the allowed programs')
+    allowed = await fetchAllowed()
+    console.log(allowed)
+  })
+
 </script>
 <div id="login" class="login">
   {#if !$login}
@@ -60,7 +99,7 @@
         id="password"
         placeholder="Password..."
         class="login__input"
-        bind:value={contrasena}
+        bind:value={contrasenaInput}
         required
       />
       <div class="login__content__button__container">

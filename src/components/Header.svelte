@@ -1,6 +1,6 @@
 <script>
   import SocialShare from './SocialShare.svelte'
-  export let login
+  // export let login
   export let handleLogOut
 </script>
 

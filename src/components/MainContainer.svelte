@@ -1,5 +1,5 @@
 <script>
-  import { login, user } from '../store'
+  import { login, user, contrasena } from '../store'
   import Login from './Login.svelte'
   import Header from './Header.svelte'
   import IntroContent from './IntroContent.svelte'
@@ -10,7 +10,7 @@
   import { onMount } from 'svelte'
 
   export let dataset
-  $:console.log($login)
+
   let selectedYear = ''
   let selectedMonth = ''
   let selectedState = ''
@@ -34,9 +34,9 @@
   }
 
   $: currentProgram = $login
-  $: console.log('current filteredData: ', filteredData())
-  $: console.log(dataset.data.showingProgram)
-  $: console.log(currentProgram)
+  // $: console.log('current filteredData: ', filteredData())
+  // $: console.log(dataset.data.showingProgram)
+  // $: console.log(currentProgram)
   
   onMount( async () => {
     console.log('is mounted')
@@ -51,6 +51,7 @@
   const handleLogOut = () => {
     $login = false
     $user = ''
+    $contrasena = ''
     currentProgram = ''
     // handleClear() 
   }
@@ -59,8 +60,6 @@
 { #if !currentProgram }
   <Login login = {$login} />
 {:else}
-  <!-- {#if dataset.data.showingProgram !==  null} -->
-
   <div id="site-content">
     <Header {handleLogOut}/>
 
@@ -90,7 +89,6 @@
     <About aboutContent={dataset.data.about.data[0]} />
     <Footer />
   </div>
-  <!-- {/if} -->
 {/if}
 
 <style lang="scss">
