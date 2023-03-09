@@ -1,11 +1,13 @@
 import * as d3Fetch from 'd3-fetch'
 import { getPressData } from './press'
 import { getSocialMediaDataa } from './socialMediaData'
+import { getWebsitesData } from './websites'
 import { getAboutContent } from './about'
 
 
 let pressDataset = {}
 let socialMediaDataset = {}
+let websiteDataset = {}
 let aboutDataset ={}
 let data = {}
 const months = [
@@ -44,9 +46,15 @@ export async function getSocialMediaData() {
 export async function getNewData() {
   pressDataset = await getPressData()
   socialMediaDataset = await getSocialMediaDataa()
+  websiteDataset = await getWebsitesData()
   aboutDataset = await getAboutContent()
-  if (pressDataset && socialMediaDataset) {
-    data = formatData(pressDataset, socialMediaDataset, aboutDataset)
+  if (pressDataset && socialMediaDataset && websiteDataset) {
+    data = formatData(
+      pressDataset,
+      socialMediaDataset,
+      websiteDataset,
+      aboutDataset
+    )
   }
   // return await getPressData()
   return data
@@ -56,7 +64,7 @@ export async function getContentData() {
   
 }
 
-function formatData(pressDataset, socialMediaDataset) {
+function formatData(pressDataset, socialMediaDataset, websiteDataset) {
   // if (!showingProgram) {
   //   return {
   //     data: {
@@ -78,9 +86,9 @@ function formatData(pressDataset, socialMediaDataset) {
       // showingProgram: showingProgram,
       metrics: pressDataset.metrics,
       about: aboutDataset,
-      tabs: unifiedData([pressDataset, socialMediaDataset]),
+      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset]),
       columnNames: pressDataset.columnNames,
-      years: pressDataset.years.sort( (a, b) => b - a ),
+      years: pressDataset.years.sort((a, b) => b - a),
       months: months,
       spreadsheetsTabs: spreadsheetsTabs
     }

@@ -205,6 +205,34 @@
               >{rows.year}</td
             >
           </tr>
+          {:else if selectedTab === 'websites'}
+          <tr class="title table__body__cell--border">
+            <td class="table__body__cell table__body__cell--data"
+              ><div class="table__body__cell__title-container">
+                <span class="icon-container" />{rows.program}
+              </div></td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.website}</td
+            >
+            <td class="table__body__cell table__body__cell--data">
+              <div class="table__body__cell__policy-goal-container">
+                <span
+                  class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.uniqueVisitors.toLowerCase()}"
+                  >{rows.uniqueVisitors}</span
+                >
+              </div>
+            </td>
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.pageViews}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.month}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.year}</td
+            >
+          </tr>
           {/if}
         {:else}
           <tr>
