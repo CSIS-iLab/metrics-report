@@ -27,7 +27,6 @@ async function fetchData(URL) {
   const dataPromise = d3Fetch.csv( URL ).then( res => {
     const data = res.map( (row, index ) => {
       if (index == 0) {
-        console.log(row);
         columnNames = Object.keys(row)
       }
       years.push(row.Year);

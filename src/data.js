@@ -1,9 +1,14 @@
 import * as d3Fetch from 'd3-fetch'
 import { getPressData } from './press'
 import { getSocialMediaDataa } from './socialMediaData'
+import { getWebsitesData } from './websites'
+import { getAboutContent } from './about'
+
 
 let pressDataset = {}
 let socialMediaDataset = {}
+let websiteDataset = {}
+let aboutDataset ={}
 let data = {}
 const months = [
   "January",
@@ -19,7 +24,7 @@ const months = [
   "November",
   "December",
 ];
-const showingProgram = 'Africa' //to control who program
+const showingProgram = '' //to control who program
 // const showingProgram = "Americas"; //to control who program
 
 // const googleAPIKey = "AIzaSyAImbihK2tiRewSFzuJTF_lcgPlGSr7zcg";
@@ -41,44 +46,66 @@ export async function getSocialMediaData() {
 export async function getNewData() {
   pressDataset = await getPressData()
   socialMediaDataset = await getSocialMediaDataa()
-  if (pressDataset && socialMediaDataset) {
-    data = formatData(pressDataset, socialMediaDataset)
+  websiteDataset = await getWebsitesData()
+  aboutDataset = await getAboutContent()
+  if (pressDataset && socialMediaDataset && websiteDataset) {
+    data = formatData(
+      pressDataset,
+      socialMediaDataset,
+      websiteDataset,
+      aboutDataset
+    )
   }
   // return await getPressData()
   return data
 }
 
-function formatData(pressDataset, socialMediaDataset) {
-  // console.log(pressDataset)
-  // console.log(socialMediaDataset)
-  const dataFilteredByProgram = pressDataset.data.filter(
-    (row) => row.program == showingProgram
-  )
-  console.log(dataFilteredByProgram)
-  // const dataFormatted
-  return {
-    data: {
-      filtered: dataFilteredByProgram,
-      showingProgram: showingProgram,
-      metrics: pressDataset.metrics,
-      tabs: unifiedData([pressDataset, socialMediaDataset]),
-      columnNames: pressDataset.columnNames,
-      years: pressDataset.years,
-      months: months,
-      spreadsheetsTabs: spreadsheetsTabs,
-
-    }
-  };
+export async function getContentData() {
+  
 }
 
-function unifiedData(params) {
-  console.log('unifiedData')
-  console.log(params)
-  const data = params.map(element => {
+function formatData(pressDataset, socialMediaDataset, websiteDataset) {
+  // if (!showingProgram) {
+  //   return {
+  //     data: {
+  //       filtered: ['no data'],
+  //       showingProgram: null,
+  //     }
+  //   }
+  // }
+  // const dataFilteredByProgram = pressDataset.data.filter(
+  //   (row) => row.program == showingProgram
+  // )
+  const dataFilteredByProgram = pressDataset.data
+  // console.log(dataFilteredByProgram)
+  return {
+    data: {
+      filtered: pressDataset.data,
+      // to test the filter by program in the main container after doing the login
+      // filtered: dataFilteredByProgram,
+      // showingProgram: showingProgram,
+      metrics: pressDataset.metrics,
+      about: aboutDataset,
+      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset]),
+      columnNames: pressDataset.columnNames,
+      years: pressDataset.years.sort((a, b) => b - a),
+      months: months,
+      spreadsheetsTabs: spreadsheetsTabs
+    }
+  }
+}
+
+function unifiedData( params ) {
+  // console.log('unifiedData')
+  // console.log(params)
+  const data = params.map( element => {
     const tab = element.metrics
+    console.log( element )
     return {
       tab: tab,
-      dataForm: element.data
+      dataForm: element.data,
+      dataColNames: element.columnNames
+
     }
   });
   return data

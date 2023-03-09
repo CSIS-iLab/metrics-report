@@ -1,17 +1,13 @@
 <script>
-  import Icon from "./Icons.svelte";
+  import Icon from './Icons.svelte'
 
-  export let showingProgram;
+  export let showingProgram
 </script>
 
 <div class="wrapper">
   <main class="container intro-content">
-    <p class="intro-content__overline--small">
-      Metrics Dashboard
-    </p>
-    <p class="intro-content__overline--regular">
-      by the Comms teams
-    </p>
+    <p class="intro-content__overline--small">Metrics Dashboard</p>
+    <p class="intro-content__overline--regular">by the Comms teams</p>
     <h1 class="intro-content__title">
       for {showingProgram}
     </h1>
@@ -25,8 +21,8 @@
         <div class="intro-bar__title">Most Referenced Authorities</div>
         <div class="intro-bar__content">
           <div class="intro-bar__column--labels"> -->
-            <!-- iterate and add the most refereced authorities -->
-            <!-- {#each mostReferencedAuhorities as authority}
+    <!-- iterate and add the most refereced authorities -->
+    <!-- {#each mostReferencedAuhorities as authority}
               <div><span>{Object.keys(authority)}</span></div>
             {/each}
           </div>
@@ -34,8 +30,8 @@
             class="intro-bar__column--bars"
             data-total-entries={totalEntries}
           > -->
-            <!-- iterate and add the most refereced authorities values -->
-            <!-- {#each mostReferencedAuhorities as authority}
+    <!-- iterate and add the most refereced authorities values -->
+    <!-- {#each mostReferencedAuhorities as authority}
               <div class="bar">
                 <span
                   style="width: {(Object.values(authority) / totalEntries) *
@@ -51,8 +47,8 @@
         <div class="intro-bar__title">Top Tags</div>
         <div class="intro-bar__content">
           <div class="intro-bar__column--labels"> -->
-            <!-- iterate and add the top tags -->
-            <!-- {#each topTags as tag}
+    <!-- iterate and add the top tags -->
+    <!-- {#each topTags as tag}
               <div><span>{Object.keys(tag)}</span></div>
             {/each}
           </div>
@@ -60,8 +56,8 @@
             class="intro-bar__column--bars"
             data-total-entries={totalEntries}
           > -->
-            <!-- iterate and add the top tags values -->
-            <!-- {#each topTags as tag}
+    <!-- iterate and add the top tags values -->
+    <!-- {#each topTags as tag}
               <div class="bar">
                 <span
                   style="width:  {(Object.values(tag) / totalEntries) * 100}%"
@@ -76,5 +72,5 @@
 </div>
 
 <style lang="scss">
-  @use "../scss/components/intro-content";
+  @use '../scss/components/intro-content';
 </style>

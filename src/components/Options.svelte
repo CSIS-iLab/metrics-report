@@ -1,82 +1,96 @@
 <script>
-  import { onMount } from "svelte";
-  import Search from "./Search.svelte";
+  import { onMount } from 'svelte'
+  import Search from './Search.svelte'
   import Select from 'svelte-select'
-  import SelectMultiple from './SelectMultiple.svelte';
-  import Icon from "./Icons.svelte";
-  
-  export let dataset;
-  export let filteredData;
-  // export let filteredNewData;
-  export let selectedYear;
-  export let selectedMonth;
-  export let selectedResourceType;
-  export let selectedPolicyGoal;
-  export let searchText = '';
-  export let row;
+  import SelectMultiple from './SelectMultiple.svelte'
+  import Icon from './Icons.svelte'
 
-  $: totalEntries =filteredData.length
-  $: console.log(dataset)
+  export let dataset
+  export let filteredData
+  // export let filteredTab
+  export let selectedYear
+  export let selectedMonth
+  export let selectedTab
+  export let selectedResourceType
+  export let selectedPolicyGoal
+  export let searchText = ''
+  export let row
+
+  $: totalEntries = filteredData.length
+  // $: console.log(dataset)
   // const dataTotal = dataset.newData.press.data.dataFormmated.length
   // const dataTotal = dataset.newData.press.data.dataFormmated.length
 
   function getMetricCount(metric) {
-
+    console.log(filteredData.length)
     // metric = metric.toLowerCase()
     // console.log(metric)
     // // console.log(dataset.newData)
     // return dataset.newData[metric].data.dataFormmated.length
-    return 2
+    return totalEntries
   }
 
-  const optionIdentifier = 'value';
-  const labelIdentifier = 'label';
+  const optionIdentifier = 'value'
+  const labelIdentifier = 'label'
 
   function updateActiveTab(val) {
     // const value = (val) ? val : 'press'
     const value = val
-    const spanCountActive = document.querySelector(`.options__count--active`)
-    // const spanCountActive = document.querySelector(`.options__count`)
-    const spanCount = document.querySelector(`.options__count[data-count="${value}"]`);
-    spanCountActive.classList.remove('options__count--active');
-    spanCount.classList.add(`options__count--active`);
+    // const spanCountActive = document.querySelector(`.options__count--active`)
+    // // const spanCountActive = document.querySelector(`.options__count`)
+    // const spanCount = document.querySelector(
+    //   `.options__count[data-count="${value}"]`
+    // )
+    // spanCountActive.classList.remove('options__count--active')
+    // spanCount.classList.add(`options__count--active`)
 
-    const activeTab = document.querySelector(`.options__btn--tab--active`);
-    const tabActivate = document.querySelector(`.options__btn--tab[data-tab="${value}"]`);
-    activeTab.classList.remove('options__btn--tab--active', 'options__btn--tab--Resilience--active', 'options__btn--tab--Economic-Development--active', 'options__btn--tab--Emissions-Reduction--active', 'options__btn--tab--press--active');
-    tabActivate.classList.add('options__btn--tab--active', `options__btn--tab--${value}--active`);
+    const activeTab = document.querySelector(`.options__btn--tab--active`)
+    const tabActivate = document.querySelector(
+      `.options__btn--tab[data-tab="${value}"]`
+    )
+    activeTab.classList.remove(
+      'options__btn--tab--active',
+      'options__btn--tab--Resilience--active',
+      'options__btn--tab--Economic-Development--active',
+      'options__btn--tab--Emissions-Reduction--active',
+      'options__btn--tab--press--active'
+    )
+    tabActivate.classList.add(
+      'options__btn--tab--active',
+      `options__btn--tab--${value}--active`
+    )
   }
 
   function removeRowActiveTitleStyle() {
-    const title = document.querySelectorAll('.title--active');
-    title.forEach(item => {
-      item.classList.remove('title--active');
-    });
+    const title = document.querySelectorAll('.title--active')
+    title.forEach((item) => {
+      item.classList.remove('title--active')
+    })
   }
 
   function removeExtraContentStyle() {
-    const extraContent = document.querySelectorAll(".extra-content");
-    extraContent.forEach(content => {
+    const extraContent = document.querySelectorAll('.extra-content')
+    extraContent.forEach((content) => {
       if (content.classList.contains('active')) {
         content.classList.remove('active')
-        content.classList.add('hide');
+        content.classList.add('hide')
       }
-    });
+    })
   }
 
   function switchRowBottomLine() {
     const rowTitle = document.querySelectorAll('.title')
     const extraContent = document.querySelectorAll('.extra-content')
-    extraContent.forEach(item => {
-      if(item.classList.contains('table__body__cell--border')) {
+    extraContent.forEach((item) => {
+      if (item.classList.contains('table__body__cell--border')) {
         item.classList.remove('table__body__cell--border')
       }
-    });
-    rowTitle.forEach(item => {
-      if(!item.classList.contains('table__body__cell--border')) {
+    })
+    rowTitle.forEach((item) => {
+      if (!item.classList.contains('table__body__cell--border')) {
         item.classList.add('table__body__cell--border')
       }
-    });
+    })
   }
 
   function handleSelect(event, selectName) {
@@ -92,8 +106,9 @@
       selectedMonth = event.detail.value
     } else if (selectName === 'Tab') {
       updateActiveTab(event.target.value)
-      selectedPolicyGoal = event.target.value
-    }  else {
+      selectedTab = event.target.value
+      // console.log(selectedTab)
+    } else {
       selectedResourceType = event.detail.value
     }
   }
@@ -115,19 +130,21 @@
   }
 
   // handle the icon
-  const chevronUp = '<svg class="iconUp" width="16" height="10" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M28 15 14 0 0 15h28z" fill="#000"/></svg>';
-  const chevronDown = '<svg class="iconDown" width="16" height="10" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="m0 0 14 15L28 0H0z" fill="#000"/></svg>';
-  let chevron = chevronDown;
-  let isListOpen = false;
-  let listStateOpen = false;
-  
-  $: chevron = isListOpen ? chevronUp : chevronDown;
+  const chevronUp =
+    '<svg class="iconUp" width="16" height="10" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M28 15 14 0 0 15h28z" fill="#000"/></svg>'
+  const chevronDown =
+    '<svg class="iconDown" width="16" height="10" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="m0 0 14 15L28 0H0z" fill="#000"/></svg>'
+  let chevron = chevronDown
+  let isListOpen = false
+  let listStateOpen = false
+
+  $: chevron = isListOpen ? chevronUp : chevronDown
 
   function handleScrollLeft() {
-    const tableContainer = document.getElementById('table-body') 
+    const tableContainer = document.getElementById('table-body')
     const btnIconLeft = document.querySelector('#icon-scroll-left')
     const btnIconRight = document.querySelector('#icon-scroll-right')
-    
+
     tableContainer.scrollLeft -= 100
     if (btnIconRight.classList.contains('inactive')) {
       btnIconRight.classList.remove('inactive')
@@ -138,7 +155,7 @@
   }
 
   function handleScrollRight() {
-    const tableContainer = document.getElementById('table-body') 
+    const tableContainer = document.getElementById('table-body')
     const table = document.getElementsByClassName('table')[0]
     const btnIconLeft = document.querySelector('#icon-scroll-left')
     const btnIconRight = document.querySelector('#icon-scroll-right')
@@ -146,14 +163,22 @@
     if (btnIconLeft.classList.contains('inactive')) {
       btnIconLeft.classList.remove('inactive')
     }
-    if (Math.ceil(tableContainer.scrollLeft) + tableContainer.offsetWidth >= table.offsetWidth) {
+    if (
+      Math.ceil(tableContainer.scrollLeft) + tableContainer.offsetWidth >=
+      table.offsetWidth
+    ) {
       btnIconRight.classList.add('inactive')
     }
   }
 
-  onMount( () => {
-    isListOpen = false;
-    const tableContainer = document.getElementById('table-body') 
+  // ToDo: fix this function. currently is not working properly
+  const toTitleCase = ( word ) => {
+    return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
+  }
+
+  onMount(() => {
+    isListOpen = false
+    const tableContainer = document.getElementById('table-body')
     const table = document.getElementsByClassName('table')[0]
     const btnIconLeft = document.querySelector('#icon-scroll-left')
     const btnIconRight = document.querySelector('#icon-scroll-right')
@@ -162,10 +187,16 @@
       if (left > 0) {
         btnIconLeft.classList.remove('inactive')
       }
-      if (Math.ceil(tableContainer.scrollLeft) + tableContainer.offsetWidth + 2 >= table.offsetWidth) {
+      if (
+        Math.ceil(tableContainer.scrollLeft) + tableContainer.offsetWidth + 2 >=
+        table.offsetWidth
+      ) {
         btnIconRight.classList.add('inactive')
       }
-      if (Math.ceil(tableContainer.scrollLeft) + tableContainer.offsetWidth + 2 <= table.offsetWidth) {
+      if (
+        Math.ceil(tableContainer.scrollLeft) + tableContainer.offsetWidth + 2 <=
+        table.offsetWidth
+      ) {
         btnIconRight.classList.remove('inactive')
       }
       if (left === 0) {
@@ -182,11 +213,16 @@
 <section class="options__container">
   <div class="options__header">
     {#each dataset.data.spreadsheetsTabs as metric, index}
-      <button class="options__btn options__btn--tab options__btn--tab--{metric} {index == 0 ? `options__btn--tab--active options__btn--tab--${metric}--active` : '' }"
+      <button
+        class="options__btn options__btn--tab options__btn--tab--{metric} {index ==
+        0
+          ? `options__btn--tab--active options__btn--tab--${metric}--active`
+          : ''}"
         data-tab={metric}
-        value="{metric}"
+        value={metric}
         on:click={(event) => handleSelect(event, 'Tab')}
-      >{metric.split('_').join(' ')} <span data-count={metric} class="options__count {index == 0 ? 'options__count--active' : ''} options__count--{metric}">{getMetricCount(metric)}</span>
+        >{toTitleCase(metric.split('_').join(' '))}
+
       </button>
     {/each}
   </div>
@@ -198,7 +234,9 @@
       indicatorSvg={chevron}
       showChevron={true}
       bind:listOpen={isListOpen}
-      {optionIdentifier} {labelIdentifier} items={dataset.data.years}
+      {optionIdentifier}
+      {labelIdentifier}
+      items={dataset.data.years}
       placeholder="Select a Year"
       on:select={(event) => handleSelect(event, 'Year')}
       on:clear={() => handleClear('Year')}
@@ -210,7 +248,9 @@
     <Select
       indicatorSvg={chevron}
       showChevron={true}
-      {optionIdentifier} {labelIdentifier} items={dataset.data.months}
+      {optionIdentifier}
+      {labelIdentifier}
+      items={dataset.data.months}
       placeholder="Select Month"
       on:select={(event) => handleSelect(event, 'Month')}
       on:clear={() => handleClear('Month')}
@@ -219,24 +259,40 @@
 </div>
 <div class="options options__container options__container--sticky">
   <section class="options__navigation">
-    <Search bind:searchText/>
+    <Search bind:searchText />
     <div class="options__navigation-inner">
-      <span class="options__table-total-entries">Showing {totalEntries} {totalEntries > 1 ? "entries" : "entry"}</span>
-      <button id='btn-scroll-left' class="btn btn--scroll btn--scroll--left inactive" aria-label="Scroll table to the left"
-        on:click={handleScrollLeft}><Icon id="icon-scroll-left" name="Icon-left" class="icon inactive"/></button>
-      <button id='btn-scroll-right' class="btn btn--scroll btn--scroll--right" aria-label="Scroll table to the right"
-        on:click={handleScrollRight}><Icon id="icon-scroll-right" name="Icon-right" class="icon"/></button>
+      <span class="options__table-total-entries"
+        >Showing {totalEntries} {totalEntries > 1 ? 'entries' : 'entry'}</span
+      >
+      <button
+        id="btn-scroll-left"
+        class="btn btn--scroll btn--scroll--left inactive"
+        aria-label="Scroll table to the left"
+        on:click={handleScrollLeft}
+        ><Icon
+          id="icon-scroll-left"
+          name="Icon-left"
+          class="icon inactive"
+        /></button
+      >
+      <button
+        id="btn-scroll-right"
+        class="btn btn--scroll btn--scroll--right"
+        aria-label="Scroll table to the right"
+        on:click={handleScrollRight}
+        ><Icon id="icon-scroll-right" name="Icon-right" class="icon" /></button
+      >
     </div>
   </section>
 </div>
 
 <style lang="scss">
   @use '../scss/abstracts/' as *;
-  @use "../scss/components/table-container";
-  @use "../scss/components/button";
-  @use "../scss/components/label";
-  @use "../scss/components/select";
-  @use "../scss/components/options";
+  @use '../scss/components/table-container';
+  @use '../scss/components/button';
+  @use '../scss/components/label';
+  @use '../scss/components/select';
+  @use '../scss/components/options';
 
   :global(.selectContainer) {
     &:hover {
@@ -252,12 +308,12 @@
     --itemHoverBG: $color-background-gray-100;
 
     &::before {
-      content:'L';
+      content: 'L';
       font-family: arial;
       -ms-transform: scaleX(-1) rotate(-35deg); /* IE 9 */
       -webkit-transform: scaleX(-1) rotate(-35deg); /* Chrome, Safari, Opera */
       transform: scaleX(-1) rotate(-35deg);
-      display:inline-block;
+      display: inline-block;
       line-height: 1rem;
       color: $color-brand-blue-600;
       text-align: center;
@@ -268,18 +324,16 @@
     }
   }
 
-  :global(.selectContainer){
+  :global(.selectContainer) {
     --internalPadding: 0 4px !important;
     --itemFirstBorderRadius: 2px;
   }
-  
 
-  :global(.selectContainer .item){
+  :global(.selectContainer .item) {
     --itemPadding: #{rem(8)} #{rem(40)} #{rem(12)};
     text-overflow: unset !important;
     overflow: unset !important;
     white-space: unset !important;
-    
   }
   :global(.listContainer) {
     --listBorderRadius: rem(2);
@@ -289,34 +343,38 @@
     min-width: 250px !important;
   }
 
-  :global(.iconDown){
-		pointer-events: none;
-    filter: invert(29%) sepia(13%) saturate(765%) hue-rotate(181deg) brightness(95%) contrast(89%);
+  :global(.iconDown) {
+    pointer-events: none;
+    filter: invert(29%) sepia(13%) saturate(765%) hue-rotate(181deg)
+      brightness(95%) contrast(89%);
 
     &:hover,
     &:focus {
       // color brand blue 600
-      filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);
-    }
-	}
-
-  :global(.iconUp) {
-		pointer-events: none;
-    filter: invert(29%) sepia(13%) saturate(765%) hue-rotate(181deg) brightness(95%) contrast(89%);
-
-    &:hover,
-    &:focus {
-      // color brand blue 600
-      filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);
+      filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg)
+        brightness(100%) contrast(84%);
     }
   }
 
-  :global(.clearSelect){
+  :global(.iconUp) {
+    pointer-events: none;
+    filter: invert(29%) sepia(13%) saturate(765%) hue-rotate(181deg)
+      brightness(95%) contrast(89%);
+
+    &:hover,
+    &:focus {
+      // color brand blue 600
+      filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg)
+        brightness(100%) contrast(84%);
+    }
+  }
+
+  :global(.clearSelect) {
     width: rem(16);
     height: rem(16);
   }
 
-  :global(.selectContainer > input)  {
+  :global(.selectContainer > input) {
     --inputPadding: 0 28px 0 4px;
   }
 
@@ -330,11 +388,13 @@
   }
   .select-container :global(.selectContainer:hover .indicator) {
     // color brand blue 600
-    filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);
+    filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg)
+      brightness(100%) contrast(84%);
   }
 
   .select-container :global(.selectContainer:focus-within .indicator) {
     // color brand blue 600
-    filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);
+    filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg)
+      brightness(100%) contrast(84%);
   }
 </style>

@@ -1,14 +1,15 @@
 <script>
-  import { onMount } from "svelte"
-  import tooltip from "../js/tooltip"
-  import Icon from "./Icons.svelte"
+  import { onMount } from 'svelte'
+  import tooltip from '../js/tooltip'
+  import Icon from './Icons.svelte'
 
-  export let filteredData;
-  export let headerNames;
-  export let row;
+  export let filteredData
+  export let headerNames
+  export let selectedTab
+  export let row
 
   let sortIconContainer
-  $: sortClass = "inactive"
+  $: sortClass = 'inactive'
 
   const sortByColumns = ['activity', 'state', 'authority', 'type of resource']
   const sortByCol = ['Year', 'Month']
@@ -17,25 +18,28 @@
     let title = undefined
     let currentRow = undefined
     let extraContent = undefined
-    
-    if (e.target.parentNode.classList.contains('title') ) {
+
+    if (e.target.parentNode.classList.contains('title')) {
       title = e.target.parentNode
       currentRow = title.nextElementSibling
-      extraContent = e.target.parentNode.nextElementSibling;
+      extraContent = e.target.parentNode.nextElementSibling
     } else {
       title = e.target.parentNode.parentNode
       currentRow = title.nextElementSibling
-      extraContent = e.target.parentNode.parentNode.nextElementSibling;
+      extraContent = e.target.parentNode.parentNode.nextElementSibling
     }
 
     title.classList.toggle('title--active')
     title.classList.toggle('table__body__cell--border')
     currentRow.classList.toggle('table__body__cell--border')
     // Show/Hide extraContent
-    extraContent.classList.toggle('active');
-    extraContent.classList.toggle("hide");
-    (row.isOpen) ? row.isOpen = true : row.isOpen = !row.isOpen
+    extraContent.classList.toggle('active')
+    extraContent.classList.toggle('hide')
+    row.isOpen ? (row.isOpen = true) : (row.isOpen = !row.isOpen)
   }
+
+  $: console.log(headerNames)
+  $: console.log(selectedTab)
 
   // const headerNames = [
   //   "Activity",
@@ -49,7 +53,7 @@
   // const headerNames = filteredNewData.
   // $:console.log(headerNames);
   // $: sortBy = { col: "activity", ascending: true };
-  
+
   // $: sort = (e, column) => {
   //   column = column.toLowerCase().replace(/\s/g, "_"); // replace spaces using regex with undesrscore
   //   const iconsActive = document.querySelectorAll('.sort-icon--active');
@@ -92,33 +96,35 @@
   // };
 
   onMount(() => {
-    const iconsActive = document.querySelectorAll('.sort-icon--active');
-    iconsActive.forEach(icon => {
-      icon.classList.remove('sort-icon--active');
-    });
+    const iconsActive = document.querySelectorAll('.sort-icon--active')
+    iconsActive.forEach((icon) => {
+      icon.classList.remove('sort-icon--active')
+    })
     // const divActivity = document.querySelector('.table__cell--header__container__program');
     // console.log(divActivity);
     // divActivity.children[1].children[1].classList.add('sort-icon--active');
     // Sync horizontal scroll of table header and table body
     // Inspired by https://codepen.io/Goweb/pen/rgrjWx
     const scrollSync = () => {
-      const tableHeader = document.querySelector("#table-header");
-      const tableBody = document.querySelector("#table-body");
+      const tableHeader = document.querySelector('#table-header')
+      const tableBody = document.querySelector('#table-body')
 
       const bindSyncScrolling = (one, two) => {
-        let echo = false;
+        let echo = false
         const sync = (elOne, elTwo) => () =>
           (echo = !echo) &&
           ((elOne.scrollTop = elTwo.scrollTop),
-          (elOne.scrollLeft = elTwo.scrollLeft));
-        two.onscroll = sync(one, two);
-        one.onscroll = sync(two, one);
-      };
-      bindSyncScrolling(tableHeader, tableBody);
-    };
-    scrollSync();
-
-  });
+          (elOne.scrollLeft = elTwo.scrollLeft))
+        two.onscroll = sync(one, two)
+        one.onscroll = sync(two, one)
+      }
+      bindSyncScrolling(tableHeader, tableBody)
+    }
+    scrollSync()
+  })
+  $: if (filteredData) {
+    console.log(filteredData)
+  }
 </script>
 
 <div class="table__wrapper">
@@ -128,7 +134,12 @@
         <tr class="table__header-row">
           {#each headerNames as name}
             <th class="table__cell--header" scope="col">
-              <div class="table__cell--header__container table__cell--header__container__{name.toLowerCase().split(' ').join('-')}">
+              <div
+                class="table__cell--header__container table__cell--header__container__{name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}"
+              >
                 <span>{name}</span>
               </div>
             </th>
@@ -141,21 +152,95 @@
     <table class="table table__body">
       <tbody>
         {#each filteredData as rows}
+          {#if selectedTab === 'press'}
           <tr class="title table__body__cell--border">
-            <td class="table__body__cell table__body__cell--data"><div class="table__body__cell__title-container"><span class="icon-container"></span>{rows.program}</div></td>
-            <td class="table__body__cell table__body__cell--data">{rows.topTierMentions}</td>
+            <td class="table__body__cell table__body__cell--data"
+              ><div class="table__body__cell__title-container">
+                <span class="icon-container" />{rows.program}
+              </div></td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.topTierMentions}</td
+            >
             <td class="table__body__cell table__body__cell--data">
               <div class="table__body__cell__policy-goal-container">
-                <span class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalMentions.toLowerCase()}">{rows.totalMentions}</span>
+                <span
+                  class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalMentions.toLowerCase()}"
+                  >{rows.totalMentions}</span
+                >
               </div>
             </td>
-            <td class="table__body__cell table__body__cell--data">{rows.month}</td>
-            <td class="table__body__cell table__body__cell--data">{rows.year}</td>
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.month}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.year}</td
+            >
           </tr>
+          {:else if selectedTab === 'social_media'}
+          <tr class="title table__body__cell--border">
+            <td class="table__body__cell table__body__cell--data"
+              ><div class="table__body__cell__title-container">
+                <span class="icon-container" />{rows.program}
+              </div></td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.numberOfPosts}</td
+            >
+            <td class="table__body__cell table__body__cell--data">
+              <div class="table__body__cell__policy-goal-container">
+                <span
+                  class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.impressions.toLowerCase()}"
+                  >{rows.impressions}</span
+                >
+              </div>
+            </td>
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.engagements}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.month}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.year}</td
+            >
+          </tr>
+          {:else if selectedTab === 'websites'}
+          <tr class="title table__body__cell--border">
+            <td class="table__body__cell table__body__cell--data"
+              ><div class="table__body__cell__title-container">
+                <span class="icon-container" />{rows.program}
+              </div></td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.website}</td
+            >
+            <td class="table__body__cell table__body__cell--data">
+              <div class="table__body__cell__policy-goal-container">
+                <span
+                  class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.uniqueVisitors.toLowerCase()}"
+                  >{rows.uniqueVisitors}</span
+                >
+              </div>
+            </td>
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.pageViews}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.month}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.year}</td
+            >
+          </tr>
+          {/if}
         {:else}
           <tr>
-            <td class="table__body__cell table__body__cell--no-data"  colspan="6"><p class="table__body__cell__no-data__title">0 entries found.</p>
-            <p class="table__body__cell__no-data__desc">Try changing or removing filters to adjust the results.</p>
+            <td class="table__body__cell table__body__cell--no-data" colspan="6"
+              ><p class="table__body__cell__no-data__title">0 entries found.</p>
+              <p class="table__body__cell__no-data__desc">
+                Try changing or removing filters to adjust the results.
+              </p>
             </td>
           </tr>
         {/each}
@@ -166,21 +251,26 @@
 
 <style lang="scss">
   @use '../scss/abstracts/' as *;
-  @use "../scss/components/table";
+  @use '../scss/components/table';
   :global(.tippy-box[data-theme~='energy']) {
     @extend %text-style-ui-4;
     color: $color-text-gray-500;
     background-color: $color-background-white;
     padding: rem(6) rem(6) rem(8) rem(6);
-    filter: drop-shadow(0px 1px 9px rgba(0, 0, 0, 0.06)) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0px 1px 9px rgba(0, 0, 0, 0.06))
+      drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
   }
 
   :global(
-    .tippy-box[data-theme~='energy'][data-placement^='top'] > .tippy-arrow::before,
-    .tippy-box[data-theme~='energy'][data-placement^='bottom'] > .tippy-arrow::before,
-    .tippy-box[data-theme~='energy'][data-placement^='left'] > .tippy-arrow::before,
-    .tippy-box[data-theme~='energy'][data-placement^='right'] > .tippy-arrow::before
-  ){
+      .tippy-box[data-theme~='energy'][data-placement^='top']
+        > .tippy-arrow::before,
+      .tippy-box[data-theme~='energy'][data-placement^='bottom']
+        > .tippy-arrow::before,
+      .tippy-box[data-theme~='energy'][data-placement^='left']
+        > .tippy-arrow::before,
+      .tippy-box[data-theme~='energy'][data-placement^='right']
+        > .tippy-arrow::before
+    ) {
     border-top-color: $color-background-white;
   }
 </style>

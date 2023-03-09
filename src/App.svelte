@@ -10,20 +10,18 @@
     dataset = res
 
     if (dataset) {
-      console.log(dataset)
+      // console.log(dataset)
     }
 
   });
 </script>
-
 { #if dataset.data && dataset.data.filtered.length > 0}
-  <MainContainer {dataset} />
+  <MainContainer {dataset}  />
 {:else}
   <div class="loading-container">
     <div class="loading" />
   </div>
 {/if}
-
 <style lang="scss" global>
   @use "./scss/main.scss";
 </style>

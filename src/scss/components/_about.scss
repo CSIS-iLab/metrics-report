@@ -63,9 +63,10 @@
       }
 
       .icon-container {
-      // color brand-blue-600
+        // color brand-blue-600
         margin-left: rem(4);
-        filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);
+        filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg)
+          brightness(100%) contrast(84%);
       }
 
       &:hover {
@@ -73,10 +74,11 @@
 
         .icon-container {
           // color: $color-brand-blue-700;
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg) brightness(92%) contrast(101%);
+          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg)
+            brightness(92%) contrast(101%);
         }
       }
-      
+
       &:focus {
         color: $color-brand-blue-700;
         background-color: $color-background-light-blue-100;
@@ -84,7 +86,8 @@
 
         .icon-container {
           // color: $color-brand-blue-700;
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg) brightness(92%) contrast(101%);
+          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg)
+            brightness(92%) contrast(101%);
         }
       }
 
@@ -92,10 +95,11 @@
         color: $color-brand-blue-870;
 
         .icon-container {
-            // color: $color-brand-blue-800;
-            opacity: 0.7;
-            filter: invert(9%) sepia(41%) saturate(6837%) hue-rotate(211deg) brightness(98%) contrast(99%);
-          }
+          // color: $color-brand-blue-800;
+          opacity: 0.7;
+          filter: invert(9%) sepia(41%) saturate(6837%) hue-rotate(211deg)
+            brightness(98%) contrast(99%);
+        }
       }
     }
   }
@@ -122,7 +126,7 @@
       }
     }
   }
-  
+
   &__development {
     margin-top: rem(42);
     margin-bottom: rem(8);
@@ -178,16 +182,18 @@
 
       .back-top__icon-container {
         // color brand-blue-600
-        filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);
+        filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg)
+          brightness(100%) contrast(84%);
         transition: $transition__link;
       }
 
       &:hover {
         color: $color-brand-blue-700;
-  
+
         .back-top__icon-container {
           // color: $color-brand-blue-700;
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg) brightness(92%) contrast(101%);
+          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg)
+            brightness(92%) contrast(101%);
           transition: $transition__link;
         }
       }
@@ -199,7 +205,8 @@
 
         .back-top__icon-container {
           // color: $color-brand-blue-700;
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg) brightness(92%) contrast(101%);
+          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg)
+            brightness(92%) contrast(101%);
           transition: $transition__link;
         }
       }
