@@ -76,7 +76,7 @@
 </script>
 
 { #if !currentProgram }
-  <Login login = {$login} />
+  <Login />
 {:else}
   <div id="site-content">
     <Header {handleLogOut}/>

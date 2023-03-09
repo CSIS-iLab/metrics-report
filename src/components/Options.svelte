@@ -11,8 +11,6 @@
   export let selectedYear
   export let selectedMonth
   export let selectedTab
-  export let selectedResourceType
-  export let selectedPolicyGoal
   export let searchText = ''
   export let row
 
@@ -109,7 +107,7 @@
       selectedTab = event.target.value
       // console.log(selectedTab)
     } else {
-      selectedResourceType = event.detail.value
+      console.log('else: ', event.detail.value)
     }
   }
 
@@ -125,7 +123,7 @@
     } else if (selectName === 'Month') {
       selectedMonth = ''
     } else {
-      selectedResourceType = ''
+      console.log('else of handleClear')
     }
   }
 
