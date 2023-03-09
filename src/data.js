@@ -3,6 +3,7 @@ import { getPressData } from './press'
 import { getSocialMediaDataa } from './socialMediaData'
 import { getWebsitesData } from './websites'
 import { getPodcastData } from './podcasts'
+import { getVideoData } from './videos'
 import { getAboutContent } from './about'
 
 
@@ -10,7 +11,8 @@ let pressDataset = {}
 let socialMediaDataset = {}
 let websiteDataset = {}
 let podcastDataset = {}
-let aboutDataset ={}
+let aboutDataset = {}
+let videoDataset = {}
 let data = {}
 const months = [
   "January",
@@ -50,13 +52,15 @@ export async function getNewData() {
   socialMediaDataset = await getSocialMediaDataa()
   websiteDataset = await getWebsitesData()
   podcastDataset  = await getPodcastData()
+  videoDataset = await getVideoData()
   aboutDataset = await getAboutContent()
-  if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && aboutDataset) {
+  if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && videoDataset && aboutDataset) {
     data = formatData(
       pressDataset,
       socialMediaDataset,
       websiteDataset,
       podcastDataset,
+      videoDataset,
       aboutDataset
     )
   }
@@ -68,7 +72,7 @@ export async function getContentData() {
   
 }
 
-function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset) {
+function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset) {
   // if (!showingProgram) {
   //   return {
   //     data: {
@@ -90,7 +94,7 @@ function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDat
       // showingProgram: showingProgram,
       metrics: pressDataset.metrics,
       about: aboutDataset,
-      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset, podcastDataset]),
+      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset]),
       columnNames: pressDataset.columnNames,
       years: pressDataset.years.sort((a, b) => b - a),
       months: months,

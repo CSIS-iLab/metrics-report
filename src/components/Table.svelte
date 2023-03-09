@@ -258,6 +258,45 @@
                 >{rows.year}</td
               >
             </tr>
+          {:else if selectedTab === 'videos'}
+            <tr class="title table__body__cell--border">
+              <td class="table__body__cell table__body__cell--data"
+                >
+                <div class="link">
+                  <a
+                    href={rows.permalink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >{rows.videoTitle}<span class="icon-container"
+                      ><Icon name="Icon-open-blank" class="icon" /></span
+                    ></a
+                  >
+                </div>
+                </td>
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.description}</td
+              >
+              <td class="table__body__cell table__body__cell--data">
+                <div class="table__body__cell__policy-goal-container">
+                  <span
+                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalViews.toLowerCase()}"
+                    >{rows.totalViews}</span
+                  >
+                </div>
+              </td>
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.totalWatchTime}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.averagePercentageViewed}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.year}</td
+              >
+            </tr>
           {/if}
         {:else}
           <tr>
