@@ -12,14 +12,10 @@
   export let selectedMonth
   export let selectedTab
   export let selectedResourceType
-  export let selectedPolicyGoal
   export let searchText = ''
   export let row
 
   $: totalEntries = filteredData.length
-  // $: console.log(dataset)
-  // const dataTotal = dataset.newData.press.data.dataFormmated.length
-  // const dataTotal = dataset.newData.press.data.dataFormmated.length
 
   function getMetricCount(metric) {
     console.log(filteredData.length)
