@@ -171,6 +171,11 @@
     }
   }
 
+  // ToDo: fix this function. currently is not working properly
+  const toTitleCase = ( word ) => {
+    return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
+  }
+
   onMount(() => {
     isListOpen = false
     const tableContainer = document.getElementById('table-body')
@@ -216,7 +221,7 @@
         data-tab={metric}
         value={metric}
         on:click={(event) => handleSelect(event, 'Tab')}
-        >{metric.split('_').join(' ')}
+        >{toTitleCase(metric.split('_').join(' '))}
 
       </button>
     {/each}
