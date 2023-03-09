@@ -38,23 +38,27 @@
   }
 
   function handleLogIn() {
-    console.log(allowed.programs)
+    // console.log(allowed.programs)
     if (!$login) {
-      const userAttemp = allowed.programs.filter( user => user.name === userInput)
-      const userWord = allowed.programs.filter( user => user.word === contrasenaInput)
-      console.log(userAttemp)
-      console.log(userWord)
-      if (userAttemp.length > 0 && userWord.length > 0) {
-          console.log('grant access')
-          $login = !$login
-          $user = userInput
-          $contrasena = contrasenaInput
-          handleClear()
-          return
-      }
+      // dummy auth
+      $login = !$login
+      $user = userInput
+      // Uncomment the next code block for the auth to work properly
+      // const userAttemp = allowed.programs.filter( user => user.name === userInput)
+      // const userWord = allowed.programs.filter( user => user.word === contrasenaInput)
+      // console.log(userAttemp)
+      // console.log(userWord)
+      // if (userAttemp.length > 0 && userWord.length > 0) {
+      //     console.log('grant access')
+      //     $login = !$login
+      //     $user = userInput
+      //     $contrasena = contrasenaInput
+      //     handleClear()
+      //     return
+      // }
       // console.log('store is ', $login)
       // console.log('store is ', $user)
-      alert('Wrong Credentials.')
+      // alert('Wrong Credentials.')
       return
     }
   }
@@ -75,9 +79,9 @@
   }
 
   onMount( async () => {
-    console.log('fetch the allowed programs')
+    // console.log('fetch the allowed programs')
     allowed = await fetchAllowed()
-    console.log(allowed)
+    // console.log(allowed)
   })
 
 </script>

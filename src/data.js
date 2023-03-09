@@ -69,7 +69,7 @@ function formatData(pressDataset, socialMediaDataset) {
   //   (row) => row.program == showingProgram
   // )
   const dataFilteredByProgram = pressDataset.data
-  console.log(dataFilteredByProgram)
+  // console.log(dataFilteredByProgram)
   return {
     data: {
       filtered: pressDataset.data,
@@ -80,21 +80,24 @@ function formatData(pressDataset, socialMediaDataset) {
       about: aboutDataset,
       tabs: unifiedData([pressDataset, socialMediaDataset]),
       columnNames: pressDataset.columnNames,
-      years: pressDataset.years,
+      years: pressDataset.years.sort( (a, b) => b - a ),
       months: months,
       spreadsheetsTabs: spreadsheetsTabs
     }
   }
 }
 
-function unifiedData(params) {
-  console.log('unifiedData')
-  console.log(params)
-  const data = params.map(element => {
+function unifiedData( params ) {
+  // console.log('unifiedData')
+  // console.log(params)
+  const data = params.map( element => {
     const tab = element.metrics
+    console.log( element )
     return {
       tab: tab,
-      dataForm: element.data
+      dataForm: element.data,
+      dataColNames: element.columnNames
+
     }
   });
   return data

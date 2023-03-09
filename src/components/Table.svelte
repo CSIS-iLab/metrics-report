@@ -5,6 +5,7 @@
 
   export let filteredData
   export let headerNames
+  export let selectedTab
   export let row
 
   let sortIconContainer
@@ -36,6 +37,9 @@
     extraContent.classList.toggle('hide')
     row.isOpen ? (row.isOpen = true) : (row.isOpen = !row.isOpen)
   }
+
+  $: console.log(headerNames)
+  $: console.log(selectedTab)
 
   // const headerNames = [
   //   "Activity",
@@ -118,6 +122,9 @@
     }
     scrollSync()
   })
+  $: if (filteredData) {
+    console.log(filteredData)
+  }
 </script>
 
 <div class="table__wrapper">
@@ -145,6 +152,7 @@
     <table class="table table__body">
       <tbody>
         {#each filteredData as rows}
+          {#if selectedTab === 'press'}
           <tr class="title table__body__cell--border">
             <td class="table__body__cell table__body__cell--data"
               ><div class="table__body__cell__title-container">
@@ -169,6 +177,35 @@
               >{rows.year}</td
             >
           </tr>
+          {:else if selectedTab === 'social_media'}
+          <tr class="title table__body__cell--border">
+            <td class="table__body__cell table__body__cell--data"
+              ><div class="table__body__cell__title-container">
+                <span class="icon-container" />{rows.program}
+              </div></td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.numberOfPosts}</td
+            >
+            <td class="table__body__cell table__body__cell--data">
+              <div class="table__body__cell__policy-goal-container">
+                <span
+                  class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.impressions.toLowerCase()}"
+                  >{rows.impressions}</span
+                >
+              </div>
+            </td>
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.engagements}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.month}</td
+            >
+            <td class="table__body__cell table__body__cell--data"
+              >{rows.year}</td
+            >
+          </tr>
+          {/if}
         {:else}
           <tr>
             <td class="table__body__cell table__body__cell--no-data" colspan="6"

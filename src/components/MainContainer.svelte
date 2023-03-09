@@ -13,14 +13,17 @@
 
   let selectedYear = ''
   let selectedMonth = ''
-  let selectedState = ''
-  let selectedResourceType = ''
-  let selectedAuthority = ''
-  let selectedTags = []
-  let selectedPolicyGoal = ''
+  let filterByTab = []
+  // $: selectedTab = 'press'
+  let selectedTab = 'press'
+
   let searchText
   $: row = { isOpen: false }
+  // $: currentTab = 'press'
 
+  $: currentColNames = () => {
+    return dataset.data.tabs.filter( row => row.tab === selectedTab)[0].dataColNames
+  }
   $: filteredData = () => {
     return dataset.data.filtered.filter((row) => {
       // console.log(row);
@@ -33,13 +36,28 @@
     })
   }
 
+  // Testing new filtering data by current tab. this will output only in the console
+  $: filteredDataByTab = () => {
+    // console.log(dataset.data.tabs)
+    // filterByTab = dataset.data.tabs.filter( row => row.tab === selectedTab)[0]
+    // console.log(filterByTab)
+    
+    return dataset.data.tabs.filter( row => row.tab === selectedTab)[0]
+    .dataForm.filter( row => {
+      const filteredYear = selectedYear ? selectedYear : row.year
+      const filteredMonth = selectedMonth ? selectedMonth : row.month
+      const filteredByProgram = $user ? $user : row.program
+      return row.year === filteredYear && row.month === filteredMonth && row.program === filteredByProgram
+    })
+  }
+
   $: currentProgram = $login
   // $: console.log('current filteredData: ', filteredData())
   // $: console.log(dataset.data.showingProgram)
-  // $: console.log(currentProgram)
-  
+  // $: console.log(selectedTab)
+  // $: console.log(filteredDataByTab())
   onMount( async () => {
-    console.log('is mounted')
+    // console.log('is mounted')
   })
 
   // function handleLogOut() {
@@ -69,20 +87,17 @@
     <section class="table-container">
       <Options
         {dataset}
-        filteredData={filteredData()}
+        filteredData={filteredDataByTab()}
         bind:row
         bind:selectedYear
         bind:selectedMonth
-        bind:selectedAuthority
-        bind:selectedResourceType
-        bind:selectedState
-        bind:selectedTags
-        bind:selectedPolicyGoal
+        bind:selectedTab
         bind:searchText
       />
       <Table
-        filteredData={filteredData()}
-        headerNames={dataset.data.columnNames}
+        filteredData={filteredDataByTab()}
+        headerNames={currentColNames()}
+        {selectedTab}
         bind:row
       />
     </section>

@@ -7,25 +7,27 @@
 
   export let dataset
   export let filteredData
-  // export let filteredNewData;
+  // export let filteredTab
   export let selectedYear
   export let selectedMonth
+  export let selectedTab
   export let selectedResourceType
   export let selectedPolicyGoal
   export let searchText = ''
   export let row
 
   $: totalEntries = filteredData.length
-  $: console.log(dataset)
+  // $: console.log(dataset)
   // const dataTotal = dataset.newData.press.data.dataFormmated.length
   // const dataTotal = dataset.newData.press.data.dataFormmated.length
 
   function getMetricCount(metric) {
+    console.log(filteredData.length)
     // metric = metric.toLowerCase()
     // console.log(metric)
     // // console.log(dataset.newData)
     // return dataset.newData[metric].data.dataFormmated.length
-    return 2
+    return totalEntries
   }
 
   const optionIdentifier = 'value'
@@ -34,13 +36,13 @@
   function updateActiveTab(val) {
     // const value = (val) ? val : 'press'
     const value = val
-    const spanCountActive = document.querySelector(`.options__count--active`)
-    // const spanCountActive = document.querySelector(`.options__count`)
-    const spanCount = document.querySelector(
-      `.options__count[data-count="${value}"]`
-    )
-    spanCountActive.classList.remove('options__count--active')
-    spanCount.classList.add(`options__count--active`)
+    // const spanCountActive = document.querySelector(`.options__count--active`)
+    // // const spanCountActive = document.querySelector(`.options__count`)
+    // const spanCount = document.querySelector(
+    //   `.options__count[data-count="${value}"]`
+    // )
+    // spanCountActive.classList.remove('options__count--active')
+    // spanCount.classList.add(`options__count--active`)
 
     const activeTab = document.querySelector(`.options__btn--tab--active`)
     const tabActivate = document.querySelector(
@@ -104,7 +106,8 @@
       selectedMonth = event.detail.value
     } else if (selectName === 'Tab') {
       updateActiveTab(event.target.value)
-      selectedPolicyGoal = event.target.value
+      selectedTab = event.target.value
+      // console.log(selectedTab)
     } else {
       selectedResourceType = event.detail.value
     }
@@ -214,12 +217,7 @@
         value={metric}
         on:click={(event) => handleSelect(event, 'Tab')}
         >{metric.split('_').join(' ')}
-        <span
-          data-count={metric}
-          class="options__count {index == 0
-            ? 'options__count--active'
-            : ''} options__count--{metric}">{getMetricCount(metric)}</span
-        >
+
       </button>
     {/each}
   </div>
