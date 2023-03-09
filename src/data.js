@@ -4,6 +4,7 @@ import { getSocialMediaDataa } from './socialMediaData'
 import { getWebsitesData } from './websites'
 import { getPodcastData } from './podcasts'
 import { getVideoData } from './videos'
+import { getPublicationData } from './publications'
 import { getAboutContent } from './about'
 
 
@@ -13,6 +14,7 @@ let websiteDataset = {}
 let podcastDataset = {}
 let aboutDataset = {}
 let videoDataset = {}
+let publicationDataset = {}
 let data = {}
 const months = [
   "January",
@@ -53,14 +55,16 @@ export async function getNewData() {
   websiteDataset = await getWebsitesData()
   podcastDataset  = await getPodcastData()
   videoDataset = await getVideoData()
+  publicationDataset = await getPublicationData()
   aboutDataset = await getAboutContent()
-  if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && videoDataset && aboutDataset) {
+  if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && videoDataset && publicationDataset && aboutDataset) {
     data = formatData(
       pressDataset,
       socialMediaDataset,
       websiteDataset,
       podcastDataset,
       videoDataset,
+      publicationDataset,
       aboutDataset
     )
   }
@@ -72,7 +76,7 @@ export async function getContentData() {
   
 }
 
-function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset) {
+function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, publicationDataset) {
   // if (!showingProgram) {
   //   return {
   //     data: {
@@ -94,7 +98,7 @@ function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDat
       // showingProgram: showingProgram,
       metrics: pressDataset.metrics,
       about: aboutDataset,
-      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset]),
+      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, publicationDataset]),
       columnNames: pressDataset.columnNames,
       years: pressDataset.years.sort((a, b) => b - a),
       months: months,
