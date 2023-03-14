@@ -50,9 +50,17 @@ function format(name) {
 }
 
 function getProgramName(productName) {
+  console.log(productName)
   let programName
   if (helperDataset.dataFormatted.length > 1) {
-      helperDataset.dataFormatted.filter( (element) => {
+    console.log(helperDataset.dataFormatted
+    .filter( element => element !== ''))
+    
+  }
+  if (helperDataset.dataFormatted.length > 1) {
+      helperDataset.dataFormatted
+      .filter( element => element !== '')
+      .filter( element => {
       if (productName === element.productName) programName = element.program
     })
   }

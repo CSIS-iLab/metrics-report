@@ -24,7 +24,7 @@ async function fetchData(URL) {
       return {
         id: index,
         // program: row.Program,
-        program: 'Americas',
+        program: getProgram(row.Description),
         videoTitle: row.Video_Title,
         description: row.Description,
         totalViews: row.Total_Views_First_30_days_of_preformance,
@@ -46,10 +46,29 @@ async function fetchData(URL) {
   return dataPromise
 }
 
+function getProgram(string) {
+  const array = string.split(' ')
+  let n = 0
+  let length = array.length
+  let programNames = []
+  while (n < length ) {
+    // console.log(programNames[n].charAt(0))
+    if (array[n].charAt(0) === '#') {
+      // console.log('is a program name')
+      programNames.push(array[n].substring(1))
+    }
+    n++
+  }
+
+  // console.log(string.split(' ')[0])
+  // console.log(programNames)
+  return programNames
+  // return string.split(' ')[0].substring(1)
+}
 function formatColumnNames(columnNames) {
-  return columnNames.map((name) => format(name))
+  return columnNames.map( name  => format( name ) )
 }
 
-function format(name) {
-  return name.replaceAll("_", " ")
+function format( name ) {
+  return name.replaceAll( "_", " " )
 }

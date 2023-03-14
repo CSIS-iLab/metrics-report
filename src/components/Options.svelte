@@ -27,6 +27,7 @@
     // return dataset.newData[metric].data.dataFormmated.length
     return totalEntries
   }
+  $: console.log(filteredData)
 
   const optionIdentifier = 'value'
   const labelIdentifier = 'label'

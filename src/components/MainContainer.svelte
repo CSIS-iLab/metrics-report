@@ -42,11 +42,25 @@
     // filterByTab = dataset.data.tabs.filter( row => row.tab === selectedTab)[0]
     // console.log(filterByTab)
     
-    return dataset.data.tabs.filter( row => row.tab === selectedTab)[0]
+    let filteredByProgram
+    return dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
     .dataForm.filter( row => {
       const filteredYear = selectedYear ? selectedYear : row.year
       const filteredMonth = selectedMonth ? selectedMonth : row.month
-      const filteredByProgram = $user ? $user : row.program
+      if (typeof row.program === 'string') {
+        filteredByProgram = $user ? $user : row.program
+      // return row.year === filteredYear && row.month === filteredMonth && row.program === filteredByProgram
+
+
+      } else {
+        console.log(row.program)
+        // filteredByProgram = $user ? row.program.filter( p => p === $user)[0] : row.program
+        filteredByProgram = row.program.includes($user) ? $user : row.program
+      // return row.year === filteredYear && row.month === filteredMonth && row.program === filteredByProgram[0]
+
+      }
+      console.log('row program ', row.program)
+      console.log('filtered by program ', filteredByProgram)
       return row.year === filteredYear && row.month === filteredMonth && row.program === filteredByProgram
     })
   }
