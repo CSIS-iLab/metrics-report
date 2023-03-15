@@ -7,26 +7,23 @@
   import Table from './Table.svelte'
   import About from './About.svelte'
   import Footer from './Footer.svelte'
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
 
   export let dataset
 
   let selectedYear = ''
   let selectedMonth = ''
   let filterByTab = []
-  // $: selectedTab = 'press'
   let selectedTab = 'press'
 
   let searchText
   $: row = { isOpen: false }
-  // $: currentTab = 'press'
 
   $: currentColNames = () => {
     return dataset.data.tabs.filter( row => row.tab === selectedTab)[0].dataColNames
   }
   $: filteredData = () => {
     return dataset.data.filtered.filter((row) => {
-      // console.log(row);
       // new Date().getFullYear()  // returns the current year
       const filteredYear = selectedYear ? selectedYear : row.year
       const filteredMonth = selectedMonth ? selectedMonth : row.month
@@ -38,39 +35,32 @@
 
   // Testing new filtering data by current tab. this will output only in the console
   $: filteredDataByTab = () => {
-    // console.log(dataset.data.tabs)
-    // filterByTab = dataset.data.tabs.filter( row => row.tab === selectedTab)[0]
-    // console.log(filterByTab)
-    
-    return dataset.data.tabs.filter( row => row.tab === selectedTab)[0]
+    let filteredByProgram
+    return dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
     .dataForm.filter( row => {
       const filteredYear = selectedYear ? selectedYear : row.year
       const filteredMonth = selectedMonth ? selectedMonth : row.month
-      const filteredByProgram = $user ? $user : row.program
+      filteredByProgram = $user ? $user : row.program
       return row.year === filteredYear && row.month === filteredMonth && row.program === filteredByProgram
     })
   }
 
   $: currentProgram = $login
-  // $: console.log('current filteredData: ', filteredData())
-  // $: console.log(dataset.data.showingProgram)
-  // $: console.log(selectedTab)
-  // $: console.log(filteredDataByTab())
   onMount( async () => {
     // console.log('is mounted')
   })
 
-  // function handleLogOut() {
-  //     $login = false
-  //     $user = ''
-  //     currentProgram = ''
-  //     handleClear()
-  // }
+  onDestroy( async () => {
+    // selectedTab = 'press'
+  })
+
   const handleLogOut = () => {
     $login = false
     $user = ''
     $contrasena = ''
     currentProgram = ''
+    selectedTab = 'press'
+
     // handleClear() 
   }
 </script>

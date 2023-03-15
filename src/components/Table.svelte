@@ -38,18 +38,6 @@
     row.isOpen ? (row.isOpen = true) : (row.isOpen = !row.isOpen)
   }
 
-  $: console.log(headerNames)
-  $: console.log(selectedTab)
-
-  // const headerNames = [
-  //   "Activity",
-  //   "State",
-  //   "Policy Goals",
-  //   "Authority",
-  //   "Type of Resource",
-  //   "Tags",
-  // ];
-
   // const headerNames = filteredNewData.
   // $:console.log(headerNames);
   // $: sortBy = { col: "activity", ascending: true };
@@ -122,9 +110,6 @@
     }
     scrollSync()
   })
-  $: if (filteredData) {
-    console.log(filteredData)
-  }
 </script>
 
 <div class="table__wrapper">

@@ -52,7 +52,9 @@ function format(name) {
 function getProgramName(productName) {
   let programName
   if (helperDataset.dataFormatted.length > 1) {
-      helperDataset.dataFormatted.filter( (element) => {
+      helperDataset.dataFormatted
+      .filter( element => element !== '')
+      .filter( element => {
       if (productName === element.productName) programName = element.program
     })
   }
