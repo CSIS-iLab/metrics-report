@@ -52,18 +52,12 @@ function getProgram(string) {
   let length = array.length
   let programNames = []
   while (n < length ) {
-    // console.log(programNames[n].charAt(0))
     if (array[n].charAt(0) === '#') {
-      // console.log('is a program name')
       programNames.push(array[n].substring(1))
     }
     n++
   }
-
-  // console.log(string.split(' ')[0])
-  // console.log(programNames)
-  return programNames
-  // return string.split(' ')[0].substring(1)
+  return programNames[0]
 }
 function formatColumnNames(columnNames) {
   return columnNames.map( name  => format( name ) )

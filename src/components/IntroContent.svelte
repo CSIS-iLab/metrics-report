@@ -9,7 +9,7 @@
     <p class="intro-content__overline--small">Metrics Dashboard</p>
     <p class="intro-content__overline--regular">by the Comms teams</p>
     <h1 class="intro-content__title">
-      for {showingProgram}
+      for the {showingProgram}
     </h1>
     <!-- <p class="intro-content__introduction">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod nisi porta lorem mollis. Id aliquet lectus proin nibh nisl condimentum.

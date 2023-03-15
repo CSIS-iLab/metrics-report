@@ -28,7 +28,6 @@
 
   function handleClick() {
     if (!userInput || !contrasenaInput) {
-      // console.log("can't be empty")
       return
     }
     handleLogIn()
@@ -38,7 +37,6 @@
   }
 
   function handleLogIn() {
-    // console.log(allowed.programs)
     if (!$login) {
       // dummy auth
       // $login = !$login
@@ -47,28 +45,16 @@
       // Uncomment the next code block for the auth to work properly
       const userAttemp = allowed.programs.filter( user => user.name === userInput)
       const userWord = allowed.programs.filter( user => user.word === contrasenaInput)
-      console.log(userAttemp)
-      console.log(userWord)
       if (userAttemp.length > 0 && userWord.length > 0) {
-          console.log('grant access')
           $login = !$login
           $user = userInput
           $contrasena = contrasenaInput
           handleClear()
           return
       }
-      // console.log('store is ', $login)
-      // console.log('store is ', $user)
       alert('Wrong Credentials.')
       return
     }
-  }
-  
-  function handleLogOut() {
-      $login = false
-      $user = ''
-      $contrasena = ''
-      handleClear()
   }
 
   const handleClear = () => {
@@ -80,9 +66,7 @@
   }
 
   onMount( async () => {
-    // console.log('fetch the allowed programs')
     allowed = await fetchAllowed()
-    // console.log(allowed)
   })
 
 </script>

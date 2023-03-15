@@ -2,12 +2,10 @@
   import { onMount } from 'svelte'
   import Search from './Search.svelte'
   import Select from 'svelte-select'
-  import SelectMultiple from './SelectMultiple.svelte'
   import Icon from './Icons.svelte'
 
   export let dataset
   export let filteredData
-  // export let filteredTab
   export let selectedYear
   export let selectedMonth
   export let selectedTab
@@ -15,33 +13,12 @@
   export let row
 
   $: totalEntries = filteredData.length
-  // $: console.log(dataset)
-  // const dataTotal = dataset.newData.press.data.dataFormmated.length
-  // const dataTotal = dataset.newData.press.data.dataFormmated.length
-
-  function getMetricCount(metric) {
-    console.log(filteredData.length)
-    // metric = metric.toLowerCase()
-    // console.log(metric)
-    // // console.log(dataset.newData)
-    // return dataset.newData[metric].data.dataFormmated.length
-    return totalEntries
-  }
-  $: console.log(filteredData)
 
   const optionIdentifier = 'value'
   const labelIdentifier = 'label'
 
   function updateActiveTab(val) {
-    // const value = (val) ? val : 'press'
     const value = val
-    // const spanCountActive = document.querySelector(`.options__count--active`)
-    // // const spanCountActive = document.querySelector(`.options__count`)
-    // const spanCount = document.querySelector(
-    //   `.options__count[data-count="${value}"]`
-    // )
-    // spanCountActive.classList.remove('options__count--active')
-    // spanCount.classList.add(`options__count--active`)
 
     const activeTab = document.querySelector(`.options__btn--tab--active`)
     const tabActivate = document.querySelector(
@@ -106,7 +83,6 @@
     } else if (selectName === 'Tab') {
       updateActiveTab(event.target.value)
       selectedTab = event.target.value
-      // console.log(selectedTab)
     } else {
       console.log('else: ', event.detail.value)
     }
