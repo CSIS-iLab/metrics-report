@@ -204,8 +204,9 @@
   </div>
 </section>
 <div class="options__avg">
-  <p>In {yearToShowAverage} Avg Total Mention per Month: {average.totalMentions}</p>
-  <p>In {yearToShowAverage} Avg Top Tier Mention per Month: {average.topTier}</p>
+  <p>In {yearToShowAverage} the average Total Mentions per Month was: {average.totalMentions} and
+    the average Top Tier Mentions per Month was: {average.topTier}
+  </p>
 </div>
 <div class="selects">
   <div class="select-container">
