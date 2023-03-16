@@ -1,5 +1,5 @@
 <script>
-  import { login, user, contrasena } from '../store'
+  import { login, user, contrasena, currentYear } from '../store'
   import Login from './Login.svelte'
   import Header from './Header.svelte'
   import IntroContent from './IntroContent.svelte'
@@ -15,6 +15,14 @@
   let selectedMonth = ''
   let filterByTab = []
   let selectedTab = 'press'
+  
+  $: yearToShowAverage = ''
+
+  $:if (selectedYear !== '') {
+    yearToShowAverage = selectedYear
+  } else {
+    yearToShowAverage = ($currentYear - 1).toString()
+  }
 
   let searchText
   $: row = { isOpen: false }
@@ -22,6 +30,7 @@
   $: currentColNames = () => {
     return dataset.data.tabs.filter( row => row.tab === selectedTab)[0].dataColNames
   }
+
   $: filteredData = () => {
     return dataset.data.filtered.filter((row) => {
       // new Date().getFullYear()  // returns the current year
@@ -45,6 +54,27 @@
     })
   }
 
+  $: filteredDataForAvg = () => {
+    let filteredByProgram
+    return dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
+    .dataForm.filter( row => {
+      const filteredYear = selectedYear ? selectedYear : row.year
+      filteredByProgram = $user ? $user : row.program
+      return row.year === filteredYear && row.program === filteredByProgram
+    })
+  }
+
+  $: calculatePressAverage = () => {
+    const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
+    const totalMentionsAvg= calculateTotalMentionsAvg(dataFilteredByYear).toFixed()
+    const TopTierMentionsAvg = calculateTopTierMentionsAvg(dataFilteredByYear).toFixed()
+    // return 20
+    return {
+      totalMentions: totalMentionsAvg,
+      topTier: TopTierMentionsAvg
+    }
+  }
+
   $: currentProgram = $login
   onMount( async () => {
     // console.log('is mounted')
@@ -60,8 +90,16 @@
     $contrasena = ''
     currentProgram = ''
     selectedTab = 'press'
+  }
 
-    // handleClear() 
+  function calculateTotalMentionsAvg(data){
+    const totalMentions = data.map( row => parseInt(row.totalMentions, 10) )
+    return totalMentions.reduce( ( a, b ) => a + b ) / totalMentions.length
+  }
+
+  function calculateTopTierMentionsAvg(data){
+    const topTierMentions = data.map( row => parseInt(row.topTierMentions, 10) )
+    return topTierMentions.reduce( ( a, b ) => a + b ) / topTierMentions.length
   }
 </script>
 
@@ -78,6 +116,8 @@
       <Options
         {dataset}
         filteredData={filteredDataByTab()}
+        average={calculatePressAverage()}
+        bind:yearToShowAverage
         bind:row
         bind:selectedYear
         bind:selectedMonth
