@@ -39,6 +39,7 @@ export async function getNewData() {
   publicationDataset = await getPublicationData()
   aboutDataset = await getAboutContent()
   if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && videoDataset && publicationDataset && aboutDataset) {
+    // console.log(pressDataset)
     data = formatData(
       pressDataset,
       socialMediaDataset,
@@ -55,8 +56,6 @@ export async function getNewData() {
 function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, publicationDataset) {
   return {
     data: {
-      filtered: pressDataset.data,
-      metrics: pressDataset.metrics,
       about: aboutDataset,
       tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, publicationDataset]),
       years: pressDataset.years.sort((a, b) => b - a),

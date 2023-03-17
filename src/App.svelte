@@ -8,14 +8,9 @@
   onMount(async () => {
     const res = await getNewData()
     dataset = res
-
-    if (dataset) {
-      // console.log(dataset)
-    }
-
   });
 </script>
-{ #if dataset.data && dataset.data.filtered.length > 0}
+{ #if dataset.data && dataset.data.tabs.length > 0}
   <MainContainer {dataset}  />
 {:else}
   <div class="loading-container">

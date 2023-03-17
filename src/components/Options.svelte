@@ -204,9 +204,15 @@
   </div>
 </section>
 <div class="options__avg">
-  <p>In {yearToShowAverage} the average Total Mentions per Month was: {average.totalMentions} and
-    the average Top Tier Mentions per Month was: {average.topTier}
-  </p>
+  {#if selectedTab === 'press'}
+    <p>In {yearToShowAverage} the average Total Mentions per Month was: {average.totalMentions} and
+      the average Top Tier Mentions per Month was: {average.topTier}
+    </p>
+  {:else if selectedTab === 'social_media'}
+    <p>In {yearToShowAverage} the average Number of Posts per Month was: {average.numberOfPosts},
+      the average Impressions per Month was: {average.impressions} and the engagements per month was: {average.engagements}
+    </p>
+  {/if}
 </div>
 <div class="selects">
   <div class="select-container">
