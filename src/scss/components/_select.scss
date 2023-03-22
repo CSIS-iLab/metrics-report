@@ -14,7 +14,7 @@
 .selects {
   display: flex;
   flex-direction: column;
-  padding-top: rem(32);
+  // padding-top: rem(32);
   padding-bottom: rem(48);
   padding-left: var(--container-padding);
   padding-right: var(--container-padding);
@@ -25,7 +25,7 @@
     display: grid;
     grid-template-columns: repeat(4, calc(25% - 2rem));
     gap: rem(40);
-    padding-top: rem(48);
+    // padding-top: rem(48);
     padding-bottom: rem(56);
   }
 }

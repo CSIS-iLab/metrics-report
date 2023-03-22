@@ -11,6 +11,8 @@
   export let selectedTab
   export let searchText = ''
   export let row
+  export let average
+  export let yearToShowAverage
 
   $: totalEntries = filteredData.length
 
@@ -146,9 +148,8 @@
     }
   }
 
-  // ToDo: fix this function. currently is not working properly
-  const toTitleCase = ( word ) => {
-    return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
+  const toTitleCase = ( metric ) => {
+    return metric.split('_').map( word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ') 
   }
 
   onMount(() => {
@@ -196,12 +197,28 @@
         data-tab={metric}
         value={metric}
         on:click={(event) => handleSelect(event, 'Tab')}
-        >{toTitleCase(metric.split('_').join(' '))}
+        >{toTitleCase(metric)}
 
       </button>
     {/each}
   </div>
 </section>
+<div class="options__avg">
+  {#if average}
+    {#if selectedTab === 'press'}
+      <p>In {yearToShowAverage} the average Total Mentions per Month was: {average.totalMentions} and
+        the average Top Tier Mentions per Month was: {average.topTier}
+      </p>
+    {:else if selectedTab === 'social_media'}
+      <p>In {yearToShowAverage} the average Number of Posts per Month was: {average.numberOfPosts},
+        the average Impressions per Month was: {average.impressions} and the engagements per month was: {average.engagements}
+      </p>
+    {/if}
+  {:else}
+   <p>No Averages</p>
+  {/if}
+
+</div>
 <div class="selects">
   <div class="select-container">
     <div class="label">Year</div>

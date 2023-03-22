@@ -1,6 +1,6 @@
 <script>
   import SocialMediaShare from '../components/SocialMediaShare.svelte'
-  const currentYear = new Date().getFullYear()
+  import { currentYear } from '../store'
 </script>
 
 <footer class="footer">
@@ -42,7 +42,7 @@
     </address>
   </div>
   <p class="footer__copyright">
-    © {currentYear} Center for Strategic and International Studies. All rights reserved.
+    © {$currentYear} Center for Strategic and International Studies. All rights reserved.
     |
     <a
       href="https://www.csis.org/privacy-policy"

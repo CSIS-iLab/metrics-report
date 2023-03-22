@@ -3,6 +3,9 @@ import { getSocialMediaDataa } from './socialMediaData'
 import { getWebsitesData } from './websites'
 import { getPodcastData } from './podcasts'
 import { getVideoData } from './videos'
+import { getVideoEventsData } from './videosEvents'
+import { getVideoPodcastsData } from './videosPodcasts'
+import { getVideoShortsData } from './videosShorts'
 import { getPublicationData } from './publications'
 import { getAboutContent } from './about'
 
@@ -13,6 +16,9 @@ let websiteDataset = {}
 let podcastDataset = {}
 let aboutDataset = {}
 let videoDataset = {}
+let videoEventsDataset = {}
+let videoShortsDataset = {}
+let videoPodcastsDataset = {}
 let publicationDataset = {}
 let data = {}
 const months = [
@@ -36,15 +42,22 @@ export async function getNewData() {
   websiteDataset = await getWebsitesData()
   podcastDataset  = await getPodcastData()
   videoDataset = await getVideoData()
+  videoEventsDataset = await getVideoEventsData()
+  videoShortsDataset = await getVideoShortsData()
+  videoPodcastsDataset = await getVideoPodcastsData()
   publicationDataset = await getPublicationData()
   aboutDataset = await getAboutContent()
-  if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && videoDataset && publicationDataset && aboutDataset) {
+  if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && videoDataset && videoEventsDataset && videoShortsDataset && videoPodcastsDataset && publicationDataset && aboutDataset) {
+    // console.log(pressDataset)
     data = formatData(
       pressDataset,
       socialMediaDataset,
       websiteDataset,
       podcastDataset,
       videoDataset,
+      videoEventsDataset,
+      videoShortsDataset,
+      videoPodcastsDataset,
       publicationDataset,
       aboutDataset
     )
@@ -52,13 +65,11 @@ export async function getNewData() {
   return data
 }
 
-function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, publicationDataset) {
+function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, videoEventsDataset, videoShortsDataset, videoPodcastsDataset, publicationDataset) {
   return {
     data: {
-      filtered: pressDataset.data,
-      metrics: pressDataset.metrics,
       about: aboutDataset,
-      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, publicationDataset]),
+      tabs: unifiedData([pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, videoEventsDataset, videoShortsDataset, videoPodcastsDataset, publicationDataset]),
       years: pressDataset.years.sort((a, b) => b - a),
       months: months,
       spreadsheetsTabs: spreadsheetsTabs
@@ -79,6 +90,6 @@ function unifiedData( params ) {
 }
 
 
-const spreadsheetsTabs = ['press','social_media', 'websites', 'podcasts', 'videos', 'publications']
+const spreadsheetsTabs = ['press','social_media', 'websites', 'podcasts', 'videos', 'videos_events', 'videos_shorts','videos_podcasts', 'publications']
 
 export default { getNewData }

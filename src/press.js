@@ -3,6 +3,7 @@ import { getHelperData } from "./helper"
 
 let helperDataset = {}
 let columnNames
+let test = {}
 let years = []
 let months = []
 
@@ -20,6 +21,15 @@ async function fetchData(URL) {
       }
       years.push(row.Year)
       months.push(row.Month)
+      // console.log(row)
+      const year = row.Year
+      // console.log(year)
+      // if (row.Year) {
+      //   test.year.push(row)
+      // } else {
+      //   test[year] = [row]
+      // }
+
       return {
         id: index,
         program: row.Program,
@@ -32,8 +42,10 @@ async function fetchData(URL) {
     return {
       metrics: "press",
       data: data,
+      hola: test,
+      dataFormmated: formatData(data),
       columnNames: formatColumnNames(columnNames),
-      years: [...new Set(years)],
+      years: [...new Set(years)].sort((a, b) => b - a),
       months: [...new Set(months)]
     };
   })
@@ -46,4 +58,22 @@ function formatColumnNames(columnNames) {
 
 function format(name) {
   return name.replaceAll("_", " ")
+}
+
+function formatData(data) {
+  // console.log(data)
+  let newData = []
+  let years = []
+  let months = []
+  data.forEach(element => {
+    // console.log(element)
+    years.push(element.year)
+    months.push(element.month)
+    newData.push({})
+  })
+  const yrs = [... new Set( years )].sort((a, b) => b - a)
+  const monthss = [... new Set( months )]
+  return {
+    data: newData
+  }
 }
