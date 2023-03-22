@@ -66,27 +66,29 @@
 
   $: calculateAverages = () => {
     const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
-    const totalMentionsAvg= calculateTotalMentionsAvg(dataFilteredByYear).toFixed()
-    const TopTierMentionsAvg = calculateTopTierMentionsAvg(dataFilteredByYear).toFixed()
-    const engagementsAvg = calculateEngagementsAvg(dataFilteredByYear).toFixed()
-    const impressionsAvg = calculateImpressionsAvg(dataFilteredByYear).toFixed()
-    const numberOfPostsAvg = calculateNumberOfPostsAvg(dataFilteredByYear).toFixed()
-    const uniqueVisitorsAvg = calculateUniqueVisitorsAvg(dataFilteredByYear).toFixed()
-    const pageViewsAvg = calculatePageViewsAvg(dataFilteredByYear).toFixed()
-    const totalDownloadsAvg = calculateTotalDownloadsAvg(dataFilteredByYear).toFixed()
-    const totalViewsFirst30DaysPerformanceAvg = calculateViewsFirst30DaysPerformanceAvg(dataFilteredByYear).toFixed()
-    return {
-      totalMentions: totalMentionsAvg,
-      topTier: TopTierMentionsAvg,
-      engagements: engagementsAvg,
-      impressions: impressionsAvg,
-      numberOfPosts: numberOfPostsAvg,
-      uniqueVisitors: uniqueVisitorsAvg,
-      pageViews: pageViewsAvg,
-      totalDownloads: totalDownloadsAvg,
-      totalViewsFirst30DaysPerformance: totalViewsFirst30DaysPerformanceAvg 
-
+    if (dataFilteredByYear.length > 0) {
+      const totalMentionsAvg= calculateTotalMentionsAvg(dataFilteredByYear).toFixed()
+      const TopTierMentionsAvg = calculateTopTierMentionsAvg(dataFilteredByYear).toFixed()
+      const engagementsAvg = calculateEngagementsAvg(dataFilteredByYear).toFixed()
+      const impressionsAvg = calculateImpressionsAvg(dataFilteredByYear).toFixed()
+      const numberOfPostsAvg = calculateNumberOfPostsAvg(dataFilteredByYear).toFixed()
+      const uniqueVisitorsAvg = calculateUniqueVisitorsAvg(dataFilteredByYear).toFixed()
+      const pageViewsAvg = calculatePageViewsAvg(dataFilteredByYear).toFixed()
+      const totalDownloadsAvg = calculateTotalDownloadsAvg(dataFilteredByYear).toFixed()
+      const totalViewsFirst30DaysPerformanceAvg = calculateViewsFirst30DaysPerformanceAvg(dataFilteredByYear).toFixed()
+      return {
+        totalMentions: totalMentionsAvg,
+        topTier: TopTierMentionsAvg,
+        engagements: engagementsAvg,
+        impressions: impressionsAvg,
+        numberOfPosts: numberOfPostsAvg,
+        uniqueVisitors: uniqueVisitorsAvg,
+        pageViews: pageViewsAvg,
+        totalDownloads: totalDownloadsAvg,
+        totalViewsFirst30DaysPerformance: totalViewsFirst30DaysPerformanceAvg 
+      }
     }
+    return false
   }
 
   $: currentProgram = $login
@@ -142,8 +144,13 @@
   }
 
   function calculateTotalDownloadsAvg( data ) {
-    const pageViews = data.map( row => parseInt( row.pageViews, 10 ) )
-    return pageViews.reduce( ( a, b ) => a + b ) / pageViews.length  
+    const totalDownloads = data.map( row => parseInt( row.totalDownloads, 10 ) )
+    return totalDownloads.reduce( ( a, b ) => a + b ) / totalDownloads.length  
+  }
+
+  function calculateViewsFirst30DaysPerformanceAvg( data ) {
+    const totalViews = data.map( row => parseInt( row.totalViews, 10 ) )
+    return totalViews.reduce( ( a, b ) => a + b ) / totalViews.length  
   }
 </script>
 
