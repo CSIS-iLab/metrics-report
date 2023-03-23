@@ -27,7 +27,7 @@ async function fetchData(URL) {
         program: getProgram(row.Description),
         videoTitle: row.Video_Title,
         description: row.Description,
-        totalViews: row.Total_Views_First_30_days_of_preformance,
+        totalViews: row.Total_Views_First_30_Days_of_Performance,
         totalWatchTime: row.Total_Watch_Time_Minutes,
         averagePercentageViewed: row.Average_Percentage_Viewed,
         permalink: row.Permalink_URL,
