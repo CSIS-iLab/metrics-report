@@ -1,7 +1,7 @@
 <div class="development">
   <h3 class="development__title">Development Team</h3>
   <p class="development__description">
-    The Technology Policy Recommendations database is a product of the <a
+    The Metrics Dashboard is a product of the <a
       class="development__link"
       href="https://www.csis.org/programs/dracopoulos-ideas-lab"
       target="_blank"
@@ -10,7 +10,7 @@
     Strategic and International Studies.
   </p>
   <p class="development__description">
-    Produced by Tucker Harris, Serven Maraghi, José Romero.
+    Produced by José Romero.
   </p>
 </div>
 
