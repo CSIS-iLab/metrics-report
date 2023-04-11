@@ -36,12 +36,12 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: "videos_podcasts",
+      metrics: 'podcasts_(Video)',
       data: data,
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)],
       months: [...new Set(months)]
-    };
+    }
   })
   return dataPromise
 }

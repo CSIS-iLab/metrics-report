@@ -36,12 +36,12 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: "videos_shorts",
+      metrics: 'YouTube_shorts',
       data: data,
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)],
       months: [...new Set(months)]
-    };
+    }
   })
   return dataPromise
 }

@@ -90,6 +90,16 @@ function unifiedData( params ) {
 }
 
 
-const spreadsheetsTabs = ['press','social_media', 'websites', 'podcasts', 'videos', 'videos_events', 'videos_shorts','videos_podcasts', 'publications']
+const spreadsheetsTabs = [
+  'press',
+  'social_media',
+  'program_sites',
+  'podcasts',
+  'podcasts_(Video)',
+  'videos',
+  'events',
+  'YouTube_shorts',
+  'publications'
+]
 
 export default { getNewData }
