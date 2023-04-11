@@ -36,7 +36,7 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: "videos_events",
+      metrics: "events",
       data: data,
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)],

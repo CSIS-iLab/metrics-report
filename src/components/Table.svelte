@@ -145,13 +145,13 @@
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.topTierMentions}</td
+                >{rows.totalMentions}</td
               >
               <td class="table__body__cell table__body__cell--data">
                 <div class="table__body__cell__policy-goal-container">
                   <span
                     class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalMentions.toLowerCase()}"
-                    >{rows.totalMentions}</span
+                    >{rows.topTierMentions}</span
                   >
                 </div>
               </td>
@@ -190,7 +190,7 @@
                 >{rows.year}</td
               >
             </tr>
-          {:else if selectedTab === 'websites'}
+          {:else if selectedTab === 'program_sites'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
@@ -282,7 +282,7 @@
                 >{rows.year}</td
               >
             </tr>
-          {:else if selectedTab === 'videos_events'}
+          {:else if selectedTab === 'events'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
                 >
@@ -321,7 +321,7 @@
                 >{rows.year}</td
               >
             </tr>
-          {:else if selectedTab === 'videos_shorts'}
+          {:else if selectedTab === 'YouTube_shorts'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
                 >

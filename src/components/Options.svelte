@@ -148,8 +148,11 @@
     }
   }
 
-  const toTitleCase = ( metric ) => {
-    return metric.split('_').map( word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ') 
+  const toTitleCase = (metric) => {
+    return metric
+      .split('_')
+      .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+      .join(' ')
   }
 
   onMount(() => {
@@ -198,7 +201,6 @@
         value={metric}
         on:click={(event) => handleSelect(event, 'Tab')}
         >{toTitleCase(metric)}
-
       </button>
     {/each}
   </div>
@@ -206,18 +208,33 @@
 <div class="options__avg">
   {#if average}
     {#if selectedTab === 'press'}
-      <p>In {yearToShowAverage} the average Total Mentions per Month was: {average.totalMentions} and
-        the average Top Tier Mentions per Month was: {average.topTier}
+      <p>
+        In {yearToShowAverage}, your program’s Average Total Mentions per Month
+        = {average.totalMentions}. Your program’s Average Top Tier Mentions per
+        Month = {average.topTier}.
+      </p>
+      <p />
+      <p>
+        Total Mentions: the number of times your program is cited across online,
+        print, TV, and radio news stories
+      </p>
+      <p>
+        Top Tier Mentions: the number of times your program is cited in print
+        and online stories by the world’s top news sources (determined by reach,
+        AKA audience size)
       </p>
     {:else if selectedTab === 'social_media'}
-      <p>In {yearToShowAverage} the average Number of Posts per Month was: {average.numberOfPosts},
-        the average Impressions per Month was: {average.impressions} and the engagements per month was: {average.engagements}
+      <p>
+        In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts}times per month.
+        These posts averaged {average.impressions} Impressions per Month, and {average.engagements} Engagements per Month.
       </p>
+      <p />
+      <p>Impressions: the number of times social media content was viewed</p>
+      <p>Engagements: the number of times users interacted with the posts</p>
     {/if}
   {:else}
-   <p>No Averages</p>
+    <p>No Averages</p>
   {/if}
-
 </div>
 <div class="selects">
   <div class="select-container">
@@ -229,7 +246,7 @@
       {optionIdentifier}
       {labelIdentifier}
       items={dataset.data.years}
-      placeholder="Select a Year"
+      placeholder="Select Year"
       on:select={(event) => handleSelect(event, 'Year')}
       on:clear={() => handleClear('Year')}
     />

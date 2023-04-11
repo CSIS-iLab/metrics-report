@@ -26,7 +26,7 @@ async function fetchData(URL) {
         page: row.Page,
         pageType: row.Page_Type,
         views: row.Views,
-        eventCount: row.Event_Count_Engagements,
+        eventCount: row.Engagements,
         month: row.Month,
         year: row.Year
       }

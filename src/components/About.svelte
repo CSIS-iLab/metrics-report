@@ -10,9 +10,17 @@
     <h2 class="about__subtitle">About</h2>
     <div class="about__description">
       <p>{aboutContent.content}</p>
+      <p />
+      <p>
+        This dashboard is a product of the <a
+          class="about__link"
+          href="https://www.csis.org/programs/dracopoulos-ideas-lab"
+          target="_blank"
+          rel="noreferrer">Andreas C. Dracopoulos iDeas Lab</a
+        >, the in-house digital, multimedia, and design agency at the Center for
+        Strategic and International Studies. It was produced by José Romero.
+      </p>
     </div>
-
-    <DevelopmentTeam />
 
     <div class="back-top-container">
       <a class="back-top-container__link" href="#top"

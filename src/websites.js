@@ -31,7 +31,7 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: 'websites',
+      metrics: 'program_sites',
       data: data,
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)],

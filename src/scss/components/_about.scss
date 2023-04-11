@@ -29,141 +29,25 @@
     }
   }
 
-  &__reports {
-    &__title {
-      @extend %text-style-ui-5-bold-caps;
-      margin-top: rem(42);
-      margin-bottom: rem(8);
+  &__link {
+    color: $color-brand-blue-600;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-brand-blue-700;
     }
 
-    ul {
-      padding: 0;
-      margin-top: 0;
-
-      li {
-        margin-bottom: rem(8);
-        line-height: 1.2;
-
-        &:last-child {
-          margin-bottom: rem(42);
-        }
-      }
+    &:focus {
+      color: $color-brand-blue-700;
+      background-color: $color-background-light-blue-100;
+      outline: 0;
     }
 
-    &__link {
-      @extend %text-style-ui-2;
-      color: $color-brand-blue-600;
-      text-decoration: none;
-
-      &--back-top {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        @extend %text-style-ui-3;
-      }
-
-      .icon-container {
-        // color brand-blue-600
-        margin-left: rem(4);
-        filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg)
-          brightness(100%) contrast(84%);
-      }
-
-      &:hover {
-        color: $color-brand-blue-700;
-
-        .icon-container {
-          // color: $color-brand-blue-700;
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg)
-            brightness(92%) contrast(101%);
-        }
-      }
-
-      &:focus {
-        color: $color-brand-blue-700;
-        background-color: $color-background-light-blue-100;
-        outline: 0;
-
-        .icon-container {
-          // color: $color-brand-blue-700;
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg)
-            brightness(92%) contrast(101%);
-        }
-      }
-
-      &:visited {
-        color: $color-brand-blue-870;
-
-        .icon-container {
-          // color: $color-brand-blue-800;
-          opacity: 0.7;
-          filter: invert(9%) sepia(41%) saturate(6837%) hue-rotate(211deg)
-            brightness(98%) contrast(99%);
-        }
-      }
+    &:visited {
+      color: $color-brand-blue-870;
     }
   }
-
-  &__initiative {
-    @extend %text-style-paragraph-2;
-
-    &__link {
-      color: $color-brand-blue-600;
-      text-decoration: none;
-
-      &:hover {
-        color: $color-brand-blue-700;
-      }
-
-      &:focus {
-        color: $color-brand-blue-700;
-        background-color: $color-background-light-blue-100;
-        outline: 0;
-      }
-
-      &:visited {
-        color: $color-brand-blue-870;
-      }
-    }
-  }
-
-  &__development {
-    margin-top: rem(42);
-    margin-bottom: rem(8);
-
-    &__title {
-      @extend %text-style-heading-4;
-      margin-bottom: rem(12);
-    }
-
-    &__description {
-      @extend %text-style-paragraph-2;
-    }
-
-    p:not(:last-child) {
-      margin-bottom: rem(24);
-    }
-
-    &__link {
-      color: $color-brand-blue-600;
-      text-decoration: none;
-
-      &:hover {
-        color: $color-brand-blue-700;
-      }
-
-      &:focus {
-        color: $color-brand-blue-700;
-        background-color: $color-background-light-blue-100;
-        outline: 0;
-      }
-
-      &:visited {
-        color: $color-brand-blue-870;
-      }
-    }
-  }
-
+  
   .back-top-container {
     display: flex;
     align-items: center;
