@@ -225,7 +225,7 @@
       </p>
     {:else if selectedTab === 'social_media'}
       <p>
-        In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts}times per month.
+        In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts} times per month.
         These posts averaged {average.impressions} Impressions per Month, and {average.engagements} Engagements per Month.
       </p>
       <p />
