@@ -57,6 +57,7 @@ function getProgram(string) {
     }
     n++
   }
+  console.log(programNames[0]);
   return programNames[0]
 }
 function formatColumnNames(columnNames) {
