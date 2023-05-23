@@ -225,12 +225,18 @@
       </p>
     {:else if selectedTab === 'social_media'}
       <p>
-        In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts}times per month.
+        In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts} times per month.
         These posts averaged {average.impressions} Impressions per Month, and {average.engagements} Engagements per Month.
       </p>
       <p />
       <p>Impressions: the number of times social media content was viewed</p>
       <p>Engagements: the number of times users interacted with the posts</p>
+    {:else if selectedTab === 'events'}
+      <p>The following data is from event video streams on YouTube only. For other event data (registrations, etc.), please contact the Events team.</p>
+    {:else if selectedTab === 'publications'}
+      <p>Views = total number of views on a publication page from all web traffic sources</p>
+      <p>Engagements = number of additional actions taken from a publication page, such as a share, longer-than-average view time, etc.</p>
+      <p>Each row in this tab presents the number of views and engagements a publication has received in the associated month. Views and engagements are not cumulative in this dashboard tab.</p>
     {/if}
   {:else}
     <p>No Averages</p>
