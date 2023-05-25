@@ -148,12 +148,7 @@
                 >{rows.totalMentions}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalMentions.toLowerCase()}"
-                    >{rows.topTierMentions}</span
-                  >
-                </div>
+                {rows.topTierMentions}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
@@ -173,12 +168,7 @@
                 >{rows.numberOfPosts}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.impressions.toLowerCase()}"
-                    >{rows.impressions}</span
-                  >
-                </div>
+                {rows.impressions}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.engagements}</td
@@ -201,12 +191,7 @@
                 >{rows.website}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.uniqueVisitors.toLowerCase()}"
-                    >{rows.uniqueVisitors}</span
-                  >
-                </div>
+                {rows.uniqueVisitors}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.pageViews}</td
@@ -229,12 +214,7 @@
                 >{rows.podcast}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalDownloads.toLowerCase()}"
-                    >{rows.totalDownloads}</span
-                  >
-                </div>
+                {rows.totalDownloads}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
@@ -267,12 +247,7 @@
                 >{rows.description}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalViews.toLowerCase()}"
-                    >{rows.totalViews}</span
-                  >
-                </div>
+                {rows.totalViews}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.totalWatchTime}</td
@@ -290,6 +265,11 @@
           {:else if selectedTab === 'events'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                ><div class="table__body__cell__title-container">
+                  <span class="icon-container" />{rows.program}
+                </div></td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
                   <a
@@ -306,12 +286,7 @@
                 >{rows.description}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalViews.toLowerCase()}"
-                    >{rows.totalViews}</span
-                  >
-                </div>
+                {rows.totalViews}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.totalWatchTime}</td
@@ -329,6 +304,11 @@
           {:else if selectedTab === 'YouTube_shorts'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                ><div class="table__body__cell__title-container">
+                  <span class="icon-container" />{rows.program}
+                </div></td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
                   <a
@@ -345,12 +325,7 @@
                 >{rows.description}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalViews.toLowerCase()}"
-                    >{rows.totalViews}</span
-                  >
-                </div>
+                {rows.totalViews}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.totalWatchTime}</td
@@ -368,6 +343,11 @@
           {:else if selectedTab === 'podcasts_(Video)'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                ><div class="table__body__cell__title-container">
+                  <span class="icon-container" />{rows.program}
+                </div></td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
                   <a
@@ -384,12 +364,7 @@
                 >{rows.description}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.totalViews.toLowerCase()}"
-                    >{rows.totalViews}</span
-                  >
-                </div>
+                {rows.totalViews}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.totalWatchTime}</td
@@ -415,12 +390,7 @@
                 >{rows.page}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                <div class="table__body__cell__policy-goal-container">
-                  <span
-                    class="table__body__cell__policy-goal table__body__cell__policy-goal--{rows.pageType.toLowerCase()}"
-                    >{rows.pageType}</span
-                  >
-                </div>
+                {rows.pageType}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.views}</td
