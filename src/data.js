@@ -85,7 +85,7 @@ function unifiedData( params ) {
       dataForm: element.data,
       dataColNames: element.columnNames
     }
-  });
+  })
   return data
 }
 

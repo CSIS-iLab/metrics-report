@@ -1,5 +1,5 @@
 import * as d3Fetch from 'd3-fetch'
-import { getHelperData } from "./helper"
+import { getHelperData } from './videoHelper'
 
 let helperDataset = {}
 let columnNames
@@ -13,6 +13,7 @@ export async function getVideoShortsData() {
 }
 
 async function fetchData(URL) {
+  helperDataset = await getHelperData()
   const dataPromise = d3Fetch.csv( URL ).then( res => {
     const data = res.map( (row, index ) => {
       if (index == 0) {
@@ -47,18 +48,32 @@ async function fetchData(URL) {
 }
 
 function getProgram(string) {
-  const array = string.split(' ')
+  let programName
+  const array = string
+    .split(' ')
+    .filter((v) => v.startsWith('#'))
+    .slice(0, 2)
+  if (helperDataset.dataFormatted.length > 1) {
+    helperDataset.dataFormatted
+      .filter((element) => element !== '')
+      .filter((element) => {
+        if (array[0] === element.productName) programName = element.program
+      })
+  }
   let n = 0
   let length = array.length
-  let programNames = []
-  while (n < length ) {
-    if (array[n].charAt(0) === '#') {
-      programNames.push(array[n].substring(1))
-    }
-    n++
-  }
-  return programNames[0]
+  // let programNames = []
+  let programNames = array[0]
+  // while (n < length ) {
+  //   if (array[n].charAt(0) === '#') {
+  //     programNames.push(array[n].substring(1))
+  //   }
+  //   n++
+  // }
+  // console.log(programNames)
+  return programName
 }
+
 function formatColumnNames(columnNames) {
   return columnNames.map( name  => format( name ) )
 }

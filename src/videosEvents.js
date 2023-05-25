@@ -1,20 +1,21 @@
 import * as d3Fetch from 'd3-fetch'
-import { getHelperData } from "./helper"
+import { getHelperData } from './videoHelper'
 
 let helperDataset = {}
-let columnNames
+let columnNames = []
 let years = []
 let months = []
 
 export async function getVideoEventsData() {
   const URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=287607348&single=true&output=csv"
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=287607348&single=true&output=csv'
   return await fetchData(URL)
 }
 
 async function fetchData(URL) {
-  const dataPromise = d3Fetch.csv( URL ).then( res => {
-    const data = res.map( (row, index ) => {
+  helperDataset = await getHelperData()
+  const dataPromise = d3Fetch.csv(URL).then((res) => {
+    const data = res.map((row, index) => {
       if (index == 0) {
         columnNames = Object.keys(row)
         columnNames.pop()
@@ -36,34 +37,47 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: "events",
+      metrics: 'events',
       data: data,
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)],
       months: [...new Set(months)]
-    };
+    }
   })
   return dataPromise
 }
 
 function getProgram(string) {
-  const array = string.split(' ')
+  let programName
+  const array = string
+    .split(' ')
+    .filter((v) => v.startsWith('#'))
+    .slice(0, 2)
+  if (helperDataset.dataFormatted.length > 1) {
+    helperDataset.dataFormatted
+      .filter((element) => element !== '')
+      .filter((element) => {
+        if (array[0] === element.productName) programName = element.program
+      })
+  }
   let n = 0
   let length = array.length
-  let programNames = []
-  while (n < length ) {
-    if (array[n].charAt(0) === '#') {
-      programNames.push(array[n].substring(1))
-    }
-    n++
-  }
-  console.log(programNames[0]);
-  return programNames[0]
-}
-function formatColumnNames(columnNames) {
-  return columnNames.map( name  => format( name ) )
+  // let programNames = []
+  let programNames = array[0]
+  // while (n < length ) {
+  //   if (array[n].charAt(0) === '#') {
+  //     programNames.push(array[n].substring(1))
+  //   }
+  //   n++
+  // }
+  // console.log(programNames)
+  return programName
 }
 
-function format( name ) {
-  return name.replaceAll( "_", " " )
+function formatColumnNames(columnNames) {
+  return columnNames.map((name) => format(name))
+}
+
+function format(name) {
+  return name.replaceAll('_', ' ')
 }
