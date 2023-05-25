@@ -19,10 +19,11 @@ async function fetchData(URL) {
       if (index == 0) {
         columnNames = Object.keys(row)
       }
-      years.push(row.Year)
+      // years.push(row.Year)
       months.push(row.Month)
       // console.log(row)
-      const year = row.Year
+      // const year = row.Year
+      years = ['2022', '2023']
       // console.log(year)
       // if (row.Year) {
       //   test.year.push(row)
@@ -37,6 +38,7 @@ async function fetchData(URL) {
         topTierMentions: row.Top_Tier_Mentions,
         month: row.Month,
         year: row.Year
+        // year: ['2022','2023'] // find way to pull years dinamically.
       }
     })
     return {
