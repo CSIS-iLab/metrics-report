@@ -246,6 +246,11 @@
           {:else if selectedTab === 'videos'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                ><div class="table__body__cell__title-container">
+                  <span class="icon-container" />{rows.program}
+                </div></td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
                   <a
@@ -360,7 +365,7 @@
                 >{rows.year}</td
               >
             </tr>
-          {:else if selectedTab === 'videos_podcasts'}
+          {:else if selectedTab === 'podcasts_(Video)'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
                 >
