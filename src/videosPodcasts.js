@@ -1,9 +1,8 @@
 import * as d3Fetch from 'd3-fetch'
 import { getHelperData } from './videoHelper'
 
-
 let helperDataset = {}
-let columnNames
+let columnNames = []
 let years = []
 let months = []
 
@@ -18,7 +17,9 @@ async function fetchData(URL) {
   const dataPromise = d3Fetch.csv( URL ).then( res => {
     const data = res.map( (row, index ) => {
       if (index == 0) {
-        columnNames = Object.keys(row)
+        columnNames.push('Program')
+        columnNames.push(...Object.keys(row))
+        // columnNames = Object.keys(row)
         columnNames.pop()
       }
       years.push(row.Year)
@@ -49,7 +50,6 @@ async function fetchData(URL) {
 }
 
 function getProgram(string) {
-  console.log(string)
   let programName
   const array = string
     .split(' ')
