@@ -11,7 +11,6 @@
       target="_blank"
       rel="noreferrer"
     >
-      <!-- <Logo /> -->
       <svg
         width="280"
         height="39"

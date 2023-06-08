@@ -19,17 +19,9 @@ async function fetchData(URL) {
       if (index == 0) {
         columnNames = Object.keys(row)
       }
-      // years.push(row.Year)
+      // TODO: pull years dinamically
       months.push(row.Month)
-      // console.log(row)
-      // const year = row.Year
-      years = ['2022', '2023']
-      // console.log(year)
-      // if (row.Year) {
-      //   test.year.push(row)
-      // } else {
-      //   test[year] = [row]
-      // }
+      years = ['2023']
 
       return {
         id: index,
@@ -63,12 +55,10 @@ function format(name) {
 }
 
 function formatData(data) {
-  // console.log(data)
   let newData = []
   let years = []
   let months = []
   data.forEach(element => {
-    // console.log(element)
     years.push(element.year)
     months.push(element.month)
     newData.push({})

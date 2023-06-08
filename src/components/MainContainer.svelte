@@ -21,7 +21,7 @@
   $:if (selectedYear !== '') {
     yearToShowAverage = selectedYear
   } else {
-    yearToShowAverage = ($currentYear - 1).toString()
+    yearToShowAverage = ($currentYear).toString()
   }
 
   let searchText
@@ -33,7 +33,6 @@
 
   $: filteredData = () => {
     return dataset.data.filtered.filter((row) => {
-      // new Date().getFullYear()  // returns the current year
       const filteredYear = selectedYear ? selectedYear : row.year
       const filteredMonth = selectedMonth ? selectedMonth : row.month
       const filteredByProgram = $user ? $user : row.program
@@ -93,11 +92,9 @@
 
   $: currentProgram = $login
   onMount( async () => {
-    // console.log('is mounted')
   })
 
   onDestroy( async () => {
-    // selectedTab = 'press'
   })
 
   const handleLogOut = () => {
@@ -160,7 +157,6 @@
   <div id="site-content">
     <Header {handleLogOut}/>
 
-    <!-- <IntroContent showingProgram={dataset.data.showingProgram} /> -->
     <IntroContent showingProgram={$user} />
 
     <section class="table-container">

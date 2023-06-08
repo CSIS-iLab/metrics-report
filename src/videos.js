@@ -19,14 +19,12 @@ async function fetchData(URL) {
       if (index == 0) {
         columnNames.push('Program')
         columnNames.push(...Object.keys(row))
-        // columnNames = Object.keys(row)
         columnNames.pop()
       }
       years.push(row.Year)
       months.push(row.Month)
       return {
         id: index,
-        // program: row.Program,
         program: getProgram(row.Description),
         videoTitle: row.Video_Title,
         description: row.Description,
@@ -64,15 +62,7 @@ function getProgram(string) {
   }
   let n = 0
   let length = array.length
-  // let programNames = []
   let programNames = array[0]
-  // while (n < length ) {
-  //   if (array[n].charAt(0) === '#') {
-  //     programNames.push(array[n].substring(1))
-  //   }
-  //   n++
-  // }
-  // console.log(programNames)
   return programName
 }
 function formatColumnNames(columnNames) {
