@@ -186,7 +186,6 @@
 </script>
 
 <section class="table-container__header">
-  <!-- <h2 class="table-container__subtitle">Explore Policy Goals</h2> -->
 </section>
 
 <section class="options__container">
@@ -225,12 +224,12 @@
       </p>
     {:else if selectedTab === 'social_media'}
       <p>
-        In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts} times per month.
-        These posts averaged {average.impressions} Impressions per Month, and {average.engagements} Engagements per Month.
-      </p>
-      <p />
+        Please find below data from ER social media accounts. In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts} times per month.
+        These posts averaged {average.impressions} Impressions per Month, and {average.engagements} Engagements per Month.</p>
       <p>Impressions: the number of times social media content was viewed</p>
       <p>Engagements: the number of times users interacted with the posts</p>
+    {:else if selectedTab === 'videos'}
+      <p>“Average percentage viewed” measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
     {:else if selectedTab === 'events'}
       <p>The following data is from event video streams on YouTube only. For other event data (registrations, etc.), please contact the Events team.</p>
     {:else if selectedTab === 'publications'}
@@ -239,7 +238,9 @@
       <p>Each row in this tab presents the number of views and engagements a publication has received in the associated month. Views and engagements are not cumulative in this dashboard tab.</p>
     {/if}
   {:else}
-    <p>No Averages</p>
+    {#if selectedTab === 'podcasts_(Video)' || selectedTab === 'events' || selectedTab === 'YouTube_shorts' || selectedTab === 'videos' }
+      <p>“Average percentage viewed” measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
+    {/if}
   {/if}
 </div>
 <div class="selects">

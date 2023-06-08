@@ -48,7 +48,6 @@ export async function getNewData() {
   publicationDataset = await getPublicationData()
   aboutDataset = await getAboutContent()
   if (pressDataset && socialMediaDataset && websiteDataset && podcastDataset && videoDataset && videoEventsDataset && videoShortsDataset && videoPodcastsDataset && publicationDataset && aboutDataset) {
-    // console.log(pressDataset)
     data = formatData(
       pressDataset,
       socialMediaDataset,
@@ -79,7 +78,6 @@ function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDat
 
 function unifiedData( params ) {
   const data = params.map( element => {
-    // const tab = element.metrics
     return {
       tab: element.metrics,
       dataForm: element.data,
