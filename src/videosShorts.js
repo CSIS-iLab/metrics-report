@@ -25,7 +25,7 @@ async function fetchData(URL) {
       months.push(row.Month)
       return {
         id: index,
-        program: getProgram(row.Description),
+        program: getProgram(row.Tags),
         videoTitle: row.Video_Title,
         description: row.Description,
         totalViews: row.Total_Views_First_30_Days_of_Performance,
@@ -39,7 +39,7 @@ async function fetchData(URL) {
     return {
       metrics: 'YouTube_shorts',
       data: data,
-      columnNames: formatColumnNames(columnNames),
+      columnNames: formatColumnNames(columnNames.slice(0, 8)),
       years: [...new Set(years)],
       months: [...new Set(months)]
     }
@@ -60,9 +60,6 @@ function getProgram(string) {
         if (array[0] === element.productName) programName = element.program
       })
   }
-  let n = 0
-  let length = array.length
-  let programNames = array[0]
   return programName
 }
 

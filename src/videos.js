@@ -8,14 +8,14 @@ let months = []
 
 export async function getVideoData() {
   const URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=1391679928&single=true&output=csv"
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=1391679928&single=true&output=csv'
   return await fetchData(URL)
 }
 
 async function fetchData(URL) {
   helperDataset = await getHelperData()
-  const dataPromise = d3Fetch.csv( URL ).then( res => {
-    const data = res.map( (row, index ) => {
+  const dataPromise = d3Fetch.csv(URL).then((res) => {
+    const data = res.map((row, index) => {
       if (index == 0) {
         columnNames.push('Program')
         columnNames.push(...Object.keys(row))
@@ -25,7 +25,7 @@ async function fetchData(URL) {
       months.push(row.Month)
       return {
         id: index,
-        program: getProgram(row.Description),
+        program: getProgram(row.Tags),
         videoTitle: row.Video_Title,
         description: row.Description,
         totalViews: row.Total_Views_First_30_Days_of_Performance,
@@ -37,12 +37,12 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: "videos",
+      metrics: 'videos',
       data: data,
-      columnNames: formatColumnNames(columnNames),
+      columnNames: formatColumnNames(columnNames.slice(0, 8)),
       years: [...new Set(years)],
       months: [...new Set(months)]
-    };
+    }
   })
   return dataPromise
 }
@@ -60,15 +60,13 @@ function getProgram(string) {
         if (array[0] === element.productName) programName = element.program
       })
   }
-  let n = 0
-  let length = array.length
-  let programNames = array[0]
   return programName
 }
+
 function formatColumnNames(columnNames) {
-  return columnNames.map( name  => format( name ) )
+  return columnNames.map((name) => format(name))
 }
 
-function format( name ) {
-  return name.replaceAll( "_", " " )
+function format(name) {
+  return name.replaceAll('_', ' ')
 }
