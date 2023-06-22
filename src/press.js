@@ -36,7 +36,7 @@ async function fetchData(URL) {
     return {
       metrics: "press",
       data: data,
-      hola: test,
+      // hola: test,
       dataFormmated: formatData(data),
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)].sort((a, b) => b - a),

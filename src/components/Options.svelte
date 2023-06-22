@@ -238,7 +238,7 @@
       <p>Each row in this tab presents the number of views and engagements a publication has received in the associated month. Views and engagements are not cumulative in this dashboard tab.</p>
     {/if}
   {:else}
-    {#if selectedTab === 'podcasts_(Video)' || selectedTab === 'events' || selectedTab === 'YouTube_shorts' || selectedTab === 'videos' }
+    {#if selectedTab === 'podcasts_(Video)' || selectedTab === 'events' || selectedTab === 'YouTube_shorts' || selectedTab === 'videos'  || selectedTab === 'videos_iLab'}
       <p>“Average percentage viewed” measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
     {/if}
   {/if}

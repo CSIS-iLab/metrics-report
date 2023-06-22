@@ -25,9 +25,9 @@ async function fetchData(URL) {
       months.push(row.Month)
       return {
         id: index,
-        program: getProgram(row.Description),
+        program: getProgram(row.Tags),
         videoTitle: row.Video_Title,
-        description: row.Description,
+        // description: row.Description,
         totalViews: row.Total_Views_First_30_Days_of_Performance,
         totalWatchTime: row.Total_Watch_Time_Minutes,
         averagePercentageViewed: row.Average_Percentage_Viewed,
@@ -39,7 +39,9 @@ async function fetchData(URL) {
     return {
       metrics: 'events',
       data: data,
-      columnNames: formatColumnNames(columnNames),
+      columnNames: removeDescriptionColumn(
+        formatColumnNames(columnNames.slice(0, 8))
+      ),
       years: [...new Set(years)],
       months: [...new Set(months)]
     }
@@ -60,10 +62,11 @@ function getProgram(string) {
         if (array[0] === element.productName) programName = element.program
       })
   }
-  let n = 0
-  let length = array.length
-  let programNames = array[0]
   return programName
+}
+
+function removeDescriptionColumn(columnNames) {
+  return columnNames.filter((name) => name !== 'Description')
 }
 
 function formatColumnNames(columnNames) {

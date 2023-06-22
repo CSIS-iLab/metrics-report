@@ -242,10 +242,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>
@@ -281,10 +278,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>
@@ -320,10 +314,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>
@@ -359,10 +350,43 @@
                     ></a
                   >
                 </div>
-                </td>
+              </td>
+              <td class="table__body__cell table__body__cell--data">
+                {rows.totalViews}
+              </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
+                >{rows.totalWatchTime}</td
               >
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.averagePercentageViewed}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.year}</td
+              >
+            </tr>
+          {:else if selectedTab === 'videos_iLab'}
+            <tr class="title table__body__cell--border">
+              <td class="table__body__cell table__body__cell--data"
+                ><div class="table__body__cell__title-container">
+                  <span class="icon-container" />{rows.program}
+                </div></td
+              >
+              <td class="table__body__cell table__body__cell--data"
+                >
+                <div class="link">
+                  <a
+                    href={rows.permalink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >{rows.videoTitle}<span class="icon-container"
+                      ><Icon name="Icon-open-blank" class="icon" /></span
+                    ></a
+                  >
+                </div>
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>

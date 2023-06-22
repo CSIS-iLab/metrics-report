@@ -93,13 +93,6 @@
         display: flex;
         align-items: center;
       }
-
-      &__container__activity,
-      &__container__state,
-      &__container__authority,
-      &__container__type-of-resource {
-        cursor: pointer;
-      }
     }
   }
 
@@ -150,10 +143,6 @@
   tr {
     background-color: $color-background-white;
     transition: $transition__link;
-  }
-
-  .title {
-    cursor: pointer;
   }
 
   .title:hover {
