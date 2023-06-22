@@ -39,7 +39,9 @@ async function fetchData(URL) {
     return {
       metrics: 'YouTube_shorts',
       data: data,
-      columnNames: formatColumnNames(columnNames.slice(0, 8)),
+      columnNames: removeDescriptionColumn(
+        formatColumnNames(columnNames.slice(0, 8))
+      ),
       years: [...new Set(years)],
       months: [...new Set(months)]
     }
@@ -61,6 +63,10 @@ function getProgram(string) {
       })
   }
   return programName
+}
+
+function removeDescriptionColumn(columnNames) {
+  return columnNames.filter((name) => name !== 'Description')
 }
 
 function formatColumnNames(columnNames) {

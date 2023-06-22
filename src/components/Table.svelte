@@ -242,10 +242,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>
@@ -281,10 +278,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>
@@ -320,10 +314,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>
@@ -359,10 +350,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>
@@ -398,10 +386,7 @@
                     ></a
                   >
                 </div>
-                </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.description}</td
-              >
+              </td>
               <td class="table__body__cell table__body__cell--data">
                 {rows.totalViews}
               </td>

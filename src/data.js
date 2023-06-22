@@ -1,15 +1,17 @@
 import { getPressData } from './press'
 import { getSocialMediaDataa } from './socialMediaData'
-import { getWebsitesData } from './websites'
+// import { getWebsitesData } from './websites'
 import { getPodcastData } from './podcasts'
 import { getVideoData } from './videos'
 import { getVideoEventsData } from './videosEvents'
 import { getVideoPodcastsData } from './videosPodcasts'
-import { getVideoShortsData } from './videosShorts'
-import { getIlabsVideosData } from './videosIlab'
+// import { getVideoShortsData } from './videosShorts'
 import { getPublicationData } from './publications'
 import { getAboutContent } from './about'
 
+/* -------------------------------------------------------------------------- */
+/*          Website and Videos shorts will be included in the phase 2         */
+/* -------------------------------------------------------------------------- */
 
 let pressDataset = {}
 let socialMediaDataset = {}
@@ -20,7 +22,6 @@ let videoDataset = {}
 let videoEventsDataset = {}
 let videoShortsDataset = {}
 let videoPodcastsDataset = {}
-let videoIlabsDataset = {}
 let publicationDataset = {}
 let data = {}
 const months = [
@@ -45,9 +46,8 @@ export async function getNewData() {
   podcastDataset  = await getPodcastData()
   videoDataset = await getVideoData()
   videoEventsDataset = await getVideoEventsData()
-  videoShortsDataset = await getVideoShortsData()
+  // videoShortsDataset = await getVideoShortsData()
   videoPodcastsDataset = await getVideoPodcastsData()
-  videoIlabsDataset = await getIlabsVideosData()
   publicationDataset = await getPublicationData()
   aboutDataset = await getAboutContent()
   if (
@@ -60,8 +60,7 @@ export async function getNewData() {
     videoShortsDataset &&
     videoPodcastsDataset &&
     publicationDataset &&
-    aboutDataset &&
-    videoIlabsDataset
+    aboutDataset
   ) {
     data = formatData(
       pressDataset,
@@ -72,7 +71,6 @@ export async function getNewData() {
       videoEventsDataset,
       videoShortsDataset,
       videoPodcastsDataset,
-      videoIlabsDataset,
       publicationDataset,
       aboutDataset
     )
@@ -80,7 +78,7 @@ export async function getNewData() {
   return data
 }
 
-function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, videoEventsDataset, videoShortsDataset, videoPodcastsDataset, videoIlabsDataset, publicationDataset) {
+function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, videoEventsDataset, videoShortsDataset, videoPodcastsDataset, publicationDataset) {
   return {
     data: {
       about: aboutDataset,
@@ -93,8 +91,7 @@ function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDat
         videoEventsDataset,
         videoShortsDataset,
         videoPodcastsDataset,
-        publicationDataset,
-        videoIlabsDataset
+        publicationDataset
       ]),
       years: pressDataset.years.sort((a, b) => b - a),
       months: months,
@@ -121,10 +118,9 @@ const spreadsheetsTabs = [
   // 'program_sites',
   'podcasts',
   'podcasts_(Video)',
-  'videos',
-  'videos_iLab',
+  'videos', // this is pulling from the videos_ilab tab
   'events',
-  'YouTube_shorts',
+  // 'YouTube_shorts',
   'publications'
 ]
 
