@@ -26,8 +26,8 @@ async function fetchData(URL) {
       return {
         id: index,
         program: row.Program,
-        totalMentions: row.Total_Mentions,
-        topTierMentions: row.Top_Tier_Mentions,
+        totalMentions: row.Total_Mentions ? row.Total_Mentions : 0,
+        topTierMentions: row.Top_Tier_Mentions ? row.Top_Tier_Mentions : 0,
         month: row.Month,
         year: row.Year
         // year: ['2022','2023'] // find way to pull years dinamically.
