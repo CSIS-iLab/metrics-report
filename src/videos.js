@@ -7,7 +7,7 @@ let years = []
 let months = []
 
 /* -------------------------------------------------------------------------- */
-/*                  Pulling from the videos_ilab tab                  */
+/*                  Pulling from the videos_ilab tab                          */
 /* -------------------------------------------------------------------------- */
 export async function getVideoData() {
   const URL =
@@ -26,6 +26,7 @@ async function fetchData(URL) {
       }
       years.push(row.Year)
       months.push(row.Month)
+      if (index == 1 ) console.log(row.Tags)
       return {
         id: index,
         program: getProgram(row.Tags),
@@ -34,9 +35,10 @@ async function fetchData(URL) {
         totalViews: row.Total_Views_First_30_Days_of_Performance,
         totalWatchTime: row.Total_Watch_Time_Minutes,
         averagePercentageViewed: row.Average_Percentage_Viewed,
-        permalink: row.Permalink_URL,
+        permalink: row.Permalink_URL + '=' + row.Video_ID,
         month: row.Month,
-        year: row.Year
+        year: row.Year,
+        tags: row.Tags
       }
     })
     return {
@@ -56,6 +58,7 @@ function getProgram(string) {
     .split(' ')
     .filter((v) => v.startsWith('#'))
     .slice(0, 2)
+  console.log('Arary = ', array );
   if (helperDataset.dataFormatted.length > 1) {
     helperDataset.dataFormatted
       .filter((element) => element !== '')
