@@ -227,7 +227,7 @@
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.program}
+                  <span class="icon-container" />{rows.programTest}
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"

@@ -50,7 +50,7 @@ async function fetchData(URL) {
 }
 
 
-function validateCells( row, index ) {
+function validateCells( row ) {
   if ( row.Program == '' || row.Total_Mentions == '' || row.Top_Tier_Mentions == '' || row.Month == '' || row.Year == '' ) {
     return true
   }
