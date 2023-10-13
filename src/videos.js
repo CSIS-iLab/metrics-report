@@ -26,12 +26,10 @@ async function fetchData(URL) {
       }
       years.push(row.Year)
       months.push(row.Month)
-      // if (index == 1 ) console.log(row)
       return {
         id: index,
         program: getProgram(row.Tags),
-        // programTest: ['International Security Program','Americas Program'],
-        programTest: getProgramArray(row.Tags),
+        programsVideos: getProgramsArray(row.Tags),
         videoTitle: row.Video_Title,
         // description: row.Description,
         totalViews: row.Total_Views_First_30_Days_of_Performance,
@@ -60,7 +58,6 @@ function getProgram(string) {
     .split(' ')
     .filter((v) => v.startsWith('#'))
     .slice(0, 2)
-  // console.log('Arary = ', array );
   if (helperDataset.dataFormatted.length > 1) {
     helperDataset.dataFormatted
       .filter((element) => element !== '')
@@ -71,23 +68,17 @@ function getProgram(string) {
   return programName
 }
 
-function getProgramArray(string) {
+function getProgramsArray(string) {
   let programName = []
   const array = string
     .split(' ')
     .filter((v) => v.startsWith('#'))
     .slice(0, 2)
-  // console.log('Arary = ', array )
   if (helperDataset.dataFormatted.length > 1) {
     helperDataset.dataFormatted
       .filter((element) => element !== '')
       .filter((element) => {
-        // console.log(array)
         if (array.includes(element.productName)) {
-          
-          // console.log(element.productName)
-          // console.log(element.program)
-          // console.log(object)
           programName.push(element.program)
         }
       })
