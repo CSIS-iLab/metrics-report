@@ -45,7 +45,7 @@
   $: filteredDataByTab = () => {
     let filteredByProgram
     
-    let byPorgram =  dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
+    let byProgram =  dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
     .dataForm.filter( (row, index ) => {
       const filteredYear = selectedYear ? selectedYear : row.year
       // if (selectedTab == 'videos') {
@@ -57,13 +57,23 @@
       const filteredMonth = selectedMonth ? selectedMonth : row.month
       return row.year === filteredYear && row.month === filteredMonth
     })
-    if (selectedTab == 'videos' || selectedTab == 'podcasts_(Video)' || selectedTab == 'events') {
+    // if (selectedTab == 'videos' || selectedTab == 'podcasts_(Video)' || selectedTab == 'events') {
+    //   filteredByProgram = $user
+    //   return byProgram.filter( row => row.programsVideos.includes(filteredByProgram))
+    // }
+
+    if (['videos', 'podcasts_(Video)', 'events'].includes(selectedTab)) {
       filteredByProgram = $user
-      return byPorgram.filter( row => row.programsVideos.includes($user))
+      return byProgram.filter(row => row.programsVideos.includes($user))
+    }
+
+    if (selectedTab === 'publications') {
+      filteredByProgram = $user
+      return byProgram.filter(row => row.programsNames?.includes($user))
     }
 
     filteredByProgram = ($user) ? $user : row.program
-    return byPorgram.filter( row => row.program === filteredByProgram)
+    return byProgram.filter( row => row.program === filteredByProgram)
   }
 
   $: filteredDataForAvg = () => {

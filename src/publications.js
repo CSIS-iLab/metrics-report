@@ -5,6 +5,7 @@ let helperDataset = {}
 let columnNames
 let years = []
 let months = []
+let n = 1
 
 export async function getPublicationData() {
   const URL =
@@ -13,6 +14,7 @@ export async function getPublicationData() {
 }
 
 async function fetchData(URL) {
+  helperDataset = await getHelperData()
   const dataPromise = d3Fetch.csv( URL ).then( res => {
     const data = res.map( (row, index ) => {
       if (index == 0) {
@@ -23,6 +25,7 @@ async function fetchData(URL) {
       return {
         id: index,
         program: row.Program,
+        programsNames: getProgramsArray(row.Program),
         page: row.Page,
         pageType: row.Page_Type,
         views: row.Views,
@@ -37,8 +40,9 @@ async function fetchData(URL) {
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)],
       months: [...new Set(months)]
-    };
+    }
   })
+  console.log(dataPromise)
   return dataPromise
 }
 
@@ -48,4 +52,19 @@ function formatColumnNames(columnNames) {
 
 function format(name) {
   return name.replaceAll("_", " ")
+}
+
+function getProgramsArray(string) { 
+  if (string === '#N/A') {
+    return
+  }
+
+  if (n == 1) {
+    console.log(helperDataset.dataFormatted)
+  }
+  n++
+  return string.split('|')
+    .filter((name) => {
+      return helperDataset.dataFormatted.some((elem) => elem.program === name)
+    }).filter( name => name !== undefined)
 }
