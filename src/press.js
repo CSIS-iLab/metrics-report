@@ -23,6 +23,9 @@ async function fetchData(URL) {
       months.push(row.Month)
       years = ['2023']
 
+      // Validate if cells in rows are empty
+      if ( validateCells( row ) ) return {}
+
       return {
         id: index,
         program: row.Program,
@@ -32,11 +35,11 @@ async function fetchData(URL) {
         year: row.Year
         // year: ['2022','2023'] // find way to pull years dinamically.
       }
+
     })
     return {
       metrics: "press",
       data: data,
-      // hola: test,
       dataFormmated: formatData(data),
       columnNames: formatColumnNames(columnNames),
       years: [...new Set(years)].sort((a, b) => b - a),
@@ -44,6 +47,13 @@ async function fetchData(URL) {
     };
   })
   return dataPromise
+}
+
+
+function validateCells( row ) {
+  if ( row.Program == '' || row.Total_Mentions == '' || row.Top_Tier_Mentions == '' || row.Month == '' || row.Year == '' ) {
+    return true
+  }
 }
 
 function formatColumnNames(columnNames) {
