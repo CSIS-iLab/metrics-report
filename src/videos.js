@@ -105,7 +105,7 @@ function getProgramsArray(string) {
   const array = string
     .split(' ')
     .filter((v) => v.startsWith('#'))
-    .slice(0, 2)
+    // .slice(0, 2)
 
   // Use a single filter statement to filter elements in helperDataset.dataFormatted
   const programName = helperDataset.dataFormatted
