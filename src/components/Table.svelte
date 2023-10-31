@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import tooltip from '../js/tooltip'
   import Icon from './Icons.svelte'
+  import Icons from './Icons.svelte'
 
   export let filteredData
   export let headerNames
@@ -9,10 +10,14 @@
   export let row
 
   let sortIconContainer
+  let sortByColumns = []
   $: sortClass = 'inactive'
 
-  const sortByColumns = ['activity', 'state', 'authority', 'type of resource']
-  const sortByCol = ['Year', 'Month']
+  // const sortByColumns = ['activity', 'state', 'authority', 'type of resource']
+  $: if (selectedTab === 'publications') {
+    // sortByColumns = ['views', 'engagements']
+    sortByColumns.push('views', 'engagements')
+  }
 
   function handleClick(e) {
     let title = undefined
@@ -40,48 +45,66 @@
 
   // const headerNames = filteredNewData.
   // $:console.log(headerNames);
-  // $: sortBy = { col: "activity", ascending: true };
+  $: sortBy = { col: "views", ascending: true }
 
-  // $: sort = (e, column) => {
-  //   column = column.toLowerCase().replace(/\s/g, "_"); // replace spaces using regex with undesrscore
-  //   const iconsActive = document.querySelectorAll('.sort-icon--active');
-  //   iconsActive.forEach(icon => {
-  //     icon.classList.remove('sort-icon--active');
-  //   });
-  //   if (sortBy.col == column) {
-  //     sortBy.ascending = !sortBy.ascending;
-  //     sortClass = sortBy.ascending ? 'active' : 'inactive';
-  //   } else {
-  //     sortClass = 'inactive';
-  //     sortBy.col = column;
-  //     sortBy.ascending = true;
-  //   }
+  $: sort = (e, column) => {
+    column = column.toLowerCase().replace(/\s/g, "_"); // replace spaces using regex with undesrscore
+    // console.log(column)
+    const iconsActive = document.querySelectorAll('.sort-icon--active');
+    iconsActive.forEach(icon => {
+      icon.classList.remove('sort-icon--active');
+    });
+    if (sortBy.col == column) {
+      sortBy.ascending = !sortBy.ascending
+      sortClass = sortBy.ascending ? 'active' : 'inactive'
+    } else {
+      sortClass = 'inactive'
+      sortBy.col = column
+      sortBy.ascending = true
+    }
 
-  //   // Modifier to sorting function for ascending or descending
-  //   let sortModifier = sortBy.ascending ? 1 : -1;
+    // Modifier to sorting function for ascending or descending
+    let sortModifier = sortBy.ascending ? 1 : -1;
 
-  //   // Sort by activity title
-  //   if (column == "activity") {
-  //     return (filteredData = filteredData.sort((a, b) => {
-  //       if (a.activity.title < b.activity.title) {
-  //         return -1 * sortModifier;
-  //       } else if (a.activity.title > b.activity.title) {
-  //         return 1 * sortModifier;
-  //       } else {
-  //         return 0;
-  //       }
-  //     }));
-  //   }
+    // Sort by views
+    if (column == "views") {
+      return (filteredData = filteredData.sort((a, b) => {
+        // console.log(a)
+        // console.log(b);
+        if (a.views < b.views) {
+          return -1 * sortModifier;
+        } else if (a.views > b.views) {
+          return 1 * sortModifier;
+        } else {
+          return 0;
+        }
+      }));
+    }
+    // Sort by engagements
+    // if (column == "engagements") {
+    //   console.log('engagements');
+    //   return (filteredData = filteredData.sort((a, b) => {
+    //     // console.log(a)
+    //     // console.log(b);
+    //     if (a.engagements < b.engagements) {
+    //       return -1 * sortModifier;
+    //     } else if (a.engagements > b.engagements) {
+    //       return 1 * sortModifier;
+    //     } else {
+    //       return 0;
+    //     }
+    //   }));
+    // }
 
-  //   let sort = (a, b) =>
-  //     a[column] < b[column]
-  //       ? -1 * sortModifier
-  //       : a[column] > b[column]
-  //       ? 1 * sortModifier
-  //       : 0;
+    let sort = (a, b) =>
+      a[column] < b[column]
+        ? -1 * sortModifier
+        : a[column] > b[column]
+        ? 1 * sortModifier
+        : 0;
 
-  //   filteredData = filteredData.sort(sort);
-  // };
+    filteredData = filteredData.sort(sort)
+  };
 
   onMount(() => {
     const iconsActive = document.querySelectorAll('.sort-icon--active')
@@ -124,8 +147,15 @@
                   .toLowerCase()
                   .split(' ')
                   .join('-')}"
+                  on:click={ (sortByColumns.includes(name.toLowerCase())) ? (e) => sort(e, name) : ''}
               >
                 <span>{name}</span>
+                {#if sortByColumns.includes(name.toLowerCase())}
+                <div class="sort-icons-container" on:click={(e) => sort(e, name)}>
+                  <button class="sort-icon sort-icon--{(sortBy.col == name.toLowerCase().split(' ').join('_') && sortBy.ascending ) ? 'inactive' : 'active'}">▲</button>
+                  <button class= "sort-icon sort-icon--{(sortBy.col == name.toLowerCase().split(' ').join('_') && sortBy.ascending ) ? 'active' : 'inactive'}">▼</button>
+                </div>
+                {/if}
               </div>
             </th>
           {/each}
@@ -420,7 +450,7 @@
                 >{rows.views}</td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.eventCount}</td
+                >{rows.engagements}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td

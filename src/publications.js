@@ -5,7 +5,7 @@ let helperDataset = {}
 let columnNames
 let years = []
 let months = []
-let n = 1
+// let n = 1
 
 export async function getPublicationData() {
   const URL =
@@ -28,8 +28,8 @@ async function fetchData(URL) {
         programsNames: getProgramsArray(row.Program),
         page: row.Page,
         pageType: row.Page_Type,
-        views: row.Views,
-        eventCount: row.Engagements,
+        views: Number(row.Views),
+        engagements: Number(row.Engagements),
         month: row.Month,
         year: row.Year
       }
@@ -42,7 +42,7 @@ async function fetchData(URL) {
       months: [...new Set(months)]
     }
   })
-  console.log(dataPromise)
+  // console.log(dataPromise)
   return dataPromise
 }
 
@@ -59,10 +59,10 @@ function getProgramsArray(string) {
     return
   }
 
-  if (n == 1) {
-    console.log(helperDataset.dataFormatted)
-  }
-  n++
+  // if (n == 1) {
+  //   console.log(helperDataset.dataFormatted)
+  // }
+  // n++
   return string.split('|')
     .filter((name) => {
       return helperDataset.dataFormatted.some((elem) => elem.program === name)
