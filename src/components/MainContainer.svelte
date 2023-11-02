@@ -13,6 +13,7 @@
 
   let selectedYear = ''
   let selectedMonth = ''
+  let selectedPageType = ''
   let filterByTab = []
   let selectedTab = 'press'
   
@@ -55,7 +56,8 @@
       // }
 
       const filteredMonth = selectedMonth ? selectedMonth : row.month
-      return row.year === filteredYear && row.month === filteredMonth
+      const filteredByPageType = selectedPageType ? selectedPageType : row.pageType
+      return row.year === filteredYear && row.month === filteredMonth && row.pageType === filteredByPageType
     })
     // if (selectedTab == 'videos' || selectedTab == 'podcasts_(Video)' || selectedTab == 'events') {
     //   filteredByProgram = $user
@@ -191,6 +193,7 @@
         bind:row
         bind:selectedYear
         bind:selectedMonth
+        bind:selectedPageType
         bind:selectedTab
         bind:searchText
       />

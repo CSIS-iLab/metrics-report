@@ -8,6 +8,7 @@
   export let filteredData
   export let selectedYear
   export let selectedMonth
+  export let selectedPageType
   export let selectedTab
   export let searchText = ''
   export let row
@@ -86,6 +87,7 @@
       updateActiveTab(event.target.value)
       selectedTab = event.target.value
     } else {
+      selectedPageType = event.detail.value
       console.log('else: ', event.detail.value)
     }
   }
@@ -102,6 +104,7 @@
     } else if (selectName === 'Month') {
       selectedMonth = ''
     } else {
+      selectedPageType = ''
       console.log('else of handleClear')
     }
   }
@@ -272,6 +275,21 @@
       on:clear={() => handleClear('Month')}
     />
   </div>
+  {#if selectedTab === 'publications'}
+  <div class="select-container">
+    <div class="label">Page Type</div>
+    <Select
+      indicatorSvg={chevron}
+      showChevron={true}
+      {optionIdentifier}
+      {labelIdentifier}
+      items={dataset.data.pageType}
+      placeholder="Select Page Type"
+      on:select={(event) => handleSelect(event, 'Page Type')}
+      on:clear={() => handleClear('Page Type')}
+    />
+  </div>
+  {/if}
 </div>
 <div class="options options__container options__container--sticky">
   <section class="options__navigation">
