@@ -88,7 +88,7 @@
       selectedTab = event.target.value
     } else {
       selectedPageType = event.detail.value
-      console.log('else: ', event.detail.value)
+      // console.log('else: ', event.detail.value)
     }
   }
 
@@ -105,7 +105,7 @@
       selectedMonth = ''
     } else {
       selectedPageType = ''
-      console.log('else of handleClear')
+      // console.log('else of handleClear')
     }
   }
 
