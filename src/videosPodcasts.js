@@ -51,36 +51,41 @@ async function fetchData(URL) {
 }
 
 function getProgram(string) {
-  let programName
-  const array = string
-  .split(' ')
-  .filter((v) => v.startsWith('#'))
-  .slice(0, 2)
-  if (helperDataset.dataFormatted.length > 1) {
-    helperDataset.dataFormatted
-      .filter((element) => element !== '')
-      .filter((element) => {
-        if (array[0] === element.productName) programName = element.program
-      })
-  }
-  return programName
-}
-
-function getProgramsArray(string) {
-  let programName = []
+  // let programName
+  // const array = string
+  // .split(' ')
+  // .filter((v) => v.startsWith('#'))
+  // .slice(0, 2)
+  // if (helperDataset.dataFormatted.length > 1) {
+  //   helperDataset.dataFormatted
+  //     .filter((element) => element !== '')
+  //     .filter((element) => {
+  //       if (array[0] === element.productName) programName = element.program
+  //     })
+  // }
+  // return programName
   const array = string
     .split(' ')
     .filter((v) => v.startsWith('#'))
     .slice(0, 2)
-  if (helperDataset.dataFormatted.length > 1) {
-    helperDataset.dataFormatted
-      .filter((element) => element !== '')
-      .filter((element) => {
-        if (array.includes(element.productName)) {
-          programName.push(element.program)
-        }
-      })
-  }
+
+  // Use the find method to get the first matching element
+  const matchingElement = helperDataset.dataFormatted.find(
+    (element) => element !== '' && array[0] === element.productName
+  )
+
+  // Return the program if a matching element was found, or null otherwise
+  return matchingElement ? matchingElement.program : null
+}
+
+function getProgramsArray(string) {
+  const array = string.split(' ').filter((v) => v.startsWith('#'))
+
+  // Use a single filter statement to filter elements in helperDataset.dataFormatted
+  const programName = helperDataset.dataFormatted
+    .filter((element) => element !== '' && array.includes(element.productName))
+    .map((element) => element.program)
+
   return programName
 }
 

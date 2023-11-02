@@ -67,19 +67,19 @@
     let sortModifier = sortBy.ascending ? 1 : -1;
 
     // Sort by views
-    if (column == "views") {
-      return (filteredData = filteredData.sort((a, b) => {
-        // console.log(a)
-        // console.log(b);
-        if (a.views < b.views) {
-          return -1 * sortModifier;
-        } else if (a.views > b.views) {
-          return 1 * sortModifier;
-        } else {
-          return 0;
-        }
-      }));
-    }
+    // if (column == "views") {
+    //   return (filteredData = filteredData.sort((a, b) => {
+    //     // console.log(a)
+    //     // console.log(b);
+    //     if (a.views < b.views) {
+    //       return -1 * sortModifier;
+    //     } else if (a.views > b.views) {
+    //       return 1 * sortModifier;
+    //     } else {
+    //       return 0;
+    //     }
+    //   }));
+    // }
     // Sort by engagements
     // if (column == "engagements") {
     //   console.log('engagements');

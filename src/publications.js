@@ -1,11 +1,13 @@
 import * as d3Fetch from 'd3-fetch'
-import { getHelperData } from "./helper"
+// import { getHelperData } from "./helper"
+import { getHelperData } from "./publicationHelper"
+// helper_internal_use_publications
 
 let helperDataset = {}
 let columnNames
 let years = []
 let months = []
-// let n = 1
+let n = 1
 
 export async function getPublicationData() {
   const URL =
@@ -42,7 +44,7 @@ async function fetchData(URL) {
       months: [...new Set(months)]
     }
   })
-  // console.log(dataPromise)
+  console.log(dataPromise)
   return dataPromise
 }
 
@@ -58,13 +60,23 @@ function getProgramsArray(string) {
   if (string === '#N/A') {
     return
   }
-
   // if (n == 1) {
+  //   console.log(string)
   //   console.log(helperDataset.dataFormatted)
   // }
-  // n++
-  return string.split('|')
+  n++
+  return string
+    .split('|')
     .filter((name) => {
       return helperDataset.dataFormatted.some((elem) => elem.program === name)
-    }).filter( name => name !== undefined)
+    })
+    .filter((name) => name !== undefined)
+    .map(name => replaceAMTI(name))
+}
+
+function replaceAMTI(programName) {
+  if (programName === 'Asia Maritime Transparency Initiative') {
+    return 'Southeast Asia Program'
+  }
+  return programName
 }
