@@ -6,6 +6,26 @@ let columnNames
 let test = {}
 let years = []
 let months = []
+const ispSubPrograms = [
+  'Aerospace Security Project',
+  'Arleigh A. Burke Chair in Strategy',
+  'Defending Democratic Institutions',
+  'Defense-Industrial Initiatives Group',
+  'Defense 360',
+  'Defense Budget Analysis',
+  'Emeritus Chair in Strategy',
+  'Missile Defense Project',
+  'Project on Fragility and Mobility',
+  'Project on Nuclear Issues',
+  'Smart Women, Smart Power',
+  'Strategic Futures',
+  'Transnational Threats Project'
+]
+const mepSubPrograms = [
+  'Brzezinski Chair in Global Security and Geostrategy',
+  'Brzezinski Institute on Geostrategy'
+]
+const seapSubPrograms = ['Asia Maritime Transparency Initiative']
 
 export async function getPressData() {
   const URL =
@@ -29,6 +49,7 @@ async function fetchData(URL) {
       return {
         id: index,
         program: row.Program,
+        parentProgram: getParentProgram(row.Program),
         totalMentions: row.Total_Mentions ? row.Total_Mentions : 0,
         topTierMentions: row.Top_Tier_Mentions ? row.Top_Tier_Mentions : 0,
         month: row.Month,
@@ -46,9 +67,25 @@ async function fetchData(URL) {
       months: [...new Set(months)]
     };
   })
+  // console.log(dataPromise)
   return dataPromise
 }
 
+function getParentProgram( name ) {
+  if (ispSubPrograms.includes( name )) {
+    return 'International Security Program'
+  }
+
+  if (mepSubPrograms.includes( name )) {
+    return 'Middle East Program'
+  }
+
+  if (seapSubPrograms.includes(name)) {
+    return 'Southeast Asia Program'
+  }
+
+  return name
+}
 
 function validateCells( row ) {
   if ( row.Program == '' || row.Total_Mentions == '' || row.Top_Tier_Mentions == '' || row.Month == '' || row.Year == '' ) {

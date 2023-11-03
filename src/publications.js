@@ -44,7 +44,7 @@ async function fetchData(URL) {
       months: [...new Set(months)]
     }
   })
-  console.log(dataPromise)
+  // console.log(dataPromise)
   return dataPromise
 }
 

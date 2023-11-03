@@ -75,7 +75,7 @@
     }
 
     filteredByProgram = ($user) ? $user : row.program
-    return byProgram.filter( row => row.program === filteredByProgram)
+    return byProgram.filter( row => row.parentProgram === filteredByProgram)
   }
 
   $: filteredDataForAvg = () => {
@@ -84,7 +84,7 @@
     .dataForm.filter( row => {
       const filteredYear = selectedYear ? selectedYear : row.year
       filteredByProgram = $user ? $user : row.program
-      return row.year === filteredYear && row.program === filteredByProgram
+      return row.year === filteredYear && row.parentProgram === filteredByProgram
     })
   }
 
