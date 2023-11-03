@@ -17,6 +17,8 @@
   $: if (selectedTab === 'publications') {
     // sortByColumns = ['views', 'engagements']
     sortByColumns.push('views', 'engagements')
+  } else {
+    sortByColumns.length = 0
   }
 
   function handleClick(e) {
