@@ -10,14 +10,12 @@ const ispSubPrograms = [
   'Arleigh A. Burke Chair in Strategy',
   'Defending Democratic Institutions',
   'Defense-Industrial Initiatives Group',
-  'Defense 360',
   'Defense Budget Analysis',
   'Emeritus Chair in Strategy',
   'Missile Defense Project',
   'Project on Fragility and Mobility',
   'Project on Nuclear Issues',
   'Smart Women, Smart Power',
-  'Strategic Futures',
   'Transnational Threats Project'
 ]
 const mepSubPrograms = [

@@ -32,7 +32,7 @@ async function fetchData(URL) {
         programsVideos: getProgramsArray(row.Tags),
         videoTitle: row.Video_Title,
         // description: row.Description,
-        totalViews: row.Total_Views_First_30_Days_of_Performance,
+        totalViews: row.Views,
         totalWatchTime: row.Total_Watch_Time_Minutes,
         averagePercentageViewed: row.Average_Percentage_Viewed,
         permalink: row.Permalink_URL,

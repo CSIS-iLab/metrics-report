@@ -64,18 +64,25 @@
     //   return byProgram.filter( row => row.programsVideos.includes(filteredByProgram))
     // }
 
+    // if ($user === 'International Security Program') {
+      
+    // }
+    filteredByProgram = $user
     if (['videos', 'podcasts_(Video)', 'events'].includes(selectedTab)) {
-      filteredByProgram = $user
-      return byProgram.filter(row => row.programsVideos.includes($user))
+        return byProgram.filter(row => row.programsVideos.includes($user))
     }
 
     if (selectedTab === 'publications') {
-      filteredByProgram = $user
+      // filteredByProgram = $user
       return byProgram.filter(row => row.programsNames?.includes($user))
     }
 
-    filteredByProgram = ($user) ? $user : row.program
-    return byProgram.filter( row => row.parentProgram === filteredByProgram)
+    // filteredByProgram = ($user) ? $user : row.program
+    if ($user === 'International Security Program') {
+      return byProgram.filter( row => row.parentProgram === filteredByProgram)
+    }
+    return byProgram.filter( row => row.program === filteredByProgram)
+
   }
 
   $: filteredDataForAvg = () => {
