@@ -26,22 +26,22 @@ async function fetchData(URL) {
       return {
         id: index,
         program: getProgram(row.Tags),
+        programsVideos: getProgramsArray(row.Tags),
         videoTitle: row.Video_Title,
-        description: row.Description,
+        // description: row.Description,
         totalViews: row.Views,
         totalWatchTime: row.Total_Watch_Time_Minutes,
         averagePercentageViewed: row.Average_Percentage_Viewed,
         permalink: row.Permalink_URL,
         month: row.Month,
-        year: row.Year
+        year: row.Year,
+        tags: row.Tags
       }
     })
     return {
       metrics: 'YouTube_shorts',
       data: data,
-      columnNames: removeDescriptionColumn(
-        formatColumnNames(columnNames.slice(0, 8))
-      ),
+      columnNames: removeDescriptionColumn(formatColumnNames(columnNames.slice(0, 8))),
       years: [...new Set(years)],
       months: [...new Set(months)]
     }
@@ -50,18 +50,29 @@ async function fetchData(URL) {
 }
 
 function getProgram(string) {
-  let programName
   const array = string
     .split(' ')
     .filter((v) => v.startsWith('#'))
     .slice(0, 2)
-  if (helperDataset.dataFormatted.length > 1) {
-    helperDataset.dataFormatted
-      .filter((element) => element !== '')
-      .filter((element) => {
-        if (array[0] === element.productName) programName = element.program
-      })
-  }
+
+  // Use the find method to get the first matching element
+  const matchingElement = helperDataset.dataFormatted.find(
+    (element) => element !== '' && array[0] === element.productName
+  )
+
+  // Return the program if a matching element was found, or null otherwise
+  return matchingElement ? matchingElement.program : null
+}
+
+function getProgramsArray(string) {
+  const array = string.split(' ').filter((v) => v.startsWith('#'))
+  // .slice(0, 2)
+
+  // Use a single filter statement to filter elements in helperDataset.dataFormatted
+  const programName = helperDataset.dataFormatted
+    .filter((element) => element !== '' && array.includes(element.productName))
+    .map((element) => element.program)
+
   return programName
 }
 
@@ -74,5 +85,12 @@ function formatColumnNames(columnNames) {
 }
 
 function format( name ) {
-  return name.replaceAll( "_", " " )
+  const formattedName = name.replaceAll('_', ' ')
+
+  const specialCases = {
+    'Total Watch Time Minutes': 'Total Watch Time (Minutes)',
+    'Average Percentage Viewed': 'Average Percentage Viewed (%)'
+  }
+
+  return specialCases[formattedName] || formattedName
 }
