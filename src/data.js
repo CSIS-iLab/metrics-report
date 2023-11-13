@@ -5,7 +5,7 @@ import { getPodcastData } from './podcasts'
 import { getVideoData } from './videos'
 import { getVideoEventsData } from './videosEvents'
 import { getVideoPodcastsData } from './videosPodcasts'
-// import { getVideoShortsData } from './videosShorts'
+import { getVideoShortsData } from './videosShorts'
 import { getPublicationData } from './publications'
 import { getAboutContent } from './about'
 
@@ -52,7 +52,7 @@ export async function getNewData() {
   podcastDataset  = await getPodcastData()
   videoDataset = await getVideoData()
   videoEventsDataset = await getVideoEventsData()
-  // videoShortsDataset = await getVideoShortsData()
+  videoShortsDataset = await getVideoShortsData()
   videoPodcastsDataset = await getVideoPodcastsData()
   publicationDataset = await getPublicationData()
   aboutDataset = await getAboutContent()
@@ -127,7 +127,7 @@ const spreadsheetsTabs = [
   'podcasts_(Video)',
   'videos', // this is pulling from the videos_ilab tab
   'events',
-  // 'YouTube_shorts',
+  'YouTube_shorts',
   'publications'
 ]
 
