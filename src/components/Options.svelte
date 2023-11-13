@@ -235,14 +235,15 @@
       <p>"Average percentage viewed" measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
     {:else if selectedTab === 'events'}
       <p>The following data is from event video streams on YouTube only. For other event data (registrations, etc.), please contact the Events team.</p>
-    {:else if selectedTab === 'publications'}
-      <p>Views = total number of views on a publication page from all web traffic sources</p>
-      <p>Engagements = number of additional actions taken from a publication page, such as a share, longer-than-average view time, etc.</p>
-      <p>Each row in this tab presents the number of views and engagements a publication has received in the associated month. Views and engagements are not cumulative in this dashboard tab.</p>
     {/if}
   {:else}
     {#if selectedTab === 'podcasts_(Video)' || selectedTab === 'events' || selectedTab === 'YouTube_shorts' || selectedTab === 'videos'  || selectedTab === 'videos_iLab'}
       <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the podcast (video) was posted. Note: podcasts (video) posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
+    {:else if selectedTab === 'publications'}
+      <p>Views = total number of views on a publication page from all web traffic sources</p>
+      <p>Engagements = number of additional actions taken from a publication page, such as a share, longer-than-average view time, etc.</p>
+      <p>Each row in this tab presents the number of views and engagements a publication has received in the associated month. Views and engagements are not cumulative in this dashboard tab.</p>
+      <p>The following data is presented on a month-by-month basis. Views and engagement are not cumulative, and only represent data from the selected month.</p>
     {/if}
   {/if}
 </div>
