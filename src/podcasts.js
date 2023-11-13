@@ -48,7 +48,7 @@ async function fetchData(URL) {
         program: getProgramName(row.Podcast),
         parentProgram: getParentProgram(getProgramName(row.Podcast)),
         podcast: row.Podcast,
-        totalDownloads: row.Total_Downloads,
+        totalDownloads: row.Total_Listens,
         month: row.Month,
         year: row.Year
       }
