@@ -113,5 +113,12 @@ function formatColumnNames(columnNames) {
 }
 
 function format(name) {
-  return name.replaceAll('_', ' ')
+  const formattedName = name.replaceAll('_', ' ')
+
+  const specialCases = {
+    'Total Watch Time Minutes': 'Total Watch Time (Minutes)',
+    'Average Percentage Viewed': 'Average Percentage Viewed (%)'
+  }
+
+  return specialCases[formattedName] || formattedName
 }

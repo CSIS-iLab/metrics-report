@@ -232,7 +232,7 @@
       <p>Impressions: the number of times social media content was viewed</p>
       <p>Engagements: the number of times users interacted with the posts</p>
     {:else if selectedTab === 'videos'}
-      <p>“Average percentage viewed” measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
+      <p>"Average percentage viewed" measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
     {:else if selectedTab === 'events'}
       <p>The following data is from event video streams on YouTube only. For other event data (registrations, etc.), please contact the Events team.</p>
     {:else if selectedTab === 'publications'}
@@ -242,7 +242,7 @@
     {/if}
   {:else}
     {#if selectedTab === 'podcasts_(Video)' || selectedTab === 'events' || selectedTab === 'YouTube_shorts' || selectedTab === 'videos'  || selectedTab === 'videos_iLab'}
-      <p>“Average percentage viewed” measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
+      <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the podcast (video) was posted. Note: podcasts (video) posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
     {/if}
   {/if}
 </div>
