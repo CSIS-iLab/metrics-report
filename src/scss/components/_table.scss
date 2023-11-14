@@ -23,7 +23,7 @@
   border-collapse: collapse;
   table-layout: fixed;
 
-  @include breakpoint('large') {
+  @include breakpoint('medium') {
     margin-left: auto;
     margin-right: auto;
   }
