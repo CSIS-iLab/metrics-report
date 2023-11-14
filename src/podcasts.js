@@ -47,7 +47,7 @@ async function fetchData(URL) {
         id: index,
         program: getProgramName(row.Podcast),
         parentProgram: getParentProgram(getProgramName(row.Podcast)),
-        podcast: row.Podcast,
+        podcast: fixPodcastsName(row.Podcast),
         totalDownloads: row.Total_Listens,
         month: row.Month,
         year: row.Year
@@ -127,5 +127,16 @@ function getParentProgram(name) {
     return 'Southeast Asia Program'
   }
 
+  return name
+}
+
+function fixPodcastsName(name) {
+  if (name === `NATOâ€™s Road to Madrid`) {
+    console.log(`NATO’s Road to Madrid`)
+    return 'NATO’s Road to Madrid'
+  }
+  if (name === `Energy 360Â°`) {
+    return 'Energy 360°'
+  }
   return name
 }
