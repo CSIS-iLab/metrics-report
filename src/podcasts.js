@@ -131,12 +131,13 @@ function getParentProgram(name) {
 }
 
 function fixPodcastsName(name) {
-  if (name === `NATOâ€™s Road to Madrid`) {
-    console.log(`NATO’s Road to Madrid`)
-    return 'NATO’s Road to Madrid'
+  const nameMapping = {
+    'NATOâ€™s Road to Madrid': 'NATO’s Road to Madrid',
+    'Energy 360Â°': 'Energy 360°'
+    // Add more name mappings as needed
   }
-  if (name === `Energy 360Â°`) {
-    return 'Energy 360°'
-  }
-  return name
+
+  const fixedName = nameMapping[name] || name
+
+  return fixedName
 }
