@@ -7,7 +7,6 @@ let helperDataset = {}
 let columnNames
 let years = []
 let months = []
-let n = 1
 
 export async function getPublicationData() {
   const URL =
@@ -56,22 +55,18 @@ function format(name) {
   return name.replaceAll("_", " ")
 }
 
-function getProgramsArray(string) { 
+function getProgramsArray(string) {
   if (string === '#N/A') {
     return
   }
-  // if (n == 1) {
-  //   console.log(string)
-  //   console.log(helperDataset.dataFormatted)
-  // }
-  n++
-  return string
-    .split('|')
-    .filter((name) => {
-      return helperDataset.dataFormatted.some((elem) => elem.program === name)
-    })
-    .filter((name) => name !== undefined)
-    .map(name => replaceAMTI(name))
+  const names = string.split('|')
+  const matchingElement = helperDataset.dataFormatted.filter( element => {
+    return names.some(name => name === element.productName)
+  })
+  if (matchingElement.length > 0) {
+    return matchingElement.map( name => replaceAMTI(name.program))
+  }
+  return names.map(name => replaceAMTI(name))
 }
 
 function replaceAMTI(programName) {
