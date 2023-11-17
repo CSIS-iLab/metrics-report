@@ -16,7 +16,8 @@ const ispSubPrograms = [
   'Project on Fragility and Mobility',
   'Project on Nuclear Issues',
   'Smart Women, Smart Power',
-  'Transnational Threats Project'
+  'Transnational Threats Project',
+  'Intelligence, National Security, and Technology Program'
 ]
 const mepSubPrograms = [
   'Brzezinski Chair in Global Security and Geostrategy',

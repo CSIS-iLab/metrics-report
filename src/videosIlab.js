@@ -26,7 +26,6 @@ async function fetchData(URL) {
       return {
         id: index,
         program: getProgram(row.Tags),
-        programTest: ['International Security Program', 'Americas Program'],
         videoTitle: row.Video_Title,
         description: row.Description,
         totalViews: row.Views,
