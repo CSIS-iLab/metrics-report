@@ -237,8 +237,14 @@
       <p>The following data is from event video streams on YouTube only. For other event data (registrations, etc.), please contact the Events team.</p>
     {/if}
   {:else}
-    {#if selectedTab === 'podcasts_(Video)' || selectedTab === 'events' || selectedTab === 'YouTube_shorts' || selectedTab === 'videos'  || selectedTab === 'videos_iLab'}
+    {#if selectedTab === 'podcasts_(Video)'|| selectedTab === 'videos_iLab'}
       <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the podcast (video) was posted. Note: podcasts (video) posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
+    {:else if selectedTab === 'videos'}
+      <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the video was posted. Note: videos posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
+    {:else if selectedTab === 'YouTube_shorts'}
+    <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the YouTube Short was posted. Note: YouTube Shorts posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
+    {:else if selectedTab === 'events'}
+    <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the event video was posted. Note: event videos posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
     {:else if selectedTab === 'publications'}
       <p>Views = total number of views on a publication page from all web traffic sources</p>
       <p>Engagements = number of additional actions taken from a publication page, such as a share, longer-than-average view time, etc.</p>
