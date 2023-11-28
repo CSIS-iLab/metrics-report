@@ -72,7 +72,7 @@ function getProgramsArray(string) {
   const programName = helperDataset.dataFormatted
     .filter((element) => element !== '' && array.includes(element.productName))
     .map((element) => element.program)
-
+  // console.log(programName)
   return programName
 }
 

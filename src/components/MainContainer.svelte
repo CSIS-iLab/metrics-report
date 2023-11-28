@@ -68,7 +68,7 @@
       
     // }
     filteredByProgram = $user
-    if (['videos', 'podcasts_(Video)', 'events'].includes(selectedTab)) {
+    if (['videos', 'podcasts_(Video)', 'events', 'YouTube_shorts'].includes(selectedTab)) {
         return byProgram.filter(row => row.programsVideos.includes($user))
     }
 
