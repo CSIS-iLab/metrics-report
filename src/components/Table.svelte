@@ -177,7 +177,7 @@
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.totalMentions}</td
+                >{rows.totalMentions.toLocaleString('en')}</td
               >
               <td class="table__body__cell table__body__cell--data">
                 {rows.topTierMentions}
@@ -197,13 +197,13 @@
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.numberOfPosts}</td
+                >{rows.numberOfPosts.toLocaleString('en')}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {rows.impressions}
+                {rows.impressions.toLocaleString('en')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.engagements}</td
+                >{rows.engagements.toLocaleString('en')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
