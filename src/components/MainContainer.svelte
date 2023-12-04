@@ -111,15 +111,15 @@
       const totalDownloads = calculateTotalDownloads(dataFilteredByYear).toFixed()
       const totalViewsFirst30DaysPerformance = calculateViewsFirst30DaysPerformance(dataFilteredByYear).toFixed()
       return {
-        totalMentions: totalMentions,
-        topTier: topTier,
-        engagements: engagements,
-        impressions: impressions,
-        numberOfPosts: numberOfPosts,
-        uniqueVisitors: uniqueVisitors,
-        pageViews: pageViews,
-        totalDownloads: totalDownloads,
-        totalViewsFirst30DaysPerformance: totalViewsFirst30DaysPerformance
+        totalMentions: Number(totalMentions),
+        topTier: Number(topTier),
+        engagements: Number(engagements),
+        impressions: Number(impressions),
+        numberOfPosts: Number(numberOfPosts),
+        uniqueVisitors: Number(uniqueVisitors),
+        pageViews: Number(pageViews),
+        totalDownloads: Number(totalDownloads),
+        totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformance)
       }
     }
   }
@@ -136,15 +136,15 @@
       const totalDownloadsAvg = calculateTotalDownloadsAvg(dataFilteredByYear).toFixed()
       const totalViewsFirst30DaysPerformanceAvg = calculateViewsFirst30DaysPerformanceAvg(dataFilteredByYear).toFixed()
       return {
-        totalMentions: totalMentionsAvg,
-        topTier: TopTierMentionsAvg,
-        engagements: engagementsAvg,
-        impressions: impressionsAvg,
-        numberOfPosts: numberOfPostsAvg,
-        uniqueVisitors: uniqueVisitorsAvg,
-        pageViews: pageViewsAvg,
-        totalDownloads: totalDownloadsAvg,
-        totalViewsFirst30DaysPerformance: totalViewsFirst30DaysPerformanceAvg
+        totalMentions: Number(totalMentionsAvg),
+        topTier: Number(TopTierMentionsAvg),
+        engagements: Number(engagementsAvg),
+        impressions: Number(impressionsAvg),
+        numberOfPosts: Number(numberOfPostsAvg),
+        uniqueVisitors: Number(uniqueVisitorsAvg),
+        pageViews: Number(pageViewsAvg),
+        totalDownloads: Number(totalDownloadsAvg),
+        totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformanceAvg)
       }
     }
     return false
