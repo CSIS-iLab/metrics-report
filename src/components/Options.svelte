@@ -216,9 +216,6 @@
       {#if $user === 'International Security Program'}
         <p><strong>Please find below data on your program’s media citations.</strong></p>
         <p><strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage}, ISP’s Total Mentions = {aggregate.totalMentions}. ISP’s Top Tier Mentions = {aggregate.topTier}.</p>
-        <p><strong>AVERAGE (YEAR TO DATE):</strong> In {yearToShowAverage}, your program’s Average Total Mentions per Month
-          = {average.totalMentions}. Your program’s Average Top Tier Mentions per
-          Month = {average.topTier}.</p>
         <p><strong>KEY</strong></p>
         <p>Total Mentions: the number of times your program and experts were cited across online, print, TV, and radio news stories</p>
         <p>Top Tier Mentions: the number of times your program and experts were cited in print and online stories by the world’s top news sources (“top sources” are those in the 10% of news sources by reach, AKA audience size)</p>
@@ -235,13 +232,13 @@
     {:else if selectedTab === 'social_media'}
       {#if $user === 'International Security Program'}
         <p><strong>Please find below data from main CSIS social media accounts. <em>Please note: Data from individual program accounts is not included on this dashboard.</em></strong></p>
-        <p><strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage}, CSIS’s main social media accounts posted about ISP and ISP sub-programs XX times, and these posts received a total of XX Impressions and XX Engagements.</p>
+        <p><strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage}, CSIS’s main social media accounts posted about ISP and ISP sub-programs {aggregate.numberOfPosts} times, and these posts received a total of {aggregate.impressions} Impressions and {aggregate.engagements} Engagements.</p>
         <p><strong>KEY</strong></p>  
         <p>Impressions: the number of times social media content was viewed</p>
         <p>Engagements: the number of times users interacted with the posts through likes, comments, shares, or clicks</p>
       {:else}
         <p><strong>Please find below data from main CSIS social media accounts. <em>Please note: Data from individual program accounts is not included on this dashboard.</em></strong></p>
-        <p><strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage}, CSIS’s main social media accounts posted about your program XX times, and these posts received a total of XX Impressions and XX Engagements.</p>
+        <p><strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage}, CSIS’s main social media accounts posted about your program {aggregate.numberOfPosts} times, and these posts received a total of {aggregate.impressions} Impressions and {aggregate.engagements} Engagements.</p>
         <p><strong>AVERAGE (YEAR TO DATE):</strong> In {yearToShowAverage}, CSIS’s main social media accounts posted about your program an average of {average.numberOfPosts} times per month.
           These posts averaged {average.impressions} Impressions per Month, and {average.engagements} Engagements per Month.</p>
         <p><strong>KEY</strong></p>  
