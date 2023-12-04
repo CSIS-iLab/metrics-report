@@ -30,7 +30,7 @@ async function fetchData(URL) {
         page: row.Page,
         pageType: row.Page_Type,
         views: Number(row.Views),
-        engagements: Number(row.Engagements),
+        // engagements: Number(row.Engagements),
         month: row.Month,
         year: row.Year
       }

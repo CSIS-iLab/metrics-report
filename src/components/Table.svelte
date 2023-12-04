@@ -16,7 +16,7 @@
   // const sortByColumns = ['activity', 'state', 'authority', 'type of resource']
   $: if (selectedTab === 'publications') {
     // sortByColumns = ['views', 'engagements']
-    sortByColumns.push('views', 'engagements')
+    sortByColumns.push('views')
   } else {
     sortByColumns.length = 0
   }
@@ -451,9 +451,9 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.views}</td
               >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.engagements}</td
-              >
+              > -->
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
