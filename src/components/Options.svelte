@@ -1,5 +1,7 @@
 <script>
   import { onMount } from 'svelte'
+  import { user } from '../store'
+
   import Search from './Search.svelte'
   import Select from 'svelte-select'
   import Icon from './Icons.svelte'
@@ -13,6 +15,7 @@
   export let searchText = ''
   export let row
   export let average
+  export let aggregate
   export let yearToShowAverage
 
   $: totalEntries = filteredData.length
@@ -188,8 +191,7 @@
   })
 </script>
 
-<section class="table-container__header">
-</section>
+<section class="table-container__header"></section>
 
 <section class="options__container">
   <div class="options__header">
@@ -210,65 +212,272 @@
 <div class="options__avg">
   {#if average}
     {#if selectedTab === 'press'}
-      <p>
-        In {yearToShowAverage}, your program’s Average Total Mentions per Month
-        = {average.totalMentions}. Your program’s Average Top Tier Mentions per
-        Month = {average.topTier}.
-      </p>
-      <p />
-      <p>
-        Total Mentions: the number of times your program is cited across online,
-        print, TV, and radio news stories
-      </p>
-      <p>
-        Top Tier Mentions: the number of times your program is cited in print
-        and online stories by the world’s top news sources (determined by reach,
-        AKA audience size)
-      </p>
+      {#if $user === 'International Security Program'}
+        <p>
+          <strong
+            >Please find below data on your program’s media citations.</strong
+          >
+        </p>
+        <p>
+          <strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage},
+          ISP’s Total Mentions = {aggregate.totalMentions.toLocaleString(
+            'en-US'
+          )}. ISP’s Top Tier Mentions = {aggregate.topTier.toLocaleString(
+            'en-US'
+          )}.
+        </p>
+        <p><strong>KEY</strong></p>
+        <p>
+          Total Mentions: the number of times your program and experts were
+          cited across online, print, TV, and radio news stories
+        </p>
+        <p>
+          Top Tier Mentions: the number of times your program and experts were
+          cited in print and online stories by the world’s top news sources
+          (“top sources” are those in the 10% of news sources by reach, AKA
+          audience size)
+        </p>
+      {:else}
+        <p>
+          <strong
+            >Please find below data on your program’s media citations.</strong
+          >
+        </p>
+        <p>
+          <strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage},
+          your program’s Total Mentions = {aggregate.totalMentions.toLocaleString(
+            'en-US'
+          )}. Your program’s Top Tier Mentions = {aggregate.topTier.toLocaleString(
+            'en-US'
+          )}.
+        </p>
+        <p>
+          <strong>AVERAGE (YEAR TO DATE):</strong> In {yearToShowAverage}, your
+          program’s Average Total Mentions per Month = {average.totalMentions.toLocaleString(
+            'en-US'
+          )}. Your program’s Average Top Tier Mentions per Month = {average.topTier.toLocaleString(
+            'en-US'
+          )}.
+        </p>
+        <p><strong>KEY</strong></p>
+        <p>
+          Total Mentions: the number of times your program and experts were
+          cited across online, print, TV, and radio news stories
+        </p>
+        <p>
+          Top Tier Mentions: the number of times your program and experts were
+          cited in print and online stories by the world’s top news sources
+          (“top sources” are those in the 10% of news sources by reach, AKA
+          audience size)
+        </p>
+      {/if}
     {:else if selectedTab === 'social_media'}
+      {#if $user === 'International Security Program'}
+        <p>
+          <strong
+            >Please find below data from main CSIS social media accounts. <em
+              >Please note: Data from individual program accounts is not
+              included on this dashboard.</em
+            ></strong
+          >
+        </p>
+        <p>
+          <strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage},
+          CSIS’s main social media accounts posted about ISP and ISP
+          sub-programs {aggregate.numberOfPosts.toLocaleString('en-US')} times, and
+          these posts received a total of {aggregate.impressions.toLocaleString(
+            'en-US'
+          )} Impressions and {aggregate.engagements.toLocaleString('en-US')} Engagements.
+        </p>
+        <p><strong>KEY</strong></p>
+        <p>Impressions: the number of times social media content was viewed</p>
+        <p>
+          Engagements: the number of times users interacted with the posts
+          through likes, comments, shares, or clicks
+        </p>
+      {:else}
+        <p>
+          <strong
+            >Please find below data from main CSIS social media accounts. <em
+              >Please note: Data from individual program accounts is not
+              included on this dashboard.</em
+            ></strong
+          >
+        </p>
+        <p>
+          <strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage},
+          CSIS’s main social media accounts posted about your program {aggregate.numberOfPosts.toLocaleString('en-US')}
+          times, and these posts received a total of {aggregate.impressions.toLocaleString('en-US')} Impressions
+          and {aggregate.engagements.toLocaleString('en-US')} Engagements.
+        </p>
+        <p>
+          <strong>AVERAGE (YEAR TO DATE):</strong> In {yearToShowAverage},
+          CSIS’s main social media accounts posted about your program an average
+          of {average.numberOfPosts.toLocaleString('en-US')} times per month. These posts averaged {average.impressions.toLocaleString('en-US')}
+          Impressions per Month, and {average.engagements.toLocaleString('en-US')} Engagements per Month.
+        </p>
+        <p><strong>KEY</strong></p>
+        <p>Impressions: the number of times social media content was viewed</p>
+        <p>
+          Engagements: the number of times users interacted with the posts
+          through likes, comments, shares, or clicks
+        </p>
+      {/if}
+    {:else if selectedTab === 'videos'}
       <p>
-        Please find below data from ER social media accounts. In {yearToShowAverage}, ER posted about your program an average of {average.numberOfPosts} times per month.
-        These posts averaged {average.impressions} Impressions per Month, and {average.engagements} Engagements per Month.</p>
-      <p>Impressions: the number of times social media content was viewed</p>
-      <p>Engagements: the number of times users interacted with the posts</p>
-    {:else if selectedTab === 'videos'}
-      <p>"Average percentage viewed" measures how much of a video users watch on average. This metric can be used to gauge how well your videos hold a viewer's attention.</p>
+        <strong
+          >Please find below data on iLab videos produced with your program,
+          including What’s Happening, Testify, and other short videos.</strong
+        >
+      </p>
+      <p>
+        <em
+          >Note: "Views," "Total Watch Time," and "Average Percent Viewed"
+          reflect performance only in the month the video was posted. Videos
+          posted later in the month will show fewer "Views," "Total Watch Time,"
+          and "Average Percent Viewed." Please click through linked video titles
+          to see up-to-date view counts on YouTube.</em
+        >
+      </p>
     {:else if selectedTab === 'events'}
-      <p>The following data is from event video streams on YouTube only. For other event data (registrations, etc.), please contact the Events team.</p>
+      <p>
+        <strong
+          >Please find below data on your program’s public events (note: this
+          tab only includes events that have been posted to YouTube).</strong
+        >
+      </p>
+      <p>
+        <em
+          >Note: "Views," "Total Watch Time," and "Average Percent Viewed"
+          reflect performance only in the month the event video was posted.
+          Event videos posted later in the month will show fewer "Views," "Total
+          Watch Time," and "Average Percent Viewed." Please click through linked
+          event video titles to see up-to-date view counts on YouTube.</em
+        >
+      </p>
+    {:else}
+      <p>
+        Please find below data on your program’s CSIS podcast(s), if applicable.
+      </p>
     {/if}
+  {:else if selectedTab === 'podcasts_(Video)'}
+    <p>
+      <strong
+        >Please find below data on your program’s CSIS podcast(s) that have been
+        posted to YouTube as videos, if applicable.</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the event video was posted. Event videos
+        posted later in the month will show fewer "Views," "Total Watch Time,"
+        and "Average Percent Viewed." Please click through linked event video
+        titles to see up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'videos'}
+    <p>
+      <strong
+        >Please find below data on iLab videos produced with your program,
+        including What’s Happening, Testify, and other short videos.</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the video was posted. Videos posted later
+        in the month will show fewer "Views," "Total Watch Time," and "Average
+        Percent Viewed." Please click through linked video titles to see
+        up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'YouTube_shorts'}
+    <p>
+      <strong
+        >Please find below data on YouTube Shorts produced with your program,
+        including Asked & Answered videos.</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the YouTube Short was posted. Event videos
+        posted later in the month will show fewer "Views," "Total Watch Time,"
+        and "Average Percent Viewed." Please click through linked YouTube Short
+        titles to see up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'events'}
+    <p>
+      <strong
+        >Please find below data on your program’s public events (note: this tab
+        only includes events that have been posted to YouTube).</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the event video was posted. Event videos
+        posted later in the month will show fewer "Views," "Total Watch Time,"
+        and "Average Percent Viewed." Please click through linked event video
+        titles to see up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'publications'}
+    <p>
+      <strong
+        >Please see below data for your program’s CSIS publications (reports,
+        briefs, commentaries, and critical questions).</strong
+      >
+    </p>
+    <p>
+      Each row in this tab shows the number of views a publication has received
+      in the associated month.
+    </p>
+    <p>
+      <em
+        >Notes: This tab includes views received in the selected month for
+        publications published on any date, not just those published within the
+        selected month. This data is presented on a month-by-month basis, so
+        views are not cumulative, and only represent data from the selected
+        month.</em
+      >
+    </p>
+    <p>
+      <em
+        >Data in this tab can be sorted by month, publication type, and number
+        of views.</em
+      >
+    </p>
+    <p>
+      Views = total number of views on a publication page from all web traffic
+      sources
+    </p>
+    <p>
+      Engagements = number of additional actions taken from a publication page,
+      such as a share, longer-than-average view time, etc.
+    </p>
+    <p>
+      Each row in this tab presents the number of views and engagements a
+      publication has received in the associated month. Views and engagements
+      are not cumulative in this dashboard tab.
+    </p>
+    <p>
+      The following data is presented on a month-by-month basis. Views and
+      engagement are not cumulative, and only represent data from the selected
+      month.
+    </p>
   {:else}
-    {#if selectedTab === 'podcasts_(Video)'|| selectedTab === 'videos_iLab'}
-      <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the podcast (video) was posted. Note: podcasts (video) posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
-    {:else if selectedTab === 'videos'}
-      <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the video was posted. Note: videos posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
-    {:else if selectedTab === 'YouTube_shorts'}
-    <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the YouTube Short was posted. Note: YouTube Shorts posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
-    {:else if selectedTab === 'events'}
-    <p>"Views," "Total Watch Time," and "Average Percent Viewed" reflect performance only in the month the event video was posted. Note: event videos posted later in the month will show fewer "Views," "Total Watch Time," and "Average Percent Viewed." Please check YouTube for up-to-date view count.</p>
-    {:else if selectedTab === 'publications'}
-      <p>Views = total number of views on a publication page from all web traffic sources</p>
-      <p>Engagements = number of additional actions taken from a publication page, such as a share, longer-than-average view time, etc.</p>
-      <p>Each row in this tab presents the number of views and engagements a publication has received in the associated month. Views and engagements are not cumulative in this dashboard tab.</p>
-      <p>The following data is presented on a month-by-month basis. Views and engagement are not cumulative, and only represent data from the selected month.</p>
-    {/if}
+    <p>
+      <strong
+        >Please find below data on your program’s CSIS podcast(s), if
+        applicable.</strong
+      >
+    </p>
   {/if}
 </div>
 <div class="selects">
-  <div class="select-container">
-    <div class="label">Year</div>
-    <Select
-      indicatorSvg={chevron}
-      showChevron={true}
-      bind:listOpen={isListOpen}
-      {optionIdentifier}
-      {labelIdentifier}
-      items={dataset.data.years}
-      placeholder="Select Year"
-      on:select={(event) => handleSelect(event, 'Year')}
-      on:clear={() => handleClear('Year')}
-    />
-  </div>
-
   <div class="select-container">
     <div class="label">Month</div>
     <Select
@@ -283,19 +492,19 @@
     />
   </div>
   {#if selectedTab === 'publications'}
-  <div class="select-container">
-    <div class="label">Page Type</div>
-    <Select
-      indicatorSvg={chevron}
-      showChevron={true}
-      {optionIdentifier}
-      {labelIdentifier}
-      items={dataset.data.pageType}
-      placeholder="Select Page Type"
-      on:select={(event) => handleSelect(event, 'Page Type')}
-      on:clear={() => handleClear('Page Type')}
-    />
-  </div>
+    <div class="select-container">
+      <div class="label">Publication Type</div>
+      <Select
+        indicatorSvg={chevron}
+        showChevron={true}
+        {optionIdentifier}
+        {labelIdentifier}
+        items={dataset.data.pageType}
+        placeholder="Select Publication Type"
+        on:select={(event) => handleSelect(event, 'Publication Type')}
+        on:clear={() => handleClear('Publication Type')}
+      />
+    </div>
   {/if}
 </div>
 <div class="options options__container options__container--sticky">

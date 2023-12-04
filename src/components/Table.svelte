@@ -16,7 +16,7 @@
   // const sortByColumns = ['activity', 'state', 'authority', 'type of resource']
   $: if (selectedTab === 'publications') {
     // sortByColumns = ['views', 'engagements']
-    sortByColumns.push('views', 'engagements')
+    sortByColumns.push('views')
   } else {
     sortByColumns.length = 0
   }
@@ -177,7 +177,7 @@
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.totalMentions}</td
+                >{rows.totalMentions.toLocaleString('en')}</td
               >
               <td class="table__body__cell table__body__cell--data">
                 {rows.topTierMentions}
@@ -197,13 +197,13 @@
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.numberOfPosts}</td
+                >{rows.numberOfPosts.toLocaleString('en')}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {rows.impressions}
+                {rows.impressions.toLocaleString('en')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.engagements}</td
+                >{rows.engagements.toLocaleString('en')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
@@ -451,9 +451,9 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.views}</td
               >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.engagements}</td
-              >
+              > -->
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >

@@ -73,6 +73,7 @@
     }
 
     if (selectedTab === 'publications') {
+    // if (['publications', 'press', 'social_media', 'podcasts'].includes(selectedTab)) {
       // filteredByProgram = $user
       return byProgram.filter(row => row.programsNames?.includes($user))
     }
@@ -91,10 +92,37 @@
     .dataForm.filter( row => {
       const filteredYear = selectedYear ? selectedYear : row.year
       filteredByProgram = $user ? $user : row.program
-      return row.year === filteredYear && row.parentProgram === filteredByProgram
+      if (['International Security Program','Middle East Program','Southeast Asia Program'].includes(filteredByProgram)){
+        return row.year === filteredYear && row.parentProgram === filteredByProgram
+      }
+      return row.year === filteredYear && row.program === filteredByProgram
     })
   }
-
+  $: calculateAggregates = () => {
+    const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
+    if (dataFilteredByYear.length > 0) {
+      const totalMentions = calculateTotalMentions(dataFilteredByYear).toFixed()
+      const topTier = calculateTopTierMentions(dataFilteredByYear).toFixed()
+      const engagements = calculateEngagements(dataFilteredByYear).toFixed()
+      const impressions = calculateImpressions(dataFilteredByYear).toFixed()
+      const numberOfPosts = calculateNumberOfPosts(dataFilteredByYear).toFixed()
+      const uniqueVisitors = calculateUniqueVisitors(dataFilteredByYear).toFixed()
+      const pageViews = calculatePageViews(dataFilteredByYear).toFixed()
+      const totalDownloads = calculateTotalDownloads(dataFilteredByYear).toFixed()
+      const totalViewsFirst30DaysPerformance = calculateViewsFirst30DaysPerformance(dataFilteredByYear).toFixed()
+      return {
+        totalMentions: Number(totalMentions),
+        topTier: Number(topTier),
+        engagements: Number(engagements),
+        impressions: Number(impressions),
+        numberOfPosts: Number(numberOfPosts),
+        uniqueVisitors: Number(uniqueVisitors),
+        pageViews: Number(pageViews),
+        totalDownloads: Number(totalDownloads),
+        totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformance)
+      }
+    }
+  }
   $: calculateAverages = () => {
     const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
     if (dataFilteredByYear.length > 0) {
@@ -108,15 +136,15 @@
       const totalDownloadsAvg = calculateTotalDownloadsAvg(dataFilteredByYear).toFixed()
       const totalViewsFirst30DaysPerformanceAvg = calculateViewsFirst30DaysPerformanceAvg(dataFilteredByYear).toFixed()
       return {
-        totalMentions: totalMentionsAvg,
-        topTier: TopTierMentionsAvg,
-        engagements: engagementsAvg,
-        impressions: impressionsAvg,
-        numberOfPosts: numberOfPostsAvg,
-        uniqueVisitors: uniqueVisitorsAvg,
-        pageViews: pageViewsAvg,
-        totalDownloads: totalDownloadsAvg,
-        totalViewsFirst30DaysPerformance: totalViewsFirst30DaysPerformanceAvg 
+        totalMentions: Number(totalMentionsAvg),
+        topTier: Number(TopTierMentionsAvg),
+        engagements: Number(engagementsAvg),
+        impressions: Number(impressionsAvg),
+        numberOfPosts: Number(numberOfPostsAvg),
+        uniqueVisitors: Number(uniqueVisitorsAvg),
+        pageViews: Number(pageViewsAvg),
+        totalDownloads: Number(totalDownloadsAvg),
+        totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformanceAvg)
       }
     }
     return false
@@ -142,9 +170,20 @@
     return totalMentions.reduce( ( a, b ) => a + b ) / totalMentions.length
   }
 
+
+  function calculateTotalMentions( data ){
+    const totalMentions = data.map( row => parseInt( row.totalMentions, 10 ) )
+    return totalMentions.reduce( ( a, b ) => a + b )
+  }
+
   function calculateTopTierMentionsAvg( data ){
     const topTierMentions = data.map( row => parseInt( row.topTierMentions, 10 ) )
     return topTierMentions.reduce( ( a, b ) => a + b ) / topTierMentions.length
+  }
+
+  function calculateTopTierMentions( data ){
+    const topTierMentions = data.map( row => parseInt( row.topTierMentions, 10 ) )
+    return topTierMentions.reduce( ( a, b ) => a + b )
   }
 
   function calculateNumberOfPostsAvg( data ) {
@@ -152,9 +191,19 @@
     return numberOfPosts.reduce( ( a, b ) => a + b ) / numberOfPosts.length
   }
 
+  function calculateNumberOfPosts( data ) {
+    const numberOfPosts = data.map( row => parseInt( row.numberOfPosts, 10 ) )
+    return numberOfPosts.reduce( ( a, b ) => a + b )
+  }
+
   function calculateImpressionsAvg( data ) {
     const impressions = data.map( row => parseInt( row.impressions, 10 ) )
     return impressions.reduce( ( a, b ) => a + b ) / impressions.length
+  }
+
+  function calculateImpressions( data ) {
+    const impressions = data.map( row => parseInt( row.impressions, 10 ) )
+    return impressions.reduce( ( a, b ) => a + b )
   }
 
   function calculateEngagementsAvg( data ) {
@@ -162,9 +211,19 @@
     return engagements.reduce( ( a, b ) => a + b ) / engagements.length  
   }
 
+  function calculateEngagements( data ) {
+    const engagements = data.map( row => parseInt( row.engagements, 10 ) )
+    return engagements.reduce( ( a, b ) => a + b )
+  }
+
   function calculateUniqueVisitorsAvg( data ) {
     const uniqueVisitors = data.map( row => parseInt( row.uniqueVisitors, 10 ) )
     return uniqueVisitors.reduce( ( a, b ) => a + b ) / uniqueVisitors.length  
+  }
+
+  function calculateUniqueVisitors( data ) {
+    const uniqueVisitors = data.map( row => parseInt( row.uniqueVisitors, 10 ) )
+    return uniqueVisitors.reduce( ( a, b ) => a + b )
   }
 
   function calculatePageViewsAvg( data ) {
@@ -172,14 +231,29 @@
     return pageViews.reduce( ( a, b ) => a + b ) / pageViews.length  
   }
 
+  function calculatePageViews( data ) {
+    const pageViews = data.map( row => parseInt( row.pageViews, 10 ) )
+    return pageViews.reduce( ( a, b ) => a + b )
+  }
+
   function calculateTotalDownloadsAvg( data ) {
     const totalDownloads = data.map( row => parseInt( row.totalDownloads, 10 ) )
     return totalDownloads.reduce( ( a, b ) => a + b ) / totalDownloads.length  
   }
 
+  function calculateTotalDownloads( data ) {
+    const totalDownloads = data.map( row => parseInt( row.totalDownloads, 10 ) )
+    return totalDownloads.reduce( ( a, b ) => a + b )
+  }
+
   function calculateViewsFirst30DaysPerformanceAvg( data ) {
     const totalViews = data.map( row => parseInt( row.totalViews, 10 ) )
     return totalViews.reduce( ( a, b ) => a + b ) / totalViews.length  
+  }
+
+  function calculateViewsFirst30DaysPerformance( data ) {
+    const totalViews = data.map( row => parseInt( row.totalViews, 10 ) )
+    return totalViews.reduce( ( a, b ) => a + b )
   }
 </script>
 
@@ -195,6 +269,7 @@
       <Options
         {dataset}
         filteredData={filteredDataByTab()}
+        aggregate={calculateAggregates()}
         average={calculateAverages()}
         bind:yearToShowAverage
         bind:row
