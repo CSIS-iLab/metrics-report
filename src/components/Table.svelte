@@ -177,10 +177,10 @@
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.totalMentions.toLocaleString('en')}</td
+                >{parseInt(rows.totalMentions).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {rows.topTierMentions}
+                {parseInt(rows.topTierMentions).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
@@ -197,13 +197,13 @@
                 </div></td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.numberOfPosts.toLocaleString('en')}</td
+                >{parseInt(rows.numberOfPosts, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {rows.impressions.toLocaleString('en')}
+                {parseInt(rows.impressions, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.engagements.toLocaleString('en')}</td
+                >{parseInt(rows.engagements, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
@@ -246,7 +246,7 @@
                 >{rows.podcast}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {rows.totalDownloads}
+                {parseInt(rows.totalDownloads, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
@@ -276,10 +276,10 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {rows.totalViews}
+                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.totalWatchTime}</td
+                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -312,10 +312,10 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {rows.totalViews}
+                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.totalWatchTime}</td
+                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -348,10 +348,10 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {rows.totalViews}
+                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.totalWatchTime}</td
+                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -384,10 +384,10 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {rows.totalViews}
+                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.totalWatchTime}</td
+                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -399,7 +399,7 @@
                 >{rows.year}</td
               >
             </tr>
-          {:else if selectedTab === 'videos_iLab'}
+          <!-- {:else if selectedTab === 'videos_iLab'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
@@ -434,7 +434,7 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
               >
-            </tr>
+            </tr> -->
           {:else if selectedTab === 'publications'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
@@ -449,7 +449,7 @@
                 {rows.pageType}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{rows.views}</td
+                >{parseInt(rows.views, 10).toLocaleString('en-US')}</td
               >
               <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.engagements}</td

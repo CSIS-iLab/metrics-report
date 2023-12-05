@@ -86,6 +86,10 @@
 
   }
 
+  $: filteredDataForCalc = () => {
+    console.log(filteredDataByTab())
+    // return filterByTab()
+  }
   $: filteredDataForAvg = () => {
     let filteredByProgram
     return dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
@@ -98,6 +102,7 @@
       return row.year === filteredYear && row.program === filteredByProgram
     })
   }
+
   $: calculateAggregates = () => {
     const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
     if (dataFilteredByYear.length > 0) {
@@ -106,45 +111,48 @@
       const engagements = calculateEngagements(dataFilteredByYear).toFixed()
       const impressions = calculateImpressions(dataFilteredByYear).toFixed()
       const numberOfPosts = calculateNumberOfPosts(dataFilteredByYear).toFixed()
-      const uniqueVisitors = calculateUniqueVisitors(dataFilteredByYear).toFixed()
-      const pageViews = calculatePageViews(dataFilteredByYear).toFixed()
-      const totalDownloads = calculateTotalDownloads(dataFilteredByYear).toFixed()
-      const totalViewsFirst30DaysPerformance = calculateViewsFirst30DaysPerformance(dataFilteredByYear).toFixed()
+      // const uniqueVisitors = calculateUniqueVisitors(dataFilteredByYear).toFixed()
+      // const pageViews = calculatePageViews(dataFilteredByYear).toFixed()
+      // const totalDownloads = calculateTotalDownloads(dataFilteredByYear).toFixed()
+      // const totalViewsFirst30DaysPerformance = calculateViewsFirst30DaysPerformance(dataFilteredByYear).toFixed()
       return {
         totalMentions: Number(totalMentions),
         topTier: Number(topTier),
         engagements: Number(engagements),
         impressions: Number(impressions),
         numberOfPosts: Number(numberOfPosts),
-        uniqueVisitors: Number(uniqueVisitors),
-        pageViews: Number(pageViews),
-        totalDownloads: Number(totalDownloads),
-        totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformance)
+        // uniqueVisitors: Number(uniqueVisitors),
+        // pageViews: Number(pageViews),
+        // totalDownloads: Number(totalDownloads),
+        // totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformance)
       }
     }
   }
+
   $: calculateAverages = () => {
     const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
-    if (dataFilteredByYear.length > 0) {
-      const totalMentionsAvg= calculateTotalMentionsAvg(dataFilteredByYear).toFixed()
-      const TopTierMentionsAvg = calculateTopTierMentionsAvg(dataFilteredByYear).toFixed()
-      const engagementsAvg = calculateEngagementsAvg(dataFilteredByYear).toFixed()
-      const impressionsAvg = calculateImpressionsAvg(dataFilteredByYear).toFixed()
-      const numberOfPostsAvg = calculateNumberOfPostsAvg(dataFilteredByYear).toFixed()
-      const uniqueVisitorsAvg = calculateUniqueVisitorsAvg(dataFilteredByYear).toFixed()
-      const pageViewsAvg = calculatePageViewsAvg(dataFilteredByYear).toFixed()
-      const totalDownloadsAvg = calculateTotalDownloadsAvg(dataFilteredByYear).toFixed()
-      const totalViewsFirst30DaysPerformanceAvg = calculateViewsFirst30DaysPerformanceAvg(dataFilteredByYear).toFixed()
-      return {
-        totalMentions: Number(totalMentionsAvg),
-        topTier: Number(TopTierMentionsAvg),
-        engagements: Number(engagementsAvg),
-        impressions: Number(impressionsAvg),
-        numberOfPosts: Number(numberOfPostsAvg),
-        uniqueVisitors: Number(uniqueVisitorsAvg),
-        pageViews: Number(pageViewsAvg),
-        totalDownloads: Number(totalDownloadsAvg),
-        totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformanceAvg)
+    if (['press', 'social_media'].includes(selectedTab)){
+      if (dataFilteredByYear.length > 0) {
+        const totalMentionsAvg= calculateTotalMentionsAvg(dataFilteredByYear).toFixed()
+        const TopTierMentionsAvg = calculateTopTierMentionsAvg(dataFilteredByYear).toFixed()
+        const engagementsAvg = calculateEngagementsAvg(dataFilteredByYear).toFixed()
+        const impressionsAvg = calculateImpressionsAvg(dataFilteredByYear).toFixed()
+        const numberOfPostsAvg = calculateNumberOfPostsAvg(dataFilteredByYear).toFixed()
+        // const uniqueVisitorsAvg = calculateUniqueVisitorsAvg(dataFilteredByYear).toFixed()
+        // const pageViewsAvg = calculatePageViewsAvg(dataFilteredByYear).toFixed()
+        // const totalDownloadsAvg = calculateTotalDownloadsAvg(dataFilteredByYear).toFixed()
+        // const totalViewsFirst30DaysPerformanceAvg = calculateViewsFirst30DaysPerformanceAvg(dataFilteredByYear).toFixed()
+        return {
+          totalMentions: Number(totalMentionsAvg),
+          topTier: Number(TopTierMentionsAvg),
+          numberOfPosts: Number(numberOfPostsAvg),
+          impressions: Number(impressionsAvg),
+          engagements: Number(engagementsAvg),
+          // uniqueVisitors: Number(uniqueVisitorsAvg),
+          // pageViews: Number(pageViewsAvg),
+          // totalDownloads: Number(totalDownloadsAvg),
+          // totalViewsFirst30DaysPerformance: Number(totalViewsFirst30DaysPerformanceAvg)
+        }
       }
     }
     return false
