@@ -189,8 +189,6 @@
       }
     })
   })
-
-  $: console.log(average)
 </script>
 
 <section class="table-container__header"></section>
@@ -308,15 +306,21 @@
         </p>
         <p>
           <strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage},
-          CSIS’s main social media accounts posted about your program {aggregate.numberOfPosts.toLocaleString('en-US')}
-          times, and these posts received a total of {aggregate.impressions.toLocaleString('en-US')} Impressions
-          and {aggregate.engagements.toLocaleString('en-US')} Engagements.
+          CSIS’s main social media accounts posted about your program {aggregate.numberOfPosts.toLocaleString(
+            'en-US'
+          )}
+          times, and these posts received a total of {aggregate.impressions.toLocaleString(
+            'en-US'
+          )} Impressions and {aggregate.engagements.toLocaleString('en-US')} Engagements.
         </p>
         <p>
           <strong>AVERAGE (YEAR TO DATE):</strong> In {yearToShowAverage},
           CSIS’s main social media accounts posted about your program an average
-          of {average.numberOfPosts.toLocaleString('en-US')} times per month. These posts averaged {average.impressions.toLocaleString('en-US')}
-          Impressions per Month, and {average.engagements.toLocaleString('en-US')} Engagements per Month.
+          of {average.numberOfPosts.toLocaleString('en-US')} times per month. These
+          posts averaged {average.impressions.toLocaleString('en-US')}
+          Impressions per Month, and {average.engagements.toLocaleString(
+            'en-US'
+          )} Engagements per Month.
         </p>
         <p><strong>KEY</strong></p>
         <p>Impressions: the number of times social media content was viewed</p>
@@ -325,7 +329,7 @@
           through likes, comments, shares, or clicks
         </p>
       {/if}
-    <!-- {:else if selectedTab === 'videos'}
+      <!-- {:else if selectedTab === 'videos'}
       <p>
         <strong
           >Please find below data on iLab videos produced with your program,
@@ -357,118 +361,120 @@
           event video titles to see up-to-date view counts on YouTube.</em
         >
       </p> -->
-    <!-- {:else if selectedTab === 'podcasts'}
+      <!-- {:else if selectedTab === 'podcasts'}
       <p>
         Please find below data on your program’s CSIS podcast(s), if applicable.
       </p> -->
     {/if}
+  {:else if selectedTab === 'podcasts'}
+    <p>
+      <strong
+        >Please find below data on your program’s CSIS podcast(s), if
+        applicable.</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: This tab includes listens in the selected month for all episodes
+        of the associated podcast, not just those released within the selected
+        month.</em
+      >
+    </p>
+  {:else if selectedTab === 'podcasts_(Video)'}
+    <p>
+      <strong
+        >Please find below data on your program’s CSIS podcast(s) that have been
+        posted to YouTube as videos, if applicable.</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the event video was posted. Podcasts
+        (video) posted later in the month will show fewer "Views," "Total Watch
+        Time," and "Average Percent Viewed." Please click through linked podcast
+        (video) titles to see up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'videos'}
+    <p>
+      <strong
+        >Please find below data on iLab videos produced with your program,
+        including What’s Happening, Testify, and other short videos.</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the video was posted. Videos posted later
+        in the month will show fewer "Views," "Total Watch Time," and "Average
+        Percent Viewed." Please click through linked video titles to see
+        up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'YouTube_shorts'}
+    <p>
+      <strong
+        >Please find below data on YouTube Shorts produced with your program,
+        including Asked & Answered videos.</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the YouTube Short was posted. YouTube
+        Shorts posted later in the month will show fewer "Views," "Total Watch
+        Time," and "Average Percent Viewed." Please click through linked YouTube
+        Short titles to see up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'events'}
+    <p>
+      <strong
+        >Please find below data on your program’s public events (note: this tab
+        only includes events that have been posted to YouTube).</strong
+      >
+    </p>
+    <p>
+      <em
+        >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
+        performance only in the month the event video was posted. Event videos
+        posted later in the month will show fewer "Views," "Total Watch Time,"
+        and "Average Percent Viewed." Please click through linked event video
+        titles to see up-to-date view counts on YouTube.</em
+      >
+    </p>
+  {:else if selectedTab === 'publications'}
+    <p>
+      <strong
+        >Please see below data for your program’s CSIS publications (reports,
+        briefs, commentaries, and critical questions).</strong
+      >
+    </p>
+    <p>
+      Each row in this tab shows the number of views a publication has received
+      in the associated month.
+    </p>
+    <p>
+      Data in this tab can be sorted by month, publication type, and number of
+      views.
+    </p>
+    <p>
+      <em
+        >Notes: This tab includes views received in the selected month for
+        publications published on any date, not just those published within the
+        selected month. This data is presented on a month-by-month basis, so
+        views are not cumulative, and only represent data from the selected
+        month.</em
+      >
+    </p>
   {:else}
-    {#if selectedTab === 'podcasts'}
-      <p>
-        Please find below data on your program’s CSIS podcast(s), if applicable.
-      </p>
-    {:else if selectedTab === 'podcasts_(Video)'}
-      <p>
-        <strong
-          >Please find below data on your program’s CSIS podcast(s) that have been
-          posted to YouTube as videos, if applicable.</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
-          performance only in the month the event video was posted. Podcasts (video)
-          posted later in the month will show fewer "Views," "Total Watch Time,"
-          and "Average Percent Viewed." Please click through linked podcast (video)
-          titles to see up-to-date view counts on YouTube.</em
-        >
-      </p>
-    {:else if selectedTab === 'videos'}
-      <p>
-        <strong
-          >Please find below data on iLab videos produced with your program,
-          including What’s Happening, Testify, and other short videos.</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
-          performance only in the month the video was posted. Videos posted later
-          in the month will show fewer "Views," "Total Watch Time," and "Average
-          Percent Viewed." Please click through linked video titles to see
-          up-to-date view counts on YouTube.</em
-        >
-      </p>
-    {:else if selectedTab === 'YouTube_shorts'}
-      <p>
-        <strong
-          >Please find below data on YouTube Shorts produced with your program,
-          including Asked & Answered videos.</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
-          performance only in the month the YouTube Short was posted. YouTube Shorts
-          posted later in the month will show fewer "Views," "Total Watch Time,"
-          and "Average Percent Viewed." Please click through linked YouTube Short
-          titles to see up-to-date view counts on YouTube.</em
-        >
-      </p>
-    {:else if selectedTab === 'events'}
-      <p>
-        <strong
-          >Please find below data on your program’s public events (note: this tab
-          only includes events that have been posted to YouTube).</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed" reflect
-          performance only in the month the event video was posted. Event videos
-          posted later in the month will show fewer "Views," "Total Watch Time,"
-          and "Average Percent Viewed." Please click through linked event video
-          titles to see up-to-date view counts on YouTube.</em
-        >
-      </p>
-    {:else if selectedTab === 'publications'}
-      <p>
-        <strong
-          >Please see below data for your program’s CSIS publications (reports,
-          briefs, commentaries, and critical questions).</strong
-        >
-      </p>
-      <p>
-        Each row in this tab shows the number of views a publication has received
-        in the associated month.
-      </p>
-      <p>
-        <em
-          >Notes: This tab includes views received in the selected month for
-          publications published on any date, not just those published within the
-          selected month. This data is presented on a month-by-month basis, so
-          views are not cumulative, and only represent data from the selected
-          month.</em
-        >
-      </p>
-      <p>
-        <em
-          >Data in this tab can be sorted by month, publication type, and number
-          of views.</em
-        >
-      </p>
-      <p>
-        Views = total number of views on a publication page from all web traffic
-        sources
-      </p>
-    {:else}
-      <p>
-        <strong
-          >Please find below data on your program’s CSIS podcast(s), if
-          applicable.</strong
-        >
-      </p>
-    {/if}
+    <p>
+      <strong
+        >Please find below data on your program’s CSIS podcast(s), if
+        applicable.</strong
+      >
+    </p>
   {/if}
 </div>
 <div class="selects">

@@ -47,6 +47,7 @@
   }
 
   a, button {
+    z-index: 9000;
     &:hover {
       // color brand-blue-600
       filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);

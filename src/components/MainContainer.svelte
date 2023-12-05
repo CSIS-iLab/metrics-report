@@ -86,10 +86,6 @@
 
   }
 
-  $: filteredDataForCalc = () => {
-    console.log(filteredDataByTab())
-    // return filterByTab()
-  }
   $: filteredDataForAvg = () => {
     let filteredByProgram
     return dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
