@@ -282,7 +282,7 @@
           <strong
             >Please find below data from main CSIS social media accounts. <em
               >Note: Data from individual program accounts is not included on
-              this dashboard. Please also note: Social media metrics for line
+              this dashboard. "Number of Posts," "Impressions," and "Engagements" do not account for posts from program accounts that have been amplified by CSIS's main social media accounts. Please also note: Social media metrics for line
               item "International Security Program" represent only ISP general
               content (i.e., does not include content also tagged to a specific
               sub-program/project).</em
@@ -309,7 +309,7 @@
           <strong
             >Please find below data from main CSIS social media accounts. <em
               >Please note: Data from individual program accounts is not
-              included on this dashboard.</em
+              included on this dashboard. "Number of Posts," "Impressions," and "Engagements" do not account for posts from program accounts that have been amplified by CSIS's main social media accounts.</em
             ></strong
           >
         </p>
