@@ -329,6 +329,7 @@
           through likes, comments, shares, or clicks
         </p>
       {/if}
+      <p><em>Note: Impressions and engagements in a selected month include impressions and engagements for social media posts published on any date, not just those published within that month (i.e., months with zero new posts may still include impressions and engagements from old posts).</em></p>
       <!-- {:else if selectedTab === 'videos'}
       <p>
         <strong
