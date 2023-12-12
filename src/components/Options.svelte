@@ -215,14 +215,19 @@
       {#if $user === 'International Security Program'}
         <p>
           <strong
-            >Please find below data on your program’s media citations.</strong
+            >Please find below data on your program’s media citations.
+          </strong><em
+            >Note: Press metrics for line item "International Security Program"
+            represent only those mentions that do not also include the name of a
+            specific sub-program/project or expert. This category is intended to
+            capture all additional mentions of ISP in the media.</em
           >
         </p>
         <p>
           <strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage},
-          ISP’s Total Mentions = {aggregate.totalMentions.toLocaleString(
+          ISP and ISP sub-programs/projects' Total Mentions = {aggregate.totalMentions.toLocaleString(
             'en-US'
-          )}. ISP’s Top Tier Mentions = {aggregate.topTier.toLocaleString(
+          )}. ISP and ISP sub-programs/projects' Top Tier Mentions = {aggregate.topTier.toLocaleString(
             'en-US'
           )}.
         </p>
@@ -276,16 +281,20 @@
         <p>
           <strong
             >Please find below data from main CSIS social media accounts. <em
-              >Please note: Data from individual program accounts is not
-              included on this dashboard.</em
+              >Note: Data from individual program accounts is not included on
+              this dashboard. Please also note: Social media metrics for line
+              item "International Security Program" represent only ISP general
+              content (i.e., does not include content also tagged to a specific
+              sub-program/project).</em
             ></strong
           >
         </p>
         <p>
           <strong>CUMULATIVE (YEAR TO DATE):</strong> In {yearToShowAverage},
           CSIS’s main social media accounts posted about ISP and ISP
-          sub-programs {aggregate.numberOfPosts.toLocaleString('en-US')} times, and
-          these posts received a total of {aggregate.impressions.toLocaleString(
+          sub-programs/projects {aggregate.numberOfPosts.toLocaleString(
+            'en-US'
+          )} times, and these posts received a total of {aggregate.impressions.toLocaleString(
             'en-US'
           )} Impressions and {aggregate.engagements.toLocaleString('en-US')} Engagements.
         </p>
@@ -329,7 +338,15 @@
           through likes, comments, shares, or clicks
         </p>
       {/if}
-      <p><em>Note: Impressions and engagements in a selected month include impressions and engagements for social media posts published on any date, not just those published within that month (i.e., months with zero new posts may still include impressions and engagements from old posts).</em></p>
+      <p>
+        <em
+          >Note: Impressions and engagements in a selected month include
+          impressions and engagements for social media posts published on any
+          date, not just those published within that month (i.e., months with
+          zero new posts may still include impressions and engagements from old
+          posts).</em
+        >
+      </p>
       <!-- {:else if selectedTab === 'videos'}
       <p>
         <strong
