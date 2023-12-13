@@ -53,8 +53,7 @@ function getProgram(string) {
   const array = string
     .split(' ')
     .filter((v) => v.startsWith('#'))
-    .slice(0, 2)
-
+    // .slice(0, 2)
   // Use the find method to get the first matching element
   const matchingElement = helperDataset.dataFormatted.find(
     (element) => element !== '' && array[0] === element.productName
