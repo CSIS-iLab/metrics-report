@@ -6,15 +6,21 @@ let columnNames
 let test = {}
 let years = []
 let months = []
+// exclude these from the press
+// const excludeFromPress = [
+//   'Defending Democratic Institutions',
+//   'Defense Budget Analysis',
+//   'Project on Fragility and Mobility'
+// ]
 const ispSubPrograms = [
   'Aerospace Security Project',
   'Arleigh A. Burke Chair in Strategy',
-  'Defending Democratic Institutions',
+  // 'Defending Democratic Institutions',
   'Defense-Industrial Initiatives Group',
-  'Defense Budget Analysis',
+  // 'Defense Budget Analysis',
   'Emeritus Chair in Strategy',
   'Missile Defense Project',
-  'Project on Fragility and Mobility',
+  // 'Project on Fragility and Mobility',
   'Project on Nuclear Issues',
   'Smart Women, Smart Power',
   'Transnational Threats Project',
