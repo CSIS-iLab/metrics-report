@@ -17,13 +17,13 @@
   let filterByTab = []
   let selectedTab = 'press'
   
-  $: yearToShowAverage = ''
+  $: yearToShowAverage = '2023'
 
-  $:if (selectedYear !== '') {
-    yearToShowAverage = selectedYear
-  } else {
-    yearToShowAverage = ($currentYear).toString()
-  }
+  // $:if (selectedYear !== '') {
+  //   yearToShowAverage = selectedYear
+  // } else {
+  //   yearToShowAverage = ($currentYear).toString()
+  // }
 
   let searchText
   $: row = { isOpen: false }
