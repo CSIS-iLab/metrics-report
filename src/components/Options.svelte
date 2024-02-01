@@ -282,7 +282,10 @@
           <strong
             >Please find below data from main CSIS social media accounts. <em
               >Note: Data from individual program accounts is not included on
-              this dashboard. "Number of Posts," "Impressions," and "Engagements" do not account for posts from program accounts that have been amplified (i.e., reposted/shared) by CSIS's main social media accounts. Please also note: Social media metrics for line
+              this dashboard. "Number of Posts," "Impressions," and
+              "Engagements" do not account for posts from program accounts that
+              have been amplified (i.e., reposted/shared) by CSIS's main social
+              media accounts. Please also note: Social media metrics for line
               item "International Security Program" represent only ISP general
               content (i.e., does not include content also tagged to a specific
               sub-program/project).</em
@@ -309,7 +312,10 @@
           <strong
             >Please find below data from main CSIS social media accounts. <em
               >Please note: Data from individual program accounts is not
-              included on this dashboard. "Number of Posts," "Impressions," and "Engagements" do not account for posts from program accounts that have been amplified (i.e., reposted/shared) by CSIS's main social media accounts.</em
+              included on this dashboard. "Number of Posts," "Impressions," and
+              "Engagements" do not account for posts from program accounts that
+              have been amplified (i.e., reposted/shared) by CSIS's main social
+              media accounts.</em
             ></strong
           >
         </p>
@@ -395,8 +401,8 @@
       <em
         >Note: This tab includes listens in the selected month for all episodes
         of the associated podcast, not just those released within the selected
-        month. “Listens” are the same as “downloads.” </em
-      >
+        month. “Listens” are the same as “downloads.”
+      </em>
     </p>
   {:else if selectedTab === 'podcasts_(Video)'}
     <p>
@@ -474,8 +480,8 @@
       in the associated month.
     </p>
     <p>
-      Data in this tab can be sorted by month, publication type, and number of
-      views.
+      Data in this tab can be sorted by month, publication title, publication
+      type, and number of views.
     </p>
     <p>
       <em
