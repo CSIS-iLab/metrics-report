@@ -172,6 +172,9 @@
           {#if selectedTab === 'press'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.program}
                 </div></td
@@ -182,15 +185,15 @@
               <td class="table__body__cell table__body__cell--data">
                 {parseInt(rows.topTierMentions).toLocaleString('en-US')}
               </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {:else if selectedTab === 'social_media'}
             <tr class="title table__body__cell--border">
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
               <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.program}
@@ -205,15 +208,15 @@
               <td class="table__body__cell table__body__cell--data"
                 >{parseInt(rows.engagements, 10).toLocaleString('en-US')}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {:else if selectedTab === 'program_sites'}
             <tr class="title table__body__cell--border">
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
               <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.program}
@@ -228,15 +231,15 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.pageViews}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {:else if selectedTab === 'podcasts'}
             <tr class="title table__body__cell--border">
+              <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
               <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.program}
@@ -248,16 +251,16 @@
               <td class="table__body__cell table__body__cell--data">
                 {parseInt(rows.totalDownloads, 10).toLocaleString('en-US')}
               </td>
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {:else if selectedTab === 'videos'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.programsVideos.join(', ')}
                 </div></td
@@ -284,16 +287,16 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {:else if selectedTab === 'events'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.programsVideos.join(', ')}
                 </div></td
@@ -320,16 +323,16 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {:else if selectedTab === 'YouTube_shorts'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.programsVideos.join(', ')}
                 </div></td
@@ -356,16 +359,16 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {:else if selectedTab === 'podcasts_(Video)'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.programsVideos.join(', ')}
                 </div></td
@@ -392,12 +395,9 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           <!-- {:else if selectedTab === 'videos_iLab'}
             <tr class="title table__body__cell--border">
@@ -438,6 +438,9 @@
           {:else if selectedTab === 'publications'}
             <tr class="title table__body__cell--border">
               <td class="table__body__cell table__body__cell--data"
+                >{rows.month}</td
+              >
+              <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.programsNames.join(', ')}
                 </div></td
@@ -454,12 +457,9 @@
               <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.engagements}</td
               > -->
-              <td class="table__body__cell table__body__cell--data"
-                >{rows.month}</td
-              >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 >{rows.year}</td
-              >
+              > -->
             </tr>
           {/if}
         {:else}
