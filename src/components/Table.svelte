@@ -1,4 +1,5 @@
 <script>
+  import { user } from '../store'
   import { onMount } from 'svelte'
   import tooltip from '../js/tooltip'
   import Icon from './Icons.svelte'
@@ -143,6 +144,9 @@
       <thead>
         <tr class="table__header-row">
           {#each headerNames as name}
+            {#if $user !== "International Security Program" && name === "Program"}
+              <!-- Skip rendering the "Program" column if currentProgram is not "ISP" -->
+            {:else}
             <th class="table__cell--header" scope="col">
               <div
                 class="table__cell--header__container table__cell--header__container__{name
@@ -160,6 +164,7 @@
                 {/if}
               </div>
             </th>
+            {/if}
           {/each}
         </tr>
       </thead>
@@ -174,11 +179,18 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
+              <!-- <td class="table__body__cell table__body__cell--data"
                 ><div class="table__body__cell__title-container">
                   <span class="icon-container" />{rows.program}
                 </div></td
-              >
+              > -->
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.program}
+                  </div></td
+                >
+              {/if}
               <td class="table__body__cell table__body__cell--data"
                 >{parseInt(rows.totalMentions).toLocaleString('en-US')}</td
               >
@@ -194,11 +206,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.program}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.program}
+                  </div></td
+                >
+              {/if}
               <td class="table__body__cell table__body__cell--data"
                 >{parseInt(rows.numberOfPosts, 10).toLocaleString('en-US')}</td
               >
@@ -217,11 +231,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.program}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.program}
+                  </div></td
+                >
+              {/if}
               <td class="table__body__cell table__body__cell--data"
                 >{rows.website}</td
               >
@@ -240,11 +256,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.program}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.program}
+                  </div></td
+                >
+              {/if}  
               <td class="table__body__cell table__body__cell--data"
                 >{rows.podcast}</td
               >
@@ -260,11 +278,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.programsVideos.join(', ')}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                  </div></td
+                >
+              {/if}
               <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
@@ -296,11 +316,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.programsVideos.join(', ')}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                  </div></td
+                >
+              {/if}  
               <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
@@ -332,11 +354,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.programsVideos.join(', ')}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                  </div></td
+                >
+              {/if}  
               <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
@@ -368,11 +392,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.programsVideos.join(', ')}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                  </div></td
+                >
+              {/if}
               <td class="table__body__cell table__body__cell--data"
                 >
                 <div class="link">
@@ -440,11 +466,13 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              <td class="table__body__cell table__body__cell--data"
-                ><div class="table__body__cell__title-container">
-                  <span class="icon-container" />{rows.programsNames.join(', ')}
-                </div></td
-              >
+              {#if $user === "International Security Program"}
+                <td class="table__body__cell table__body__cell--data"
+                  ><div class="table__body__cell__title-container">
+                    <span class="icon-container" />{rows.programsNames.join(', ')}
+                  </div></td
+                >
+              {/if}
               <td class="table__body__cell table__body__cell--data"
                 >{rows.page}</td
               >
