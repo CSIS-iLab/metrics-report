@@ -485,11 +485,14 @@
     </p>
     <p>
       <em
-        >Notes: This tab includes views received in the selected month for
+        >Note: This tab includes views received in the selected month for
         publications published on any date, not just those published within the
         selected month. This data is presented on a month-by-month basis, so
         views are not cumulative, and only represent data from the selected
-        month.</em
+        month. For data on Digital Reports and downloads of PDFs on CSIS
+        analysis pages, please contact External Relations. Please also note:
+        This tab includes all CSIS.org publications tagged to your program,
+        including those co-authored by or also tagged to other programs.</em
       >
     </p>
   {:else}
