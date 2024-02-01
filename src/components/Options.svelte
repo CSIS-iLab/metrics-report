@@ -395,7 +395,7 @@
       <em
         >Note: This tab includes listens in the selected month for all episodes
         of the associated podcast, not just those released within the selected
-        month.</em
+        month. “Listens” are the same as “downloads.” </em
       >
     </p>
   {:else if selectedTab === 'podcasts_(Video)'}
