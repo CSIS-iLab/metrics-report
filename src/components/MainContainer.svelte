@@ -170,23 +170,23 @@
   }
 
   function calculateTotalMentionsAvg( data ){
-    const totalMentions = data.map( row => parseInt( row.totalMentions, 10 ) )
+    const totalMentions = data.map( row => parseInt( row.total_mentions, 10 ) )
     return totalMentions.reduce( ( a, b ) => a + b ) / totalMentions.length
   }
 
 
   function calculateTotalMentions( data ){
-    const totalMentions = data.map( row => parseInt( row.totalMentions, 10 ) )
+    const totalMentions = data.map( row => parseInt( row.total_mentions, 10 ) )
     return totalMentions.reduce( ( a, b ) => a + b )
   }
 
   function calculateTopTierMentionsAvg( data ){
-    const topTierMentions = data.map( row => parseInt( row.topTierMentions, 10 ) )
+    const topTierMentions = data.map( row => parseInt( row.top_tier_mentions, 10 ) )
     return topTierMentions.reduce( ( a, b ) => a + b ) / topTierMentions.length
   }
 
   function calculateTopTierMentions( data ){
-    const topTierMentions = data.map( row => parseInt( row.topTierMentions, 10 ) )
+    const topTierMentions = data.map( row => parseInt( row.top_tier_mentions, 10 ) )
     return topTierMentions.reduce( ( a, b ) => a + b )
   }
 
@@ -241,12 +241,12 @@
   }
 
   function calculateTotalDownloadsAvg( data ) {
-    const totalDownloads = data.map( row => parseInt( row.totalDownloads, 10 ) )
+    const totalDownloads = data.map( row => parseInt( row.total_listens, 10 ) )
     return totalDownloads.reduce( ( a, b ) => a + b ) / totalDownloads.length  
   }
 
   function calculateTotalDownloads( data ) {
-    const totalDownloads = data.map( row => parseInt( row.totalDownloads, 10 ) )
+    const totalDownloads = data.map( row => parseInt( row.total_listens, 10 ) )
     return totalDownloads.reduce( ( a, b ) => a + b )
   }
 
@@ -273,6 +273,7 @@
       <Options
         {dataset}
         filteredData={filteredDataByTab()}
+        months={dataset.data.months}
         aggregate={calculateAggregates()}
         average={calculateAverages()}
         bind:yearToShowAverage
@@ -286,6 +287,7 @@
       <Table
         filteredData={filteredDataByTab()}
         headerNames={currentColNames()}
+        monthOrder={dataset.data.monthOrder}
         {selectedTab}
         bind:row
       />

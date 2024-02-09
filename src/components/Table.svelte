@@ -6,57 +6,92 @@
   import Icons from './Icons.svelte'
 
   export let filteredData
+  export let monthOrder
   export let headerNames
   export let selectedTab
   export let row
 
   let sortIconContainer
-  let sortByColumns = []
+  // let sortByColumns = []
   $: sortClass = 'inactive'
 
   // const sortByColumns = ['activity', 'state', 'authority', 'type of resource']
-  $: if (selectedTab === 'publications') {
-    // sortByColumns = ['views', 'engagements']
-    sortByColumns.push('views')
-  } else {
-    sortByColumns.length = 0
-  }
+  const sortByColumns = [
+    'month',
+    'title',
+    'publication type',
+    'views',
+    'video title',
+    'total watch time (minutes)',
+    'average percentage viewed (%)',
+    'podcast',
+    'total listens',
+    'number of posts',
+    'impressions',
+    'engagements',
+    'total mentions',
+    'top tier mentions'
+  ]
 
-  function handleClick(e) {
-    let title = undefined
-    let currentRow = undefined
-    let extraContent = undefined
+  // // Define the monthOrder mapping
+  // const monthOrder = {
+  //   january: 1,
+  //   february: 2,
+  //   march: 3,
+  //   april: 4,
+  //   may: 5,
+  //   june: 6,
+  //   july: 7,
+  //   august: 8,
+  //   september: 9,
+  //   october: 10,
+  //   november: 11,
+  //   december: 12,
+  // }
 
-    if (e.target.parentNode.classList.contains('title')) {
-      title = e.target.parentNode
-      currentRow = title.nextElementSibling
-      extraContent = e.target.parentNode.nextElementSibling
-    } else {
-      title = e.target.parentNode.parentNode
-      currentRow = title.nextElementSibling
-      extraContent = e.target.parentNode.parentNode.nextElementSibling
-    }
+// Your sorting function seems fine, just ensure monthOrder is accessible in this context
 
-    title.classList.toggle('title--active')
-    title.classList.toggle('table__body__cell--border')
-    currentRow.classList.toggle('table__body__cell--border')
-    // Show/Hide extraContent
-    extraContent.classList.toggle('active')
-    extraContent.classList.toggle('hide')
-    row.isOpen ? (row.isOpen = true) : (row.isOpen = !row.isOpen)
-  }
+  // $: if (selectedTab === 'publications') {
+  //   // sortByColumns = ['views', 'engagements']
+  //   sortByColumns.push('views')
+  // } else {
+  //   sortByColumns.length = 0
+  // }
+
+  // function handleClick(e) {
+  //   let title = undefined
+  //   let currentRow = undefined
+  //   let extraContent = undefined
+
+  //   if (e.target.parentNode.classList.contains('title')) {
+  //     title = e.target.parentNode
+  //     currentRow = title.nextElementSibling
+  //     extraContent = e.target.parentNode.nextElementSibling
+  //   } else {
+  //     title = e.target.parentNode.parentNode
+  //     currentRow = title.nextElementSibling
+  //     extraContent = e.target.parentNode.parentNode.nextElementSibling
+  //   }
+
+  //   title.classList.toggle('title--active')
+  //   title.classList.toggle('table__body__cell--border')
+  //   currentRow.classList.toggle('table__body__cell--border')
+  //   // Show/Hide extraContent
+  //   extraContent.classList.toggle('active')
+  //   extraContent.classList.toggle('hide')
+  //   row.isOpen ? (row.isOpen = true) : (row.isOpen = !row.isOpen)
+  // }
 
   // const headerNames = filteredNewData.
   // $:console.log(headerNames);
-  $: sortBy = { col: "views", ascending: true }
+  $: sortBy = { col: 'views', ascending: true }
 
   $: sort = (e, column) => {
-    column = column.toLowerCase().replace(/\s/g, "_"); // replace spaces using regex with undesrscore
-    // console.log(column)
-    const iconsActive = document.querySelectorAll('.sort-icon--active');
-    iconsActive.forEach(icon => {
-      icon.classList.remove('sort-icon--active');
-    });
+    column = column.toLowerCase().replace(/\s/g, '_') // replace spaces using regex with undesrscore
+    const iconsActive = document.querySelectorAll('.sort-icon--active')
+    iconsActive.forEach((icon) => {
+      icon.classList.remove('sort-icon--active')
+    })
     if (sortBy.col == column) {
       sortBy.ascending = !sortBy.ascending
       sortClass = sortBy.ascending ? 'active' : 'inactive'
@@ -67,7 +102,7 @@
     }
 
     // Modifier to sorting function for ascending or descending
-    let sortModifier = sortBy.ascending ? 1 : -1;
+    let sortModifier = sortBy.ascending ? 1 : -1
 
     // Sort by views
     // if (column == "views") {
@@ -99,15 +134,42 @@
     //   }));
     // }
 
-    let sort = (a, b) =>
-      a[column] < b[column]
-        ? -1 * sortModifier
-        : a[column] > b[column]
-        ? 1 * sortModifier
-        : 0;
+    // let sort = (a, b) =>
+    //   a[column] < b[column]
+    //     ? -1 * sortModifier
+    //     : a[column] > b[column]
+    //       ? 1 * sortModifier
+    //       : 0
+    // console.log(monthOrder)
+    let sort = (a, b) => {
+      let valueA = a[column]
+      let valueB = b[column]
+
+      // Special handling for 'Months' column
+      if (column.toLowerCase() === 'month') {
+        valueA = valueA.toLowerCase()
+        valueB = valueB.toLowerCase()
+
+        return (monthOrder[valueA] - monthOrder[valueB]) * sortModifier
+      }
+      // Checking if both values are numbers
+      if (!isNaN(Number(valueA)) && !isNaN(Number(valueB))) {
+        // Numeric comparison
+        return (valueA - valueB) * sortModifier
+      } else {
+        // String comparison (case-insensitive)
+        valueA = valueA.toLowerCase()
+        valueB = valueB.toLowerCase()
+
+        if (valueA < valueB) return -1 * sortModifier
+        if (valueA > valueB) return 1 * sortModifier
+        return 0
+      }
+    }
 
     filteredData = filteredData.sort(sort)
-  };
+    // console.log(filteredData)
+  }
 
   onMount(() => {
     const iconsActive = document.querySelectorAll('.sort-icon--active')
@@ -144,26 +206,49 @@
       <thead>
         <tr class="table__header-row">
           {#each headerNames as name}
-            {#if $user !== "International Security Program" && name === "Program"}
+            {#if $user !== 'International Security Program' && name === 'Program'}
               <!-- Skip rendering the "Program" column if currentProgram is not "ISP" -->
             {:else}
-            <th class="table__cell--header {($user === "International Security Program") ? '--ISP' : ''}" scope="col">
-              <div
-                class="table__cell--header__container table__cell--header__container__{name
-                  .toLowerCase()
-                  .split(' ')
-                  .join('-')}"
-                  on:click={ (sortByColumns.includes(name.toLowerCase())) ? (e) => sort(e, name) : ''}
+              <th
+                class="table__cell--header {$user ===
+                'International Security Program'
+                  ? '--ISP'
+                  : ''}"
+                scope="col"
               >
-                <span>{name}</span>
-                {#if sortByColumns.includes(name.toLowerCase())}
-                <div class="sort-icons-container" on:click={(e) => sort(e, name)}>
-                  <button class="sort-icon sort-icon--{(sortBy.col == name.toLowerCase().split(' ').join('_') && sortBy.ascending ) ? 'inactive' : 'active'}">▲</button>
-                  <button class= "sort-icon sort-icon--{(sortBy.col == name.toLowerCase().split(' ').join('_') && sortBy.ascending ) ? 'active' : 'inactive'}">▼</button>
+                <div
+                  class="table__cell--header__container table__cell--header__container__{name
+                    .toLowerCase()
+                    .split(' ')
+                    .join('-')}"
+                  on:click={sortByColumns.includes(name.toLowerCase())
+                    ? (e) => sort(e, name)
+                    : ''}
+                >
+                  <span>{name}</span>
+                  {#if sortByColumns.includes(name.toLowerCase())}
+                    <div
+                      class="sort-icons-container"
+                      on:click={(e) => sort(e, name)}
+                    >
+                      <button
+                        class="sort-icon sort-icon--{sortBy.col ==
+                          name.toLowerCase().split(' ').join('_') &&
+                        sortBy.ascending
+                          ? 'inactive'
+                          : 'active'}">▲</button
+                      >
+                      <button
+                        class="sort-icon sort-icon--{sortBy.col ==
+                          name.toLowerCase().split(' ').join('_') &&
+                        sortBy.ascending
+                          ? 'active'
+                          : 'inactive'}">▼</button
+                      >
+                    </div>
+                  {/if}
                 </div>
-                {/if}
-              </div>
-            </th>
+              </th>
             {/if}
           {/each}
         </tr>
@@ -179,7 +264,7 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--ISP"
                   ><div class="table__body__cell__title-container">
                     <span class="icon-container" />{rows.program}
@@ -187,10 +272,10 @@
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.totalMentions).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_mentions).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {parseInt(rows.topTierMentions).toLocaleString('en-US')}
+                {parseInt(rows.top_tier_mentions).toLocaleString('en-US')}
               </td>
             </tr>
           {:else if selectedTab === 'social_media'}
@@ -198,7 +283,7 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
                     <span class="icon-container" />{rows.program}
@@ -220,7 +305,7 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
                     <span class="icon-container" />{rows.program}
@@ -242,18 +327,18 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
                     <span class="icon-container" />{rows.program}
                   </div></td
                 >
-              {/if}  
+              {/if}
               <td class="table__body__cell table__body__cell--data"
                 >{rows.podcast}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {parseInt(rows.totalDownloads, 10).toLocaleString('en-US')}
+                {parseInt(rows.total_listens, 10).toLocaleString('en-US')}
               </td>
             </tr>
           {:else if selectedTab === 'videos'}
@@ -261,21 +346,22 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                    <span class="icon-container" />{rows.programsVideos.join(
+                      ', '
+                    )}
                   </div></td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data"
-                >
+              <td class="table__body__cell table__body__cell--data">
                 <div class="link">
                   <a
                     href={rows.permalink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    >{rows.videoTitle}<span class="icon-container"
+                    >{rows.video_title}<span class="icon-container"
                       ><Icon name="Icon-open-blank" class="icon" /></span
                     ></a
                   >
@@ -285,7 +371,7 @@
                 {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -296,21 +382,22 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                    <span class="icon-container" />{rows.programsVideos.join(
+                      ', '
+                    )}
                   </div></td
                 >
-              {/if}  
-              <td class="table__body__cell table__body__cell--data"
-                >
+              {/if}
+              <td class="table__body__cell table__body__cell--data">
                 <div class="link">
                   <a
                     href={rows.permalink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    >{rows.videoTitle}<span class="icon-container"
+                    >{rows.video_title}<span class="icon-container"
                       ><Icon name="Icon-open-blank" class="icon" /></span
                     ></a
                   >
@@ -320,7 +407,7 @@
                 {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -331,21 +418,22 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                    <span class="icon-container" />{rows.programsVideos.join(
+                      ', '
+                    )}
                   </div></td
                 >
-              {/if}  
-              <td class="table__body__cell table__body__cell--data"
-                >
+              {/if}
+              <td class="table__body__cell table__body__cell--data">
                 <div class="link">
                   <a
                     href={rows.permalink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    >{rows.videoTitle}<span class="icon-container"
+                    >{rows.video_title}<span class="icon-container"
                       ><Icon name="Icon-open-blank" class="icon" /></span
                     ></a
                   >
@@ -355,7 +443,7 @@
                 {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -366,21 +454,22 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(', ')}
+                    <span class="icon-container" />{rows.programsVideos.join(
+                      ', '
+                    )}
                   </div></td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data"
-                >
+              <td class="table__body__cell table__body__cell--data">
                 <div class="link">
                   <a
                     href={rows.permalink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    >{rows.videoTitle}<span class="icon-container"
+                    >{rows.video_title}<span class="icon-container"
                       ><Icon name="Icon-open-blank" class="icon" /></span
                     ></a
                   >
@@ -390,7 +479,7 @@
                 {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.totalWatchTime, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data"
                 >{rows.averagePercentageViewed}</td
@@ -401,10 +490,12 @@
               <td class="table__body__cell table__body__cell--data"
                 >{rows.month}</td
               >
-              {#if $user === "International Security Program"}
+              {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsNames.join(', ')}
+                    <span class="icon-container" />{rows.programsNames.join(
+                      ', '
+                    )}
                   </div></td
                 >
               {/if}

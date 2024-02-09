@@ -7,6 +7,7 @@
   import Icon from './Icons.svelte'
 
   export let dataset
+  export let months
   export let filteredData
   export let selectedYear
   export let selectedMonth
@@ -512,7 +513,7 @@
       showChevron={true}
       {optionIdentifier}
       {labelIdentifier}
-      items={dataset.data.months}
+      items={months}
       placeholder="Select Month"
       on:select={(event) => handleSelect(event, 'Month')}
       on:clear={() => handleClear('Month')}

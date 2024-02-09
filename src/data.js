@@ -25,31 +25,43 @@ let videoPodcastsDataset = {}
 let publicationDataset = {}
 let data = {}
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-const pageType = [
-  "Brief",
-  "Commentary",
-  "Critical Questions",
-  "Report"
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
 ]
+
+// Mapping of month names to their chronological order
+const monthOrder = {
+  january: 1,
+  february: 2,
+  march: 3,
+  april: 4,
+  may: 5,
+  june: 6,
+  july: 7,
+  august: 8,
+  september: 9,
+  october: 10,
+  november: 11,
+  december: 12,
+}
+
+const pageType = ['Brief', 'Commentary', 'Critical Questions', 'Report']
 
 export async function getNewData() {
   pressDataset = await getPressData()
   socialMediaDataset = await getSocialMediaDataa()
   // websiteDataset = await getWebsitesData()
-  podcastDataset  = await getPodcastData()
+  podcastDataset = await getPodcastData()
   videoDataset = await getVideoData()
   videoEventsDataset = await getVideoEventsData()
   videoShortsDataset = await getVideoShortsData()
@@ -84,7 +96,17 @@ export async function getNewData() {
   return data
 }
 
-function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDataset, videoDataset, videoEventsDataset, videoShortsDataset, videoPodcastsDataset, publicationDataset) {
+function formatData(
+  pressDataset,
+  socialMediaDataset,
+  websiteDataset,
+  podcastDataset,
+  videoDataset,
+  videoEventsDataset,
+  videoShortsDataset,
+  videoPodcastsDataset,
+  publicationDataset
+) {
   return {
     data: {
       about: aboutDataset,
@@ -101,14 +123,15 @@ function formatData(pressDataset, socialMediaDataset, websiteDataset, podcastDat
       ]),
       years: pressDataset.years.sort((a, b) => b - a),
       months: months,
+      monthOrder: monthOrder,
       pageType: pageType,
       spreadsheetsTabs: spreadsheetsTabs
     }
   }
 }
 
-function unifiedData( params ) {
-  const data = params.map( element => {
+function unifiedData(params) {
+  const data = params.map((element) => {
     return {
       tab: element.metrics,
       dataForm: element.data,
@@ -117,7 +140,6 @@ function unifiedData( params ) {
   })
   return data
 }
-
 
 const spreadsheetsTabs = [
   'press',
