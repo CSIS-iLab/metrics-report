@@ -55,7 +55,7 @@ const monthOrder = {
   december: 12,
 }
 
-const pageType = ['Brief', 'Commentary', 'Critical Questions', 'Report']
+const publication_type = ['Brief', 'Commentary', 'Critical Questions', 'Report']
 
 export async function getNewData() {
   pressDataset = await getPressData()
@@ -124,7 +124,7 @@ function formatData(
       years: pressDataset.years.sort((a, b) => b - a),
       months: months,
       monthOrder: monthOrder,
-      pageType: pageType,
+      publication_type: publication_type,
       spreadsheetsTabs: spreadsheetsTabs
     }
   }

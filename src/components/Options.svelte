@@ -527,7 +527,7 @@
         showChevron={true}
         {optionIdentifier}
         {labelIdentifier}
-        items={dataset.data.pageType}
+        items={dataset.data.publication_type}
         placeholder="Select Publication Type"
         on:select={(event) => handleSelect(event, 'Publication Type')}
         on:clear={() => handleClear('Publication Type')}

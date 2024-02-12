@@ -45,7 +45,7 @@ async function fetchData(URL) {
         id: index,
         program: row.Program,
         parentProgram: getParentProgram(row.Program),
-        numberOfPosts: row.Number_of_Posts,
+        number_of_posts: row.Number_of_Posts,
         impressions: row.Impressions,
         engagements: row.Engagements,
         month: row.Month,

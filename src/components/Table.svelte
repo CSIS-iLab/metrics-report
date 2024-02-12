@@ -49,7 +49,7 @@
   //   december: 12,
   // }
 
-// Your sorting function seems fine, just ensure monthOrder is accessible in this context
+  // Your sorting function seems fine, just ensure monthOrder is accessible in this context
 
   // $: if (selectedTab === 'publications') {
   //   // sortByColumns = ['views', 'engagements']
@@ -87,7 +87,12 @@
   $: sortBy = { col: 'views', ascending: true }
 
   $: sort = (e, column) => {
-    column = column.toLowerCase().replace(/\s/g, '_') // replace spaces using regex with undesrscore
+    column = column
+      .toLowerCase()
+      .replace(/%/g, '') //removes percentage symbol %
+      .replace(/\(|\)/g, '') //rm parentheses
+      .replace(/\s/g, '_') // replace spaces using regex with undesrscore
+    column = column.replace(/_$/, '') //rm last underscore in sentence
     const iconsActive = document.querySelectorAll('.sort-icon--active')
     iconsActive.forEach((icon) => {
       icon.classList.remove('sort-icon--active')
@@ -103,44 +108,6 @@
 
     // Modifier to sorting function for ascending or descending
     let sortModifier = sortBy.ascending ? 1 : -1
-
-    // Sort by views
-    // if (column == "views") {
-    //   return (filteredData = filteredData.sort((a, b) => {
-    //     // console.log(a)
-    //     // console.log(b);
-    //     if (a.views < b.views) {
-    //       return -1 * sortModifier;
-    //     } else if (a.views > b.views) {
-    //       return 1 * sortModifier;
-    //     } else {
-    //       return 0;
-    //     }
-    //   }));
-    // }
-    // Sort by engagements
-    // if (column == "engagements") {
-    //   console.log('engagements');
-    //   return (filteredData = filteredData.sort((a, b) => {
-    //     // console.log(a)
-    //     // console.log(b);
-    //     if (a.engagements < b.engagements) {
-    //       return -1 * sortModifier;
-    //     } else if (a.engagements > b.engagements) {
-    //       return 1 * sortModifier;
-    //     } else {
-    //       return 0;
-    //     }
-    //   }));
-    // }
-
-    // let sort = (a, b) =>
-    //   a[column] < b[column]
-    //     ? -1 * sortModifier
-    //     : a[column] > b[column]
-    //       ? 1 * sortModifier
-    //       : 0
-    // console.log(monthOrder)
     let sort = (a, b) => {
       let valueA = a[column]
       let valueB = b[column]
@@ -291,7 +258,7 @@
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.numberOfPosts, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.number_of_posts, 10).toLocaleString('en-US')}</td
               >
               <td class="table__body__cell table__body__cell--data">
                 {parseInt(rows.impressions, 10).toLocaleString('en-US')}
@@ -368,13 +335,15 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
+                {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
+                  'en-US'
+                )}</td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.averagePercentageViewed}</td
+                >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'events'}
@@ -404,13 +373,15 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
+                {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
+                  'en-US'
+                )}</td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.averagePercentageViewed}</td
+                >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'YouTube_shorts'}
@@ -440,13 +411,15 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
+                {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
+                  'en-US'
+                )}</td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.averagePercentageViewed}</td
+                >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'podcasts_(Video)'}
@@ -476,13 +449,15 @@
                 </div>
               </td>
               <td class="table__body__cell table__body__cell--data">
-                {parseInt(rows.totalViews, 10).toLocaleString('en-US')}
+                {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
               <td class="table__body__cell table__body__cell--data"
-                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString('en-US')}</td
+                >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
+                  'en-US'
+                )}</td
               >
               <td class="table__body__cell table__body__cell--data"
-                >{rows.averagePercentageViewed}</td
+                >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'publications'}
@@ -500,10 +475,10 @@
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
-                >{rows.page}</td
+                >{rows.title}</td
               >
               <td class="table__body__cell table__body__cell--data">
-                {rows.pageType}
+                {rows.publication_type}
               </td>
               <td class="table__body__cell table__body__cell--data"
                 >{parseInt(rows.views, 10).toLocaleString('en-US')}</td

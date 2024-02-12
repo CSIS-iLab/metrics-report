@@ -56,8 +56,8 @@
       // }
 
       const filteredMonth = selectedMonth ? selectedMonth : row.month
-      const filteredByPageType = selectedPageType ? selectedPageType : row.pageType
-      return row.year === filteredYear && row.month === filteredMonth && row.pageType === filteredByPageType
+      const filteredByPageType = selectedPageType ? selectedPageType : row.publication_type
+      return row.year === filteredYear && row.month === filteredMonth && row.publication_type === filteredByPageType
     })
     // if (selectedTab == 'videos' || selectedTab == 'podcasts_(Video)' || selectedTab == 'events') {
     //   filteredByProgram = $user
@@ -191,12 +191,12 @@
   }
 
   function calculateNumberOfPostsAvg( data ) {
-    const numberOfPosts = data.map( row => parseInt( row.numberOfPosts, 10 ) )
+    const numberOfPosts = data.map( row => parseInt( row.number_of_posts, 10 ) )
     return numberOfPosts.reduce( ( a, b ) => a + b ) / numberOfPosts.length
   }
 
   function calculateNumberOfPosts( data ) {
-    const numberOfPosts = data.map( row => parseInt( row.numberOfPosts, 10 ) )
+    const numberOfPosts = data.map( row => parseInt( row.number_of_posts, 10 ) )
     return numberOfPosts.reduce( ( a, b ) => a + b )
   }
 
@@ -251,12 +251,12 @@
   }
 
   function calculateViewsFirst30DaysPerformanceAvg( data ) {
-    const totalViews = data.map( row => parseInt( row.totalViews, 10 ) )
+    const totalViews = data.map( row => parseInt( row.views, 10 ) )
     return totalViews.reduce( ( a, b ) => a + b ) / totalViews.length  
   }
 
   function calculateViewsFirst30DaysPerformance( data ) {
-    const totalViews = data.map( row => parseInt( row.totalViews, 10 ) )
+    const totalViews = data.map( row => parseInt( row.views, 10 ) )
     return totalViews.reduce( ( a, b ) => a + b )
   }
 </script>
