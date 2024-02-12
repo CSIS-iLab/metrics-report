@@ -475,7 +475,18 @@
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
-                >{rows.title}</td
+                >
+                <div class="link">
+                  <a
+                    href={rows.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >{rows.title}<span class="icon-container"
+                      ><Icon name="Icon-open-blank" class="icon" /></span
+                    ></a
+                  >
+                </div>  
+              </td
               >
               <td class="table__body__cell table__body__cell--data">
                 {rows.publication_type}

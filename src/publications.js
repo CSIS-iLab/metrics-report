@@ -27,7 +27,8 @@ async function fetchData(URL) {
         id: index,
         program: row.Program,
         programsNames: getProgramsArray(row.Program),
-        title: row.Title,
+        title: formatTitle(row.Title),
+        url: 'https://www.csis.org' + row.Title,
         publication_type: row.Publication_Type,
         views: Number(row.Views),
         // engagements: Number(row.Engagements),
@@ -45,6 +46,19 @@ async function fetchData(URL) {
   })
   // console.log(dataPromise)
   return dataPromise
+}
+
+function formatTitle(title) {
+  // Extract the last part of the URL path
+  const lastSegment = title.split('/').pop()
+  // Replace hyphens with spaces and split into words
+  const words = lastSegment.split('-')
+  // Capitalize the first letter of each word
+  const capitalizedWords = words.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1)
+  )
+  // Join the words back into a string
+  return capitalizedWords.join(' ')
 }
 
 function formatColumnNames(columnNames) {
