@@ -39,12 +39,19 @@ main {
 
 	&__title {
 		margin-top: rem(12);
-		padding-bottom: rem(48);
-
+    
 		@extend %text-style-heading-1;
 		color: $color-text-gray-500;
 		text-align: center;
 	}
+  
+  &__subtitle {
+    margin-top: rem(10);
+    padding-bottom: rem(48);
+    @extend %text-style-heading-2;
+		color: $color-text-gray-500;
+		text-align: center;
+  }
 
 	&__introduction {
 		margin: 0 auto;

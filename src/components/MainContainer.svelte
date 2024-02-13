@@ -1,5 +1,5 @@
 <script>
-  import { login, user, contrasena, currentYear } from '../store'
+  import { login, user, contrasena, currentYear, yearShowing } from '../store'
   import Login from './Login.svelte'
   import Header from './Header.svelte'
   import IntroContent from './IntroContent.svelte'
@@ -17,7 +17,8 @@
   let filterByTab = []
   let selectedTab = 'press'
 
-  $: yearToShowAverage = '2023'
+
+  $: yearToShowAverage = $yearShowing
 
   // $:if (selectedYear !== '') {
   //   yearToShowAverage = selectedYear
@@ -33,19 +34,19 @@
       .dataColNames
   }
 
-  $: filteredData = () => {
-    return dataset.data.filtered.filter((row) => {
-      const filteredYear = selectedYear ? selectedYear : row.year
-      const filteredMonth = selectedMonth ? selectedMonth : row.month
-      const filteredByProgram = $user ? $user : row.program
+  // $: filteredData = () => {
+  //   return dataset.data.filtered.filter((row) => {
+  //     const filteredYear = selectedYear ? selectedYear : row.year
+  //     const filteredMonth = selectedMonth ? selectedMonth : row.month
+  //     const filteredByProgram = $user ? $user : row.program
 
-      return (
-        row.year === filteredYear &&
-        row.month === filteredMonth &&
-        row.program === filteredByProgram
-      )
-    })
-  }
+  //     return (
+  //       row.year === filteredYear &&
+  //       row.month === filteredMonth &&
+  //       row.program === filteredByProgram
+  //     )
+  //   })
+  // }
 
   // Testing new filtering data by current tab. this will output only in the console
   $: filteredDataByTab = () => {
@@ -257,46 +258,6 @@
   function calculateEngagements(data) {
     const engagements = data.map((row) => parseInt(row.engagements, 10))
     return engagements.reduce((a, b) => a + b)
-  }
-
-  function calculateUniqueVisitorsAvg(data) {
-    const uniqueVisitors = data.map((row) => parseInt(row.uniqueVisitors, 10))
-    return uniqueVisitors.reduce((a, b) => a + b) / uniqueVisitors.length
-  }
-
-  function calculateUniqueVisitors(data) {
-    const uniqueVisitors = data.map((row) => parseInt(row.uniqueVisitors, 10))
-    return uniqueVisitors.reduce((a, b) => a + b)
-  }
-
-  function calculatePageViewsAvg(data) {
-    const pageViews = data.map((row) => parseInt(row.pageViews, 10))
-    return pageViews.reduce((a, b) => a + b) / pageViews.length
-  }
-
-  function calculatePageViews(data) {
-    const pageViews = data.map((row) => parseInt(row.pageViews, 10))
-    return pageViews.reduce((a, b) => a + b)
-  }
-
-  function calculateTotalDownloadsAvg(data) {
-    const totalDownloads = data.map((row) => parseInt(row.total_listens, 10))
-    return totalDownloads.reduce((a, b) => a + b) / totalDownloads.length
-  }
-
-  function calculateTotalDownloads(data) {
-    const totalDownloads = data.map((row) => parseInt(row.total_listens, 10))
-    return totalDownloads.reduce((a, b) => a + b)
-  }
-
-  function calculateViewsFirst30DaysPerformanceAvg(data) {
-    const totalViews = data.map((row) => parseInt(row.views, 10))
-    return totalViews.reduce((a, b) => a + b) / totalViews.length
-  }
-
-  function calculateViewsFirst30DaysPerformance(data) {
-    const totalViews = data.map((row) => parseInt(row.views, 10))
-    return totalViews.reduce((a, b) => a + b)
   }
 </script>
 

@@ -1,4 +1,5 @@
 <script>
+  import { yearShowing } from '../store'
   import Icon from './Icons.svelte'
 
   export let showingProgram
@@ -10,6 +11,9 @@
     <p class="intro-content__overline--regular">By The CSIS External Relations Team</p>
     <h1 class="intro-content__title">
       for the {showingProgram}
+    </h1>
+    <h1 class="intro-content__subtitle">
+      for {$yearShowing}
     </h1>
   </main>
   <div class="container">
