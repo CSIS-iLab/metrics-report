@@ -537,7 +537,7 @@
 </div>
 <div class="options options__container options__container--sticky">
   <section class="options__navigation">
-    <Search bind:searchText />
+     <Search bind:searchText bind:selectedTab />
     <div class="options__navigation-inner">
       <span class="options__table-total-entries"
         >Showing {totalEntries} {totalEntries > 1 ? 'entries' : 'entry'}</span

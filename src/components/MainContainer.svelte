@@ -16,7 +16,7 @@
   let selectedPageType = ''
   let filterByTab = []
   let selectedTab = 'press'
-  
+
   $: yearToShowAverage = '2023'
 
   // $:if (selectedYear !== '') {
@@ -29,7 +29,8 @@
   $: row = { isOpen: false }
 
   $: currentColNames = () => {
-    return dataset.data.tabs.filter( row => row.tab === selectedTab)[0].dataColNames
+    return dataset.data.tabs.filter((row) => row.tab === selectedTab)[0]
+      .dataColNames
   }
 
   $: filteredData = () => {
@@ -38,69 +39,99 @@
       const filteredMonth = selectedMonth ? selectedMonth : row.month
       const filteredByProgram = $user ? $user : row.program
 
-      return row.year === filteredYear && row.month === filteredMonth && row.program === filteredByProgram
+      return (
+        row.year === filteredYear &&
+        row.month === filteredMonth &&
+        row.program === filteredByProgram
+      )
     })
   }
 
   // Testing new filtering data by current tab. this will output only in the console
   $: filteredDataByTab = () => {
     let filteredByProgram
-    
-    let byProgram =  dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
-    .dataForm.filter( (row, index ) => {
-      const filteredYear = selectedYear ? selectedYear : row.year
-      // if (selectedTab == 'videos') {
-      //   if (index == 1) {
-      //     console.log(row)
-      //   }
-      // }
 
-      const filteredMonth = selectedMonth ? selectedMonth : row.month
-      const filteredByPageType = selectedPageType ? selectedPageType : row.publication_type
-      return row.year === filteredYear && row.month === filteredMonth && row.publication_type === filteredByPageType
-    })
+    let byProgram = dataset.data.tabs
+      .filter((row) => row.tab === selectedTab)[0]
+      .dataForm.filter((row, index) => {
+        const filteredYear = selectedYear ? selectedYear : row.year
+        // if (selectedTab == 'videos') {
+        //   if (index == 1) {
+        //     console.log(row)
+        //   }
+        // }
+        const filteredByTitle = searchText ? searchText : row.title
+        if (selectedTab === 'publications') {
+        }
+        const filteredMonth = selectedMonth ? selectedMonth : row.month
+        const filteredByPageType = selectedPageType
+          ? selectedPageType
+          : row.publication_type
+        if (selectedTab === 'publications') {
+          return ( row.title.toLowerCase().includes(filteredByTitle.toLowerCase())) &&
+            row.year === filteredYear &&
+            row.month === filteredMonth &&
+            row.publication_type === filteredByPageType
+        }
+        return row.year === filteredYear && row.month === filteredMonth && row.publication_type === filteredByPageType
+        
+      })
     // if (selectedTab == 'videos' || selectedTab == 'podcasts_(Video)' || selectedTab == 'events') {
     //   filteredByProgram = $user
     //   return byProgram.filter( row => row.programsVideos.includes(filteredByProgram))
     // }
 
     // if ($user === 'International Security Program') {
-      
+
     // }
     filteredByProgram = $user
-    if (['videos', 'podcasts_(Video)', 'events', 'YouTube_shorts'].includes(selectedTab)) {
-        return byProgram.filter(row => row.programsVideos.includes($user))
+    if (
+      ['videos', 'podcasts_(Video)', 'events', 'YouTube_shorts'].includes(
+        selectedTab
+      )
+    ) {
+      return byProgram.filter((row) => row.programsVideos.includes($user))
     }
 
     if (selectedTab === 'publications') {
-    // if (['publications', 'press', 'social_media', 'podcasts'].includes(selectedTab)) {
+      // if (['publications', 'press', 'social_media', 'podcasts'].includes(selectedTab)) {
       // filteredByProgram = $user
-      return byProgram.filter(row => row.programsNames?.includes($user))
+      return byProgram.filter((row) => row.programsNames?.includes($user))
     }
 
     // filteredByProgram = ($user) ? $user : row.program
     if ($user === 'International Security Program') {
-      return byProgram.filter( row => row.parentProgram === filteredByProgram)
+      return byProgram.filter((row) => row.parentProgram === filteredByProgram)
     }
-    return byProgram.filter( row => row.program === filteredByProgram)
-
+    return byProgram.filter((row) => row.program === filteredByProgram)
   }
 
   $: filteredDataForAvg = () => {
     let filteredByProgram
-    return dataset.data.tabs.filter( row => row.tab === selectedTab )[0]
-    .dataForm.filter( row => {
-      const filteredYear = selectedYear ? selectedYear : row.year
-      filteredByProgram = $user ? $user : row.program
-      if (['International Security Program','Middle East Program','Southeast Asia Program'].includes(filteredByProgram)){
-        return row.year === filteredYear && row.parentProgram === filteredByProgram
-      }
-      return row.year === filteredYear && row.program === filteredByProgram
-    })
+    return dataset.data.tabs
+      .filter((row) => row.tab === selectedTab)[0]
+      .dataForm.filter((row) => {
+        const filteredYear = selectedYear ? selectedYear : row.year
+        filteredByProgram = $user ? $user : row.program
+        if (
+          [
+            'International Security Program',
+            'Middle East Program',
+            'Southeast Asia Program'
+          ].includes(filteredByProgram)
+        ) {
+          return (
+            row.year === filteredYear && row.parentProgram === filteredByProgram
+          )
+        }
+        return row.year === filteredYear && row.program === filteredByProgram
+      })
   }
 
   $: calculateAggregates = () => {
-    const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
+    const dataFilteredByYear = filteredDataForAvg().filter(
+      (row) => row.year === yearToShowAverage
+    )
     if (dataFilteredByYear.length > 0) {
       const totalMentions = calculateTotalMentions(dataFilteredByYear).toFixed()
       const topTier = calculateTopTierMentions(dataFilteredByYear).toFixed()
@@ -116,7 +147,7 @@
         topTier: Number(topTier),
         engagements: Number(engagements),
         impressions: Number(impressions),
-        numberOfPosts: Number(numberOfPosts),
+        numberOfPosts: Number(numberOfPosts)
         // uniqueVisitors: Number(uniqueVisitors),
         // pageViews: Number(pageViews),
         // totalDownloads: Number(totalDownloads),
@@ -126,14 +157,21 @@
   }
 
   $: calculateAverages = () => {
-    const dataFilteredByYear = filteredDataForAvg().filter( row => row.year === yearToShowAverage)
-    if (['press', 'social_media'].includes(selectedTab)){
+    const dataFilteredByYear = filteredDataForAvg().filter(
+      (row) => row.year === yearToShowAverage
+    )
+    if (['press', 'social_media'].includes(selectedTab)) {
       if (dataFilteredByYear.length > 0) {
-        const totalMentionsAvg= calculateTotalMentionsAvg(dataFilteredByYear).toFixed()
-        const TopTierMentionsAvg = calculateTopTierMentionsAvg(dataFilteredByYear).toFixed()
-        const engagementsAvg = calculateEngagementsAvg(dataFilteredByYear).toFixed()
-        const impressionsAvg = calculateImpressionsAvg(dataFilteredByYear).toFixed()
-        const numberOfPostsAvg = calculateNumberOfPostsAvg(dataFilteredByYear).toFixed()
+        const totalMentionsAvg =
+          calculateTotalMentionsAvg(dataFilteredByYear).toFixed()
+        const TopTierMentionsAvg =
+          calculateTopTierMentionsAvg(dataFilteredByYear).toFixed()
+        const engagementsAvg =
+          calculateEngagementsAvg(dataFilteredByYear).toFixed()
+        const impressionsAvg =
+          calculateImpressionsAvg(dataFilteredByYear).toFixed()
+        const numberOfPostsAvg =
+          calculateNumberOfPostsAvg(dataFilteredByYear).toFixed()
         // const uniqueVisitorsAvg = calculateUniqueVisitorsAvg(dataFilteredByYear).toFixed()
         // const pageViewsAvg = calculatePageViewsAvg(dataFilteredByYear).toFixed()
         // const totalDownloadsAvg = calculateTotalDownloadsAvg(dataFilteredByYear).toFixed()
@@ -143,7 +181,7 @@
           topTier: Number(TopTierMentionsAvg),
           numberOfPosts: Number(numberOfPostsAvg),
           impressions: Number(impressionsAvg),
-          engagements: Number(engagementsAvg),
+          engagements: Number(engagementsAvg)
           // uniqueVisitors: Number(uniqueVisitorsAvg),
           // pageViews: Number(pageViewsAvg),
           // totalDownloads: Number(totalDownloadsAvg),
@@ -155,11 +193,9 @@
   }
 
   $: currentProgram = $login
-  onMount( async () => {
-  })
+  onMount(async () => {})
 
-  onDestroy( async () => {
-  })
+  onDestroy(async () => {})
 
   const handleLogOut = () => {
     $login = false
@@ -169,103 +205,106 @@
     selectedTab = 'press'
   }
 
-  function calculateTotalMentionsAvg( data ){
-    const totalMentions = data.map( row => parseInt( row.total_mentions, 10 ) )
-    return totalMentions.reduce( ( a, b ) => a + b ) / totalMentions.length
+  function calculateTotalMentionsAvg(data) {
+    const totalMentions = data.map((row) => parseInt(row.total_mentions, 10))
+    return totalMentions.reduce((a, b) => a + b) / totalMentions.length
   }
 
-
-  function calculateTotalMentions( data ){
-    const totalMentions = data.map( row => parseInt( row.total_mentions, 10 ) )
-    return totalMentions.reduce( ( a, b ) => a + b )
+  function calculateTotalMentions(data) {
+    const totalMentions = data.map((row) => parseInt(row.total_mentions, 10))
+    return totalMentions.reduce((a, b) => a + b)
   }
 
-  function calculateTopTierMentionsAvg( data ){
-    const topTierMentions = data.map( row => parseInt( row.top_tier_mentions, 10 ) )
-    return topTierMentions.reduce( ( a, b ) => a + b ) / topTierMentions.length
+  function calculateTopTierMentionsAvg(data) {
+    const topTierMentions = data.map((row) =>
+      parseInt(row.top_tier_mentions, 10)
+    )
+    return topTierMentions.reduce((a, b) => a + b) / topTierMentions.length
   }
 
-  function calculateTopTierMentions( data ){
-    const topTierMentions = data.map( row => parseInt( row.top_tier_mentions, 10 ) )
-    return topTierMentions.reduce( ( a, b ) => a + b )
+  function calculateTopTierMentions(data) {
+    const topTierMentions = data.map((row) =>
+      parseInt(row.top_tier_mentions, 10)
+    )
+    return topTierMentions.reduce((a, b) => a + b)
   }
 
-  function calculateNumberOfPostsAvg( data ) {
-    const numberOfPosts = data.map( row => parseInt( row.number_of_posts, 10 ) )
-    return numberOfPosts.reduce( ( a, b ) => a + b ) / numberOfPosts.length
+  function calculateNumberOfPostsAvg(data) {
+    const numberOfPosts = data.map((row) => parseInt(row.number_of_posts, 10))
+    return numberOfPosts.reduce((a, b) => a + b) / numberOfPosts.length
   }
 
-  function calculateNumberOfPosts( data ) {
-    const numberOfPosts = data.map( row => parseInt( row.number_of_posts, 10 ) )
-    return numberOfPosts.reduce( ( a, b ) => a + b )
+  function calculateNumberOfPosts(data) {
+    const numberOfPosts = data.map((row) => parseInt(row.number_of_posts, 10))
+    return numberOfPosts.reduce((a, b) => a + b)
   }
 
-  function calculateImpressionsAvg( data ) {
-    const impressions = data.map( row => parseInt( row.impressions, 10 ) )
-    return impressions.reduce( ( a, b ) => a + b ) / impressions.length
+  function calculateImpressionsAvg(data) {
+    const impressions = data.map((row) => parseInt(row.impressions, 10))
+    return impressions.reduce((a, b) => a + b) / impressions.length
   }
 
-  function calculateImpressions( data ) {
-    const impressions = data.map( row => parseInt( row.impressions, 10 ) )
-    return impressions.reduce( ( a, b ) => a + b )
+  function calculateImpressions(data) {
+    const impressions = data.map((row) => parseInt(row.impressions, 10))
+    return impressions.reduce((a, b) => a + b)
   }
 
-  function calculateEngagementsAvg( data ) {
-    const engagements = data.map( row => parseInt( row.engagements, 10 ) )
-    return engagements.reduce( ( a, b ) => a + b ) / engagements.length  
+  function calculateEngagementsAvg(data) {
+    const engagements = data.map((row) => parseInt(row.engagements, 10))
+    return engagements.reduce((a, b) => a + b) / engagements.length
   }
 
-  function calculateEngagements( data ) {
-    const engagements = data.map( row => parseInt( row.engagements, 10 ) )
-    return engagements.reduce( ( a, b ) => a + b )
+  function calculateEngagements(data) {
+    const engagements = data.map((row) => parseInt(row.engagements, 10))
+    return engagements.reduce((a, b) => a + b)
   }
 
-  function calculateUniqueVisitorsAvg( data ) {
-    const uniqueVisitors = data.map( row => parseInt( row.uniqueVisitors, 10 ) )
-    return uniqueVisitors.reduce( ( a, b ) => a + b ) / uniqueVisitors.length  
+  function calculateUniqueVisitorsAvg(data) {
+    const uniqueVisitors = data.map((row) => parseInt(row.uniqueVisitors, 10))
+    return uniqueVisitors.reduce((a, b) => a + b) / uniqueVisitors.length
   }
 
-  function calculateUniqueVisitors( data ) {
-    const uniqueVisitors = data.map( row => parseInt( row.uniqueVisitors, 10 ) )
-    return uniqueVisitors.reduce( ( a, b ) => a + b )
+  function calculateUniqueVisitors(data) {
+    const uniqueVisitors = data.map((row) => parseInt(row.uniqueVisitors, 10))
+    return uniqueVisitors.reduce((a, b) => a + b)
   }
 
-  function calculatePageViewsAvg( data ) {
-    const pageViews = data.map( row => parseInt( row.pageViews, 10 ) )
-    return pageViews.reduce( ( a, b ) => a + b ) / pageViews.length  
+  function calculatePageViewsAvg(data) {
+    const pageViews = data.map((row) => parseInt(row.pageViews, 10))
+    return pageViews.reduce((a, b) => a + b) / pageViews.length
   }
 
-  function calculatePageViews( data ) {
-    const pageViews = data.map( row => parseInt( row.pageViews, 10 ) )
-    return pageViews.reduce( ( a, b ) => a + b )
+  function calculatePageViews(data) {
+    const pageViews = data.map((row) => parseInt(row.pageViews, 10))
+    return pageViews.reduce((a, b) => a + b)
   }
 
-  function calculateTotalDownloadsAvg( data ) {
-    const totalDownloads = data.map( row => parseInt( row.total_listens, 10 ) )
-    return totalDownloads.reduce( ( a, b ) => a + b ) / totalDownloads.length  
+  function calculateTotalDownloadsAvg(data) {
+    const totalDownloads = data.map((row) => parseInt(row.total_listens, 10))
+    return totalDownloads.reduce((a, b) => a + b) / totalDownloads.length
   }
 
-  function calculateTotalDownloads( data ) {
-    const totalDownloads = data.map( row => parseInt( row.total_listens, 10 ) )
-    return totalDownloads.reduce( ( a, b ) => a + b )
+  function calculateTotalDownloads(data) {
+    const totalDownloads = data.map((row) => parseInt(row.total_listens, 10))
+    return totalDownloads.reduce((a, b) => a + b)
   }
 
-  function calculateViewsFirst30DaysPerformanceAvg( data ) {
-    const totalViews = data.map( row => parseInt( row.views, 10 ) )
-    return totalViews.reduce( ( a, b ) => a + b ) / totalViews.length  
+  function calculateViewsFirst30DaysPerformanceAvg(data) {
+    const totalViews = data.map((row) => parseInt(row.views, 10))
+    return totalViews.reduce((a, b) => a + b) / totalViews.length
   }
 
-  function calculateViewsFirst30DaysPerformance( data ) {
-    const totalViews = data.map( row => parseInt( row.views, 10 ) )
-    return totalViews.reduce( ( a, b ) => a + b )
+  function calculateViewsFirst30DaysPerformance(data) {
+    const totalViews = data.map((row) => parseInt(row.views, 10))
+    return totalViews.reduce((a, b) => a + b)
   }
 </script>
 
-{ #if !currentProgram }
+{#if !currentProgram}
   <Login />
 {:else}
   <div id="site-content">
-    <Header {handleLogOut}/>
+    <Header {handleLogOut} />
 
     <IntroContent showingProgram={$user} />
 
