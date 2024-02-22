@@ -1,17 +1,25 @@
 import * as d3Fetch from 'd3-fetch'
+import { get } from 'svelte/store'
+import { yearShowing } from './store'
 import { getHelperData } from './videoHelper'
 
 let helperDataset = {}
 let columnNames = []
 let years = []
 let months = []
+let URL
 
 /* -------------------------------------------------------------------------- */
 /*                  Pulling from the videos_ilab tab                          */
 /* -------------------------------------------------------------------------- */
 export async function getVideoData() {
-  const URL =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=387650855&single=true&output=csv'
+  // if year is 2024
+  if (get(yearShowing) === 2024)
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vTj67l2D7wfqIr28Hx0eMvmXHMaMFxdqwL7yI3H-PoXvzfop0qHkPxaUT0RFCkGl0qqRrVMNbDuqgGa/pub?gid=387650855&single=true&output=csv'
+  else // if year is 2023
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=387650855&single=true&output=csv'
   return await fetchData(URL)
 }
 
@@ -24,7 +32,7 @@ async function fetchData(URL) {
         columnNames.push(...Object.keys(row))
         columnNames.pop()
       }
-      years.push(row.Year)
+      years = [get(yearShowing)]
       months.push(row.Month)
       return {
         id: index,
@@ -37,7 +45,7 @@ async function fetchData(URL) {
         average_percentage_viewed: row.Average_Percentage_Viewed,
         permalink: row.Permalink_URL,
         month: row.Month,
-        year: row.Year,
+        year: Number(row.Year),
         tags: row.Tags
       }
     })
@@ -45,7 +53,7 @@ async function fetchData(URL) {
       metrics: 'videos',
       data: data,
       columnNames: removeDescriptionColumn(formatColumnNames(columnNames.slice(0, 8))),
-      years: [...new Set(years)],
+      years: [get(yearShowing)],
       months: [...new Set(months)]
     }
   })

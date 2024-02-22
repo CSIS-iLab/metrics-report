@@ -9,7 +9,10 @@
   let allowed = {}
   
   async function fetchAllowed() {
-    const URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=1063007507&single=true&output=csv'
+    // this link is from the spreadsheet 2023 
+    // const URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=1063007507&single=true&output=csv'
+    // testing new spreadsheet
+    const URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSmW5sqT3mHTZOxLfwzHz5UER-pnpYzqasepZZcoF927i9_Q7hKz8Mb2dQgMDhqxGexQ20jJ_MobohY/pub?gid=0&single=true&output=csv'
     const dataPromise = d3Fetch.csv( URL ).then( res => {
       const data = res.map( ( row, index ) => {
         return {

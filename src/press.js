@@ -1,17 +1,21 @@
 import * as d3Fetch from 'd3-fetch'
-import { getHelperData } from "./helper"
+import { get } from 'svelte/store'
+import { yearShowing } from './store'
+// import { getHelperData } from "./helper"
 
 let helperDataset = {}
 let columnNames
 let test = {}
 let years = []
 let months = []
+let URL
 // exclude these from the press
 // const excludeFromPress = [
 //   'Defending Democratic Institutions',
 //   'Defense Budget Analysis',
 //   'Project on Fragility and Mobility'
 // ]
+
 const ispSubPrograms = [
   'Aerospace Security Project',
   'Arleigh A. Burke Chair in Strategy',
@@ -33,8 +37,14 @@ const mepSubPrograms = [
 const seapSubPrograms = ['Asia Maritime Transparency Initiative']
 
 export async function getPressData() {
-  const URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=71771517&single=true&output=csv"
+  // if year is 2024 
+  if (get(yearShowing) === 2024)
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vTj67l2D7wfqIr28Hx0eMvmXHMaMFxdqwL7yI3H-PoXvzfop0qHkPxaUT0RFCkGl0qqRrVMNbDuqgGa/pub?gid=71771517&single=true&output=csv'
+  // if year is 2023
+  else
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=71771517&single=true&output=csv'
   return await fetchData(URL)
 }
 
@@ -46,7 +56,9 @@ async function fetchData(URL) {
       }
       // TODO: pull years dinamically
       months.push(row.Month)
-      years = ['2023']
+      // years = [2023]
+      years = [get(yearShowing)]
+      // years = ['2023']
 
       // Validate if cells in rows are empty
       if ( validateCells( row ) ) return {}
@@ -58,19 +70,19 @@ async function fetchData(URL) {
         total_mentions: row.Total_Mentions ? row.Total_Mentions : 0,
         top_tier_mentions: row.Top_Tier_Mentions ? row.Top_Tier_Mentions : 0,
         month: row.Month,
-        year: row.Year
+        year: Number(row.Year)
         // year: ['2022','2023'] // find way to pull years dinamically.
       }
 
     })
     return {
-      metrics: "press",
+      metrics: 'press',
       data: data,
       dataFormmated: formatData(data),
       columnNames: formatColumnNames(columnNames),
-      years: [...new Set(years)].sort((a, b) => b - a),
+      years: [get(yearShowing)],
       months: [...new Set(months)]
-    };
+    }
   })
   // console.log(dataPromise)
   return dataPromise

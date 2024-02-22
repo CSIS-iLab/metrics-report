@@ -22,10 +22,16 @@
     align-items: center;
     padding-top: rem(8);
     margin-bottom: rem(4);
+    z-index: 9;
 
     @include breakpoint('medium') {
       padding-top: rem(16);
       margin-bottom: rem(8);
+    }
+
+    &__left {
+      display: flex;
+      align-items: center;
     }
   }
 
