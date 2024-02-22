@@ -121,7 +121,7 @@ function formatData(
         videoPodcastsDataset,
         publicationDataset
       ]),
-      years: pressDataset.years.sort((a, b) => b - a),
+      // years: pressDataset.years.sort((a, b) => b - a),
       months: months,
       monthOrder: monthOrder,
       publication_type: publication_type,
