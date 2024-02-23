@@ -233,9 +233,7 @@
               >
               {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--ISP"
-                  ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.program}
-                  </div></td
+                  >{rows.program}</td
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
@@ -251,10 +249,8 @@
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
-                  ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.program}
-                  </div></td
+                <td class="table__body__cell table__body__cell--ISP"
+                  >{rows.program}</td
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
@@ -273,10 +269,8 @@
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
-                  ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.program}
-                  </div></td
+                <td class="table__body__cell table__body__cell--ISP"
+                  >{rows.program}</td
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
@@ -295,10 +289,8 @@
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
-                  ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.program}
-                  </div></td
+                <td class="table__body__cell table__body__cell--ISP"
+                  >{rows.program}</td
                 >
               {/if}
               <td class="table__body__cell table__body__cell--data"
@@ -316,7 +308,7 @@
               {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(
+                    {rows.programsVideos.join(
                       ', '
                     )}
                   </div></td
@@ -354,7 +346,7 @@
               {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(
+                    {rows.programsVideos.join(
                       ', '
                     )}
                   </div></td
@@ -392,7 +384,7 @@
               {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(
+                    {rows.programsVideos.join(
                       ', '
                     )}
                   </div></td
@@ -430,7 +422,7 @@
               {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsVideos.join(
+                    {rows.programsVideos.join(
                       ', '
                     )}
                   </div></td
@@ -468,7 +460,7 @@
               {#if $user === 'International Security Program'}
                 <td class="table__body__cell table__body__cell--data"
                   ><div class="table__body__cell__title-container">
-                    <span class="icon-container" />{rows.programsNames.join(
+                    {rows.programsNames.join(
                       ', '
                     )}
                   </div></td
