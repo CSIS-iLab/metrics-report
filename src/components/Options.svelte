@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { user } from '../store'
+  import { user, ispSubPrograms } from '../store'
 
   import Search from './Search.svelte'
   import Select from 'svelte-select'
@@ -12,6 +12,7 @@
   export let selectedYear
   export let selectedMonth
   export let selectedPageType
+  export let selectedSubProgram
   export let selectedTab
   export let searchText = ''
   export let row
@@ -23,6 +24,9 @@
 
   const optionIdentifier = 'value'
   const labelIdentifier = 'label'
+
+  // $: console.log(dataset.data.publication_type)
+  // $: console.log($ispSubPrograms)
 
   function updateActiveTab(val) {
     const value = val
@@ -90,6 +94,9 @@
     } else if (selectName === 'Tab') {
       updateActiveTab(event.target.value)
       selectedTab = event.target.value
+    } else if (selectName === 'SubProgram') {
+      // console.log('I need the value here', event)
+      selectedSubProgram = event.detail.value
     } else {
       selectedPageType = event.detail.value
       // console.log('else: ', event.detail.value)
@@ -107,6 +114,8 @@
       selectedYear = ''
     } else if (selectName === 'Month') {
       selectedMonth = ''
+    } else if (selectName === 'SubProgram') {
+      selectedSubProgram = ''
     } else {
       selectedPageType = ''
       // console.log('else of handleClear')
@@ -354,42 +363,6 @@
           posts).</em
         >
       </p>
-      <!-- {:else if selectedTab === 'videos'}
-      <p>
-        <strong
-          >Please find below data on iLab videos produced with your program,
-          including What’s Happening, Testify, and other short videos.</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed"
-          reflect performance only in the month the video was posted. Videos
-          posted later in the month will show fewer "Views," "Total Watch Time,"
-          and "Average Percent Viewed." Please click through linked video titles
-          to see up-to-date view counts on YouTube.</em
-        >
-      </p>
-    {:else if selectedTab === 'events'}
-      <p>
-        <strong
-          >Please find below data on your program’s public events (note: this
-          tab only includes events that have been posted to YouTube).</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed"
-          reflect performance only in the month the event video was posted.
-          Event videos posted later in the month will show fewer "Views," "Total
-          Watch Time," and "Average Percent Viewed." Please click through linked
-          event video titles to see up-to-date view counts on YouTube.</em
-        >
-      </p> -->
-      <!-- {:else if selectedTab === 'podcasts'}
-      <p>
-        Please find below data on your program’s CSIS podcast(s), if applicable.
-      </p> -->
     {/if}
   {:else if selectedTab === 'podcasts'}
     <p>
@@ -531,6 +504,21 @@
         placeholder="Select Publication Type"
         on:select={(event) => handleSelect(event, 'Publication Type')}
         on:clear={() => handleClear('Publication Type')}
+      />
+    </div>
+  {/if}
+  {#if $user === 'International Security Program'}
+    <div class="select-container">
+      <div class="label">Program</div>
+      <Select
+        indicatorSvg={chevron}
+        showChevron={true}
+        {optionIdentifier}
+        {labelIdentifier}
+        items={$ispSubPrograms}
+        placeholder="Select Program"
+        on:select={(event) => handleSelect(event, 'SubProgram')}
+        on:clear={() => handleClear('SubProgram')}
       />
     </div>
   {/if}

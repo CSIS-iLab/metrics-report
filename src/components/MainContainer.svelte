@@ -14,9 +14,9 @@
   let selectedYear = ''
   let selectedMonth = ''
   let selectedPageType = ''
+  let selectedSubProgram = ''
   let filterByTab = []
   let selectedTab = 'press'
-
 
   $: yearToShowAverage = $yearShowing
 
@@ -56,26 +56,24 @@
       .filter((row) => row.tab === selectedTab)[0]
       .dataForm.filter((row, index) => {
         const filteredYear = selectedYear ? selectedYear : row.year
-        // if (selectedTab == 'videos') {
-        //   if (index == 1) {
-        //     console.log(row)
-        //   }
-        // }
         const filteredByTitle = searchText ? searchText : row.title
-        if (selectedTab === 'publications') {
-        }
         const filteredMonth = selectedMonth ? selectedMonth : row.month
         const filteredByPageType = selectedPageType
           ? selectedPageType
           : row.publication_type
         if (selectedTab === 'publications') {
-          return ( row.title.toLowerCase().includes(filteredByTitle.toLowerCase())) &&
+          return (
+            row.title.toLowerCase().includes(filteredByTitle.toLowerCase()) &&
             row.year === filteredYear &&
             row.month === filteredMonth &&
             row.publication_type === filteredByPageType
+          )
         }
-        return row.year === filteredYear && row.month === filteredMonth && row.publication_type === filteredByPageType
-        
+        return (
+          row.year === filteredYear &&
+          row.month === filteredMonth &&
+          row.publication_type === filteredByPageType
+        )
       })
     // if (selectedTab == 'videos' || selectedTab == 'podcasts_(Video)' || selectedTab == 'events') {
     //   filteredByProgram = $user
@@ -91,18 +89,47 @@
         selectedTab
       )
     ) {
-      return byProgram.filter((row) => row.programsVideos.includes($user))
+      if ($user === 'International Security Program') {
+        return byProgram.filter((row) => row.programsVideos?.includes($user))
+        .filter((row) => {
+          // console.log(row)
+            const filteredSubProgram = selectedSubProgram
+              ? selectedSubProgram
+              : $user
+            return row.programsVideos?.includes(filteredSubProgram)
+          })
+      }
+      return byProgram.filter((row) => row.programsVideos.includes($user))  
     }
 
     if (selectedTab === 'publications') {
       // if (['publications', 'press', 'social_media', 'podcasts'].includes(selectedTab)) {
       // filteredByProgram = $user
+      if ($user === 'International Security Program') {
+        return byProgram.filter((row) => row.programsNames?.includes($user))
+        .filter((row) => {
+            const filteredSubProgram = selectedSubProgram
+              ? selectedSubProgram
+              : $user
+            return row.programsNames?.includes(filteredSubProgram)
+          })
+      }
       return byProgram.filter((row) => row.programsNames?.includes($user))
     }
 
     // filteredByProgram = ($user) ? $user : row.program
     if ($user === 'International Security Program') {
-      return byProgram.filter((row) => row.parentProgram === filteredByProgram)
+      return byProgram
+        .filter((row) => row.parentProgram === filteredByProgram)
+        .filter((row) => {
+          const filteredSubProgram = selectedSubProgram
+            ? selectedSubProgram
+            : row.program
+          return row.program === filteredSubProgram
+        })
+
+      // console.log(filtered)
+      // return filtered
     }
     return byProgram.filter((row) => row.program === filteredByProgram)
   }
@@ -204,6 +231,13 @@
     $contrasena = ''
     currentProgram = ''
     selectedTab = 'press'
+    $yearShowing = Number($currentYear)
+    selectedYear = ''
+    selectedMonth = ''
+    selectedPageType = ''
+    selectedSubProgram = ''
+
+
   }
 
   function calculateTotalMentionsAvg(data) {
@@ -281,6 +315,7 @@
         bind:selectedYear
         bind:selectedMonth
         bind:selectedPageType
+        bind:selectedSubProgram
         bind:selectedTab
         bind:searchText
       />
