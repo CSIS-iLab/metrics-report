@@ -249,7 +249,7 @@
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--ISP"
                   >{rows.program}</td
                 >
               {/if}
@@ -269,7 +269,7 @@
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--ISP"
                   >{rows.program}</td
                 >
               {/if}
@@ -289,7 +289,7 @@
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--ISP"
                   >{rows.program}</td
                 >
               {/if}
