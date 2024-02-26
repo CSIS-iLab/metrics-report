@@ -22,10 +22,16 @@
     align-items: center;
     padding-top: rem(8);
     margin-bottom: rem(4);
+    z-index: 9;
 
     @include breakpoint('medium') {
       padding-top: rem(16);
       margin-bottom: rem(8);
+    }
+
+    &__left {
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -40,7 +46,7 @@
 
     @include breakpoint('medium') {
       background: no-repeat url(/assets/static/CSIS-logo-long.svg);
-      width: 286px;
+      width: rem(215);
       height: 24px;
       font-size: rem(16);
     }

@@ -1,10 +1,13 @@
 import * as d3Fetch from 'd3-fetch'
+import { get } from 'svelte/store'
+import { yearShowing } from './store'
 import { getHelperData } from "./helper"
 
 let helperDataset = {}
-let columnNames = []
+let columnNames
 let years = []
 let months = []
+let URL
 const ispSubPrograms = [
   'Aerospace Security Project',
   'Arleigh A. Burke Chair in Strategy',
@@ -26,7 +29,14 @@ const mepSubPrograms = [
 const seapSubPrograms = ['Asia Maritime Transparency Initiative']
 
 export async function getPodcastData() {
-  const URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=553537768&single=true&output=csv'
+  // if year is 2024
+  if (get(yearShowing) === 2024)
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vTj67l2D7wfqIr28Hx0eMvmXHMaMFxdqwL7yI3H-PoXvzfop0qHkPxaUT0RFCkGl0qqRrVMNbDuqgGa/pub?gid=553537768&single=true&output=csv'
+  // if year is 2023
+  else
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=553537768&single=true&output=csv'
   return await fetchData(URL)
 }
 
@@ -35,10 +45,13 @@ async function fetchData(URL) {
   const dataPromise = d3Fetch.csv( URL ).then( res => {
     const data = res.map( (row, index ) => {
       if (index == 0) {
+        columnNames = []
         columnNames.push('Program')
         columnNames.push(...Object.keys(row))
+        
       }
-      years.push(row.Year)
+      // years.push(row.Year)
+      years = [get(yearShowing)]
       months.push(row.Month)
       
       // Validate if cells in rows are empty
@@ -49,16 +62,16 @@ async function fetchData(URL) {
         program: getProgramName(row.Podcast),
         parentProgram: getParentProgram(getProgramName(row.Podcast)),
         podcast: fixPodcastsName(row.Podcast),
-        totalDownloads: row.Total_Listens,
+        total_listens: row.Total_Listens,
         month: row.Month,
-        year: row.Year
+        year: Number(row.Year)
       }
     })
     return {
       metrics: "podcasts",
       data: data,
       columnNames: formatColumnNames(columnNames),
-      years: [...new Set(years)],
+      years: [get(yearShowing)],
       months: [...new Set(months)]
     };
   })
@@ -79,7 +92,11 @@ function validateCells(row) {
 }
 
 function formatColumnNames(columnNames) {
-  return columnNames.map((name) => format(name))
+  // return columnNames.map((name) => format(name))
+  return columnNames
+    .sort((a, b) => (a === 'Month' ? -1 : b === 'Month' ? 1 : 0))
+    .map(format)
+    .filter((name) => name !== 'Year')
 }
 
 function format(name) {

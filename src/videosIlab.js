@@ -26,11 +26,11 @@ async function fetchData(URL) {
       return {
         id: index,
         program: getProgram(row.Tags),
-        videoTitle: row.Video_Title,
+        video_title: row.Video_Title,
         description: row.Description,
-        totalViews: row.Views,
-        totalWatchTime: row.Total_Watch_Time_Minutes,
-        averagePercentageViewed: row.Average_Percentage_Viewed,
+        views: row.Views,
+        total_watch_time_minutes: row.Total_Watch_Time_Minutes,
+        average_percentage_viewed: row.Average_Percentage_Viewed,
         permalink: row.Permalink_URL,
         month: row.Month,
         year: row.Year
@@ -64,7 +64,11 @@ function getProgram(string) {
 }
 
 function formatColumnNames(columnNames) {
-  return columnNames.map((name) => format(name))
+  // return columnNames.map((name) => format(name))
+  return columnNames
+    .sort((a, b) => (a === 'Month' ? -1 : b === 'Month' ? 1 : 0))
+    .map(format)
+    .filter((name) => name !== 'Year')
 }
 
 function format(name) {

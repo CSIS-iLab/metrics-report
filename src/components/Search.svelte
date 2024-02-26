@@ -3,6 +3,7 @@
 
   import Icon from './Icons.svelte'
   export let searchText = ''
+  export let selectedTab = ''
   let btnSearch
 
   const clearSearch = () => {
@@ -27,7 +28,7 @@
   }
 </script>
 
-<div class="search search--hidden">
+<div class="search {selectedTab === 'publications' ? '' : 'search--hidden'}">
   <span class="search__icon">
     <Icon name="Icon-magnify" class="icon" />
   </span>

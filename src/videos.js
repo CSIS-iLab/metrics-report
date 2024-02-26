@@ -1,17 +1,25 @@
 import * as d3Fetch from 'd3-fetch'
+import { get } from 'svelte/store'
+import { yearShowing } from './store'
 import { getHelperData } from './videoHelper'
 
 let helperDataset = {}
 let columnNames = []
 let years = []
 let months = []
+let URL
 
 /* -------------------------------------------------------------------------- */
 /*                  Pulling from the videos_ilab tab                          */
 /* -------------------------------------------------------------------------- */
 export async function getVideoData() {
-  const URL =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=387650855&single=true&output=csv'
+  // if year is 2024
+  if (get(yearShowing) === 2024)
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vTj67l2D7wfqIr28Hx0eMvmXHMaMFxdqwL7yI3H-PoXvzfop0qHkPxaUT0RFCkGl0qqRrVMNbDuqgGa/pub?gid=387650855&single=true&output=csv'
+  else // if year is 2023
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=387650855&single=true&output=csv'
   return await fetchData(URL)
 }
 
@@ -24,20 +32,20 @@ async function fetchData(URL) {
         columnNames.push(...Object.keys(row))
         columnNames.pop()
       }
-      years.push(row.Year)
+      years = [get(yearShowing)]
       months.push(row.Month)
       return {
         id: index,
         program: getProgram(row.Tags),
         programsVideos: getProgramsArray(row.Tags),
-        videoTitle: row.Video_Title,
+        video_title: row.Video_Title,
         // description: row.Description,
-        totalViews: row.Views,
-        totalWatchTime: row.Total_Watch_Time_Minutes,
-        averagePercentageViewed: row.Average_Percentage_Viewed,
+        views: row.Views,
+        total_watch_time_minutes: row.Total_Watch_Time_Minutes,
+        average_percentage_viewed: row.Average_Percentage_Viewed,
         permalink: row.Permalink_URL,
         month: row.Month,
-        year: row.Year,
+        year: Number(row.Year),
         tags: row.Tags
       }
     })
@@ -45,7 +53,7 @@ async function fetchData(URL) {
       metrics: 'videos',
       data: data,
       columnNames: removeDescriptionColumn(formatColumnNames(columnNames.slice(0, 8))),
-      years: [...new Set(years)],
+      years: [get(yearShowing)],
       months: [...new Set(months)]
     }
   })
@@ -87,17 +95,17 @@ async function fetchData(URL) {
 // }
 
 function getProgram(string) {
-  const array = string
-    .split(' ')
-    .filter((v) => v.startsWith('#'))
-    .slice(0, 2)
+  const array = string.split(' ').filter((v) => v.startsWith('#'))
+  // .slice(0, 2)
 
   // Use the find method to get the first matching element
   const matchingElement = helperDataset.dataFormatted.find(
-    (element) => element !== '' && array[0] === element.productName
+    (element) => element !== '' && array.includes(element.productName)
+    // (element) => element !== '' && array[0] === element.productName
   )
 
   // Return the program if a matching element was found, or null otherwise
+  // matchingElement ? console.log('matching', matchingElement.program) : console.log('nada')
   return matchingElement ? matchingElement.program : null
 }
 
@@ -120,7 +128,11 @@ function removeDescriptionColumn(columnNames) {
 }
 
 function formatColumnNames(columnNames) {
-  return columnNames.map((name) => format(name))
+  // return columnNames.map((name) => format(name))
+  return columnNames
+    .sort((a, b) => (a === 'Month' ? -1 : b === 'Month' ? 1 : 0))
+    .map(format)
+    .filter((name) => name !== 'Year')
 }
 
 function format(name) {

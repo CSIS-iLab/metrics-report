@@ -1,14 +1,21 @@
 <script>
+  import { yearShowing } from './store'
   import { onMount } from 'svelte'
   import { getNewData } from './data'
   import MainContainer from './components/MainContainer.svelte'
 
   let dataset = {}
 
-  onMount(async () => {
-    const res = await getNewData()
-    dataset = res
-  })
+  $: $yearShowing, fetchData()
+
+  async function fetchData() {
+    // const res = await getNewData()
+    // dataset = res
+    dataset = {}
+    dataset = await getNewData()
+  }
+
+  onMount(fetchData)
 </script>
 
 {#if dataset.data && dataset.data.tabs.length > 0}

@@ -1,16 +1,18 @@
 <script>
   import { onMount } from 'svelte'
-  import { user } from '../store'
+  import { user, ispSubPrograms } from '../store'
 
   import Search from './Search.svelte'
   import Select from 'svelte-select'
   import Icon from './Icons.svelte'
 
   export let dataset
+  export let months
   export let filteredData
   export let selectedYear
   export let selectedMonth
   export let selectedPageType
+  export let selectedSubProgram
   export let selectedTab
   export let searchText = ''
   export let row
@@ -22,6 +24,9 @@
 
   const optionIdentifier = 'value'
   const labelIdentifier = 'label'
+
+  // $: console.log(dataset.data.publication_type)
+  // $: console.log($ispSubPrograms)
 
   function updateActiveTab(val) {
     const value = val
@@ -89,6 +94,9 @@
     } else if (selectName === 'Tab') {
       updateActiveTab(event.target.value)
       selectedTab = event.target.value
+    } else if (selectName === 'SubProgram') {
+      // console.log('I need the value here', event)
+      selectedSubProgram = event.detail.value
     } else {
       selectedPageType = event.detail.value
       // console.log('else: ', event.detail.value)
@@ -106,6 +114,8 @@
       selectedYear = ''
     } else if (selectName === 'Month') {
       selectedMonth = ''
+    } else if (selectName === 'SubProgram') {
+      selectedSubProgram = ''
     } else {
       selectedPageType = ''
       // console.log('else of handleClear')
@@ -282,7 +292,10 @@
           <strong
             >Please find below data from main CSIS social media accounts. <em
               >Note: Data from individual program accounts is not included on
-              this dashboard. "Number of Posts," "Impressions," and "Engagements" do not account for posts from program accounts that have been amplified (i.e., reposted/shared) by CSIS's main social media accounts. Please also note: Social media metrics for line
+              this dashboard. "Number of Posts," "Impressions," and
+              "Engagements" do not account for posts from program accounts that
+              have been amplified (i.e., reposted/shared) by CSIS's main social
+              media accounts. Please also note: Social media metrics for line
               item "International Security Program" represent only ISP general
               content (i.e., does not include content also tagged to a specific
               sub-program/project).</em
@@ -309,7 +322,10 @@
           <strong
             >Please find below data from main CSIS social media accounts. <em
               >Please note: Data from individual program accounts is not
-              included on this dashboard. "Number of Posts," "Impressions," and "Engagements" do not account for posts from program accounts that have been amplified (i.e., reposted/shared) by CSIS's main social media accounts.</em
+              included on this dashboard. "Number of Posts," "Impressions," and
+              "Engagements" do not account for posts from program accounts that
+              have been amplified (i.e., reposted/shared) by CSIS's main social
+              media accounts.</em
             ></strong
           >
         </p>
@@ -347,42 +363,6 @@
           posts).</em
         >
       </p>
-      <!-- {:else if selectedTab === 'videos'}
-      <p>
-        <strong
-          >Please find below data on iLab videos produced with your program,
-          including What’s Happening, Testify, and other short videos.</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed"
-          reflect performance only in the month the video was posted. Videos
-          posted later in the month will show fewer "Views," "Total Watch Time,"
-          and "Average Percent Viewed." Please click through linked video titles
-          to see up-to-date view counts on YouTube.</em
-        >
-      </p>
-    {:else if selectedTab === 'events'}
-      <p>
-        <strong
-          >Please find below data on your program’s public events (note: this
-          tab only includes events that have been posted to YouTube).</strong
-        >
-      </p>
-      <p>
-        <em
-          >Note: "Views," "Total Watch Time," and "Average Percent Viewed"
-          reflect performance only in the month the event video was posted.
-          Event videos posted later in the month will show fewer "Views," "Total
-          Watch Time," and "Average Percent Viewed." Please click through linked
-          event video titles to see up-to-date view counts on YouTube.</em
-        >
-      </p> -->
-      <!-- {:else if selectedTab === 'podcasts'}
-      <p>
-        Please find below data on your program’s CSIS podcast(s), if applicable.
-      </p> -->
     {/if}
   {:else if selectedTab === 'podcasts'}
     <p>
@@ -395,8 +375,8 @@
       <em
         >Note: This tab includes listens in the selected month for all episodes
         of the associated podcast, not just those released within the selected
-        month.</em
-      >
+        month. “Listens” are the same as “downloads.”
+      </em>
     </p>
   {:else if selectedTab === 'podcasts_(Video)'}
     <p>
@@ -474,16 +454,19 @@
       in the associated month.
     </p>
     <p>
-      Data in this tab can be sorted by month, publication type, and number of
-      views.
+      Data in this tab can be sorted by month, publication title, publication
+      type, and number of views.
     </p>
     <p>
       <em
-        >Notes: This tab includes views received in the selected month for
+        >Note: This tab includes views received in the selected month for
         publications published on any date, not just those published within the
         selected month. This data is presented on a month-by-month basis, so
         views are not cumulative, and only represent data from the selected
-        month.</em
+        month. For data on Digital Reports and downloads of PDFs on CSIS
+        analysis pages, please contact External Relations. Please also note:
+        This tab includes all CSIS.org publications tagged to your program,
+        including those co-authored by or also tagged to other programs.</em
       >
     </p>
   {:else}
@@ -503,7 +486,7 @@
       showChevron={true}
       {optionIdentifier}
       {labelIdentifier}
-      items={dataset.data.months}
+      items={months}
       placeholder="Select Month"
       on:select={(event) => handleSelect(event, 'Month')}
       on:clear={() => handleClear('Month')}
@@ -517,17 +500,32 @@
         showChevron={true}
         {optionIdentifier}
         {labelIdentifier}
-        items={dataset.data.pageType}
+        items={dataset.data.publication_type}
         placeholder="Select Publication Type"
         on:select={(event) => handleSelect(event, 'Publication Type')}
         on:clear={() => handleClear('Publication Type')}
       />
     </div>
   {/if}
+  {#if $user === 'International Security Program'}
+    <div class="select-container">
+      <div class="label">Program</div>
+      <Select
+        indicatorSvg={chevron}
+        showChevron={true}
+        {optionIdentifier}
+        {labelIdentifier}
+        items={$ispSubPrograms}
+        placeholder="Select Program"
+        on:select={(event) => handleSelect(event, 'SubProgram')}
+        on:clear={() => handleClear('SubProgram')}
+      />
+    </div>
+  {/if}
 </div>
 <div class="options options__container options__container--sticky">
   <section class="options__navigation">
-    <Search bind:searchText />
+     <Search bind:searchText bind:selectedTab />
     <div class="options__navigation-inner">
       <span class="options__table-total-entries"
         >Showing {totalEntries} {totalEntries > 1 ? 'entries' : 'entry'}</span

@@ -1,8 +1,11 @@
 import * as d3Fetch from 'd3-fetch'
+import { get } from 'svelte/store'
+import { yearShowing } from './store'
 
 let columnNames
 let years = []
 let months = []
+let URL
 const ispSubPrograms = [
   'Aerospace Security Project',
   'Arleigh A. Burke Chair in Strategy',
@@ -24,9 +27,15 @@ const mepSubPrograms = [
 const seapSubPrograms = ['Asia Maritime Transparency Initiative']
 
 export async function getSocialMediaDataa() {
-  const newURL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=833450828&single=true&output=csv"
-  return await fetchData(newURL)
+  // if year is 2024
+  if (get(yearShowing) === 2024)
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vTj67l2D7wfqIr28Hx0eMvmXHMaMFxdqwL7yI3H-PoXvzfop0qHkPxaUT0RFCkGl0qqRrVMNbDuqgGa/pub?gid=833450828&single=true&output=csv'
+  // if year is 2023
+  else
+    URL =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7w_KjpjOnWrTBRESsdR4B71EURLp-aFfOTqk5KnA9Y3uZ9FhfHndJtddFkq_jbbp5e1u346r1uG8V/pub?gid=833450828&single=true&output=csv'
+  return await fetchData(URL)
 }
 
 async function fetchData(URL) {
@@ -35,7 +44,8 @@ async function fetchData(URL) {
       if (index == 0) {
         columnNames = Object.keys(row)
       }
-      years.push(row.Year)
+      // years.push(row.Year)
+      years = [get(yearShowing)]
       months.push(row.Month)
 
       // Validate if cells in rows are empty
@@ -45,20 +55,20 @@ async function fetchData(URL) {
         id: index,
         program: row.Program,
         parentProgram: getParentProgram(row.Program),
-        numberOfPosts: row.Number_of_Posts,
+        number_of_posts: row.Number_of_Posts,
         impressions: row.Impressions,
         engagements: row.Engagements,
         month: row.Month,
-        year: row.Year
+        year: Number(row.Year)
       }
     })
     return {
-      metrics: "social_media",
+      metrics: 'social_media',
       data: data,
       columnNames: formatColumnNames(columnNames),
-      years: [...new Set(years)],
-      months: [...new Set(months)],
-    };
+      years: [get(yearShowing)],
+      months: [...new Set(months)]
+    }
   })
   return dataPromise
 }
@@ -77,7 +87,11 @@ function validateCells(row) {
 }
 
 function formatColumnNames(columnNames) {
-  return columnNames.map((name) => format(name))
+  // return columnNames.map((name) => format(name))
+  return columnNames
+    .sort((a, b) => (a === 'Month' ? -1 : b === 'Month' ? 1 : 0))
+    .map(format)
+    .filter((name) => name !== 'Year')
 }
 
 function format(name) {
