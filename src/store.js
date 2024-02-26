@@ -16,6 +16,7 @@ export const ispSubPrograms = readable([
   'Emeritus Chair in Strategy',
   'Missile Defense Project',
   // 'Project on Fragility and Mobility',
+  'International Security Program',
   'Project on Nuclear Issues',
   'Smart Women, Smart Power',
   'Transnational Threats Project',
