@@ -31,9 +31,8 @@
   &__wrapper {
     background-color: $color-background-white;
   }
-  
-  &__cell{
-  
+
+  &__cell {
     &--header {
       color: $color-text-gray-500;
       padding: rem(12) rem(16);
@@ -48,62 +47,168 @@
       }
 
       // originally use for program name
-      &--ISP {
-        padding: rem(12) rem(16);
-        padding-left: 6vw;
-        min-width: 80vw;
-        max-width: rem(440);
+      // &--ISP {
+      //   padding: rem(12) rem(16);
+      //   padding-left: 6vw;
+      //   min-width: 80vw;
+      //   max-width: rem(440);
 
-        @include breakpoint('medium') {
-          min-width: rem(440);
-          padding-left:rem(88);
-        }
+      //   @include breakpoint('medium') {
+      //     min-width: rem(440);
+      //     padding-left: rem(88);
+      //   }
 
-        @include breakpoint('large') {
-          min-width: rem(550);
-          max-width: rem(550);
-        }
-      }
-       
-      &:first-child {
-        min-width: rem(224);
-        max-width: rem(224);
+      //   @include breakpoint('large') {
+      //     min-width: rem(550);
+      //     max-width: rem(550);
+      //   }
+      // }
+
+      // &:first-child {
+      //   min-width: rem(224);
+      //   max-width: rem(224);
+      // }
+
+      // &:nth-child(2) {
+      //   min-width: rem(190);
+      //   max-width: rem(190);
+      // }
+
+      // &:nth-child(3) {
+      //   min-width: rem(224);
+      //   max-width: rem(224);
+      // }
+
+      // &:nth-child(4) {
+      //   min-width: rem(144);
+      //   max-width: rem(144);
+      // }
+
+      // &:nth-child(5) {
+      //   min-width: rem(224);
+      //   max-width: rem(224);
+      // }
+
+      // &:nth-child(6) {
+      //   min-width: rem(240);
+      //   max-width: rem(240);
+      // }
+
+      // &__container {
+      //   display: flex;
+      //   align-items: center;
+      // }
+    }
+  }
+
+  &__cell__header {
+    color: $color-text-gray-500;
+    padding: rem(12) rem(16);
+    background-color: $color-background-white;
+    @extend %text-style-ui-2-bold;
+
+    // border-bottom: 1px solid $color-borders-gray-400;
+    text-align: left;
+
+    @include breakpoint('medium') {
+      padding: rem(12) rem(24);
+    }
+
+    &--month {
+      min-width: rem(160);
+      max-width: rem(160);
+    }
+
+    // originally use for program name
+    &--program {
+      padding-left: 6vw;
+      min-width: 80vw;
+      max-width: rem(440);
+
+      @include breakpoint('medium') {
+        min-width: rem(440);
+        padding-left: 0;
       }
 
-      &:nth-child(2) {
-        min-width: rem(190);
-        max-width: rem(190);
+      @include breakpoint('large') {
+        min-width: rem(450);
+        max-width: rem(450);
       }
+    }
 
-      &:nth-child(3) {
-        min-width: rem(224);
-        max-width: rem(224);
-      }
+    &--total-mentions {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
 
-      &:nth-child(4) {
-        min-width: rem(144);
-        max-width: rem(144);
-      }
+    &--top-tier-mentions {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
 
-      &:nth-child(5) {
-        min-width: rem(224);
-        max-width: rem(224);
-      }
+    &--number-of-posts {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
 
-      &:nth-child(6) {
-        min-width: rem(240);
-        max-width: rem(240);
-      }
+    &--impressions {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
 
-      &__container {
-        display: flex;
-        align-items: center;
-      }
+    &--engagements {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--podcast {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--total-listens {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--video-title {
+      min-width: rem(250);
+      max-width: rem(250);
+    }
+
+    &--views {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--total-watch-time {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--average-percentage-viewed {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--title {
+      min-width: rem(250);
+      max-width: rem(250);
+    }
+
+    &--publication-type {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &__container {
+      display: flex;
+      align-items: center;
     }
   }
 
   .sort-icons-container {
-    display:flex;
+    display: flex;
     flex-direction: column;
     margin-left: rem(4);
     cursor: pointer;
@@ -121,7 +226,6 @@
     &--inactive {
       color: $color-text-gray-100;
     }
-
   }
 
   &__container {
@@ -134,8 +238,9 @@
       position: sticky;
       top: rem(48);
       z-index: 10;
-      box-shadow: 0 1px 2px hsl(0deg 0% 0% / 5%), 0 1px 4px hsl(0deg 0% 0% / 5%), 0 2px 8px hsl(0deg 0% 0% / 5%);
-      
+      box-shadow: 0 1px 2px hsl(0deg 0% 0% / 5%), 0 1px 4px hsl(0deg 0% 0% / 5%),
+        0 2px 8px hsl(0deg 0% 0% / 5%);
+
       @include breakpoint('medium') {
         top: rem(50);
       }
@@ -155,106 +260,14 @@
     background-color: $color-background-gray-100;
     transition: $transition__link;
   }
-  
+
   .title--active {
     background-color: $color-background-gray-200;
   }
 
-  .extra-content {
-    background-color: $color-background-gray-200;
-
-    .table__body__cell {
-      padding-left: 6vw;
-      overflow: hidden;
-      padding-top: 0;
-      padding-bottom: 0;
-
-      @include breakpoint('medium') {
-         padding-left: rem(56);
-      }
-    }
-
-    &__container {
-      padding: 0;
-      width: calc(100vw - rem(32) * 2);
-      max-width: rem(750);
-      max-height: 0px;
-      @extend %text-style-paragraph-2;
-      transition: $transition__link;
-
-      @include breakpoint('medium') {
-        padding: 0 rem(16) 0 rem(32);
-      }
-    }
-
-    &.active .extra-content__container {
-      max-height: 1000px;
-      transition: $transition__link;
-      transition-duration: .5s;
-    }
-
-    .description {
-      padding-top: rem(8);
-    }
-
-    .link {
-      margin-top: rem(12);
-      margin-bottom: rem(32);
-    }
-
-    .link a {
-      color: $color-brand-blue-600;
-      text-decoration: none;
-
-      .icon-container {
-        // color brand-blue-600
-        margin-left: rem(5);
-        filter: invert(39%) sepia(72%) saturate(6596%) hue-rotate(200deg) brightness(100%) contrast(84%);
-      }
-
-      &:hover {
-        color: $color-brand-blue-700;
-
-        .icon-container {
-          // color brand-blue-700
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg) brightness(92%) contrast(101%);
-        }
-      }
-
-      &:focus {
-        color: $color-brand-blue-700;
-        background-color: $color-background-light-blue-100;
-        outline: 0;
-
-        .icon-container {
-          // color: $color-brand-blue-700;
-          filter: invert(22%) sepia(54%) saturate(2858%) hue-rotate(194deg) brightness(92%) contrast(101%);
-        }
-      }
-
-      &:visited {
-        color: $color-brand-blue-870;
-
-        .icon-container {
-          // color: $color-brand-blue-800;
-          opacity: 0.7;
-          filter: invert(9%) sepia(41%) saturate(6837%) hue-rotate(211deg) brightness(98%) contrast(99%);
-        }
-      }
-    }
-  
-    .policy-goals {
-      &__title {
-        color: black;
-        text-decoration: underline;
-        text-transform: uppercase;
-      }
-    }
-  }
-
   &__cell {
     color: $color-text-gray-500;
-    
+
     overflow-wrap: break-word;
     @extend %text-style-ui-2;
     text-align: left;
@@ -273,18 +286,19 @@
     }
 
     // originally used for program name
-    &--ISP {
+    &--program {
       padding-left: 6vw;
       min-width: 80vw;
       max-width: rem(440);
+
       @include breakpoint('medium') {
         min-width: rem(440);
         padding-left: 0;
       }
 
       @include breakpoint('large') {
-        min-width: rem(550);
-        max-width: rem(550);
+        min-width: rem(450);
+        max-width: rem(450);
       }
     }
 
@@ -302,51 +316,126 @@
       padding-bottom: rem(56);
     }
 
-
-    &:first-child {
-      min-width: rem(224);
-      max-width: rem(224);
+    &--month {
+      min-width: rem(160);
+      max-width: rem(160);
     }
 
-    &:nth-child(2) {
-      min-width: rem(190);
-      max-width: rem(190);
-    }
-    
-    &:nth-child(3) {
+    // &--program {
+    //   min-width: rem(190);
+    //   max-width: rem(190);
+    // }
+
+    &--total-mentions {
       min-width: rem(224);
       max-width: rem(224);
     }
-    
-    &:nth-child(4) {
-      min-width: rem(144);
-      max-width: rem(144);
-    }
-    
-    &:nth-child(5) {
+
+    &--top-tier-mentions {
       min-width: rem(224);
       max-width: rem(224);
     }
-    
-    &:nth-child(6) {
-      min-width: rem(240);
-      max-width: rem(240);
+
+    &--number-of-posts {
+      min-width: rem(224);
+      max-width: rem(224);
     }
+
+    &--impressions {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--engagements {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--podcast {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--total-listens {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--video-title {
+      min-width: rem(250);
+      max-width: rem(250);
+    }
+
+    &--views {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--total-watch-time {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--average-percentage-viewed {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    &--title {
+      min-width: rem(250);
+      max-width: rem(250);
+    }
+
+    &--publication-type {
+      min-width: rem(224);
+      max-width: rem(224);
+    }
+
+    // &:first-child {
+    //   min-width: rem(224);
+    //   max-width: rem(224);
+    // }
+
+    // &:nth-child(2) {
+    //   min-width: rem(190);
+    //   max-width: rem(190);
+    // }
+
+    // &:nth-child(3) {
+    //   min-width: rem(224);
+    //   max-width: rem(224);
+    // }
+
+    // &:nth-child(4) {
+    //   min-width: rem(144);
+    //   max-width: rem(144);
+    // }
+
+    // &:nth-child(5) {
+    //   min-width: rem(224);
+    //   max-width: rem(224);
+    // }
+
+    // &:nth-child(6) {
+    //   min-width: rem(240);
+    //   max-width: rem(240);
+    // }
 
     &__title-container {
       display: flex;
 
-      .icon-container{
+      .icon-container {
         position: relative;
         width: rem(24);
-        min-width:rem(24);
+        min-width: rem(24);
         height: rem(20);
-        display:block;
+        display: block;
 
-        &:before, &:after {
+        &:before,
+        &:after {
           top: 50%;
-          content: " ";
-          display:block;
+          content: ' ';
+          display: block;
           position: absolute;
           width: 9px;
           height: 2px;
@@ -365,38 +454,6 @@
           -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
         }
-
-      }
-    }
-    
-
-    &__policy-goal-container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0px;
-      gap: rem(8);
-      pointer-events: none;
-    }
-
-    &__policy-goal {
-      border-radius: rem(10);
-      padding: rem(3) rem(10) rem(5);
-      @extend %text-style-ui-5;
-
-      &--emissions_reduction {
-        color: $color-policy-goals-emissions-reduction-text;
-        background-color: $color-policy-goals-emissions-reduction-fill;
-      }
-  
-      &--economic_development {
-        color: $color-policy-goals-economic-development-text;
-        background-color: $color-policy-goals-economic-development-fill;
-      }
-  
-      &--resilience {
-        color: $color-policy-goals-resilience-text;
-        background-color: $color-policy-goals-resilience-fill;
       }
     }
 
@@ -421,7 +478,6 @@
     transform: rotate(45deg);
     transition: $transition__link;
   }
-  
 }
 
 .icon-container {
@@ -431,7 +487,6 @@
 
 .icon-tag-container {
   margin-right: rem(8);
-
 }
 
 .tooltip {
