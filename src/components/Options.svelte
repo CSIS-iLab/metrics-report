@@ -249,8 +249,12 @@
         <p>
           Top Tier Mentions: the number of times your program and experts were
           cited in print and online stories by the world’s top news sources
-          (“top sources” are those in the 10% of news sources by reach, AKA
-          audience size)
+          (“top sources” are top tier outlets such as: The New York Times, The
+          Wall Street Journal, CNN, MSNBC, The Associated Press, etc.) For a
+          comprehensive list of news sources included, <a
+            href="https://docs.google.com/spreadsheets/d/1ggbibHZp2RgVlkj4P9BT0BAGrI_TljKlRnyrY7McpJs/edit#gid=0"
+            target="_blank" rel="noopener noreferrer">please see here</a
+          >.
         </p>
       {:else}
         <p>
@@ -282,8 +286,12 @@
         <p>
           Top Tier Mentions: the number of times your program and experts were
           cited in print and online stories by the world’s top news sources
-          (“top sources” are those in the 10% of news sources by reach, AKA
-          audience size)
+          (“top sources” are top tier outlets such as: The New York Times, The
+          Wall Street Journal, CNN, MSNBC, The Associated Press, etc.) For a
+          comprehensive list of news sources included, <a
+            href="https://docs.google.com/spreadsheets/d/1ggbibHZp2RgVlkj4P9BT0BAGrI_TljKlRnyrY7McpJs/edit#gid=0"
+            target="_blank" rel="noopener noreferrer">please see here</a
+          >.
         </p>
       {/if}
     {:else if selectedTab === 'social_media'}
@@ -525,7 +533,7 @@
 </div>
 <div class="options options__container options__container--sticky">
   <section class="options__navigation">
-     <Search bind:searchText bind:selectedTab />
+    <Search bind:searchText bind:selectedTab />
     <div class="options__navigation-inner">
       <span class="options__table-total-entries"
         >Showing {totalEntries} {totalEntries > 1 ? 'entries' : 'entry'}</span
