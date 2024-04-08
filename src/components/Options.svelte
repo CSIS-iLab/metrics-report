@@ -244,7 +244,7 @@
         <p><strong>KEY</strong></p>
         <p>
           Total Mentions: the number of times your program and experts were
-          cited across online, print, TV, and radio news stories
+          cited across online, print, TV, and radio news stories.
         </p>
         <p>
           Top Tier Mentions: the number of times your program and experts were
@@ -281,7 +281,7 @@
         <p><strong>KEY</strong></p>
         <p>
           Total Mentions: the number of times your program and experts were
-          cited across online, print, TV, and radio news stories
+          cited across online, print, TV, and radio news stories.
         </p>
         <p>
           Top Tier Mentions: the number of times your program and experts were
