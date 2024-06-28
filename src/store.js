@@ -21,5 +21,6 @@ export const ispSubPrograms = readable([
   'Project on Nuclear Issues',
   'Smart Women, Smart Power',
   'Transnational Threats Project',
-  'Intelligence, National Security, and Technology Program'
+  'Intelligence, National Security, and Technology Program',
+  'Warfare, Irregular Threats, and Terrorism Program'
 ])
