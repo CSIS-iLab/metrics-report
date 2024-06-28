@@ -160,19 +160,19 @@ function getParentProgram(name) {
   return name
 }
 
-function updateISPProgramName(name) {
-  console.log(name)
-  const ispProgramNames = [
-    'Transnational Threats Project',
-    'Warfare, Irregular Threats, and Terrorism Program'
-  ]
+// function updateISPProgramName(name) {
+//   console.log(name)
+//   const ispProgramNames = [
+//     'Transnational Threats Project',
+//     'Warfare, Irregular Threats, and Terrorism Program'
+//   ]
 
-  if (ispProgramNames.includes(name)) {
-    return 'Warfare, Irregular Threats, and Terrorism Program'
-  }
+//   if (ispProgramNames.includes(name)) {
+//     return 'Warfare, Irregular Threats, and Terrorism Program'
+//   }
 
-  return name
-}
+//   return name
+// }
 
 function fixPodcastsName(name) {
   const nameMapping = {

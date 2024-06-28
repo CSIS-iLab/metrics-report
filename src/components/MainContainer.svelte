@@ -26,6 +26,7 @@
   //   yearToShowAverage = ($currentYear).toString()
   // }
 
+  // $: console.log(dataset)
   let searchText
   $: row = { isOpen: false }
 
