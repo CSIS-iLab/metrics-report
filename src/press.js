@@ -29,7 +29,9 @@ const ispSubPrograms = [
   'Smart Women, Smart Power',
   'Transnational Threats Project',
   'Intelligence, National Security, and Technology Program',
-  'Warfare, Irregular Threats, and Terrorism Program'
+  'Warfare, Irregular Threats, and Terrorism Program',
+  'Defending Democratic Institutions',
+  'Futures Lab'
 ]
 const mepSubPrograms = [
   'Brzezinski Chair in Global Security and Geostrategy',
@@ -90,12 +92,12 @@ async function fetchData(URL) {
 }
 
 function updateProgramName(name) {
-  const programNames = [
+  const ispProgramNames = [
     'Transnational Threats Project',
     'Warfare, Irregular Threats, and Terrorism Program'
   ]
 
-  if (programNames.includes(name)) {
+  if (ispProgramNames.includes(name)) {
     return 'Warfare, Irregular Threats, and Terrorism Program'
   }
 
