@@ -18,7 +18,11 @@
           target="_blank"
           rel="noreferrer">Andreas C. Dracopoulos iDeas Lab</a
         >, the in-house digital, multimedia, and design agency at the Center for
-        Strategic and International Studies. It was produced by José Romero.
+        Strategic and International Studies. It was produced by <a
+          class="about__link"
+          href="https://www.csis.org/people/jose-romero"
+          target="_blank"
+          rel="noreferrer">José Romero</a>.
       </p>
     </div>
 
