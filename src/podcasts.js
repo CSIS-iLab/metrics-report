@@ -1,7 +1,7 @@
 import * as d3Fetch from 'd3-fetch'
 import { get } from 'svelte/store'
 import { yearShowing } from './store'
-import { getHelperData } from "./helper"
+import { getHelperData } from './helper'
 
 let helperDataset = {}
 let columnNames
@@ -11,16 +11,19 @@ let URL
 const ispSubPrograms = [
   'Aerospace Security Project',
   'Arleigh A. Burke Chair in Strategy',
-  'Defending Democratic Institutions',
+  // 'Defending Democratic Institutions',
   'Defense-Industrial Initiatives Group',
-  'Defense Budget Analysis',
+  // 'Defense Budget Analysis',
   'Emeritus Chair in Strategy',
   'Missile Defense Project',
-  'Project on Fragility and Mobility',
+  // 'Project on Fragility and Mobility',
   'Project on Nuclear Issues',
   'Smart Women, Smart Power',
   'Transnational Threats Project',
-  'Intelligence, National Security, and Technology Program'
+  'Intelligence, National Security, and Technology Program',
+  'Warfare, Irregular Threats, and Terrorism Program',
+  'Defending Democratic Institutions',
+  'Futures Lab'
 ]
 const mepSubPrograms = [
   'Brzezinski Chair in Global Security and Geostrategy',
@@ -42,18 +45,17 @@ export async function getPodcastData() {
 
 async function fetchData(URL) {
   helperDataset = await getHelperData()
-  const dataPromise = d3Fetch.csv( URL ).then( res => {
-    const data = res.map( (row, index ) => {
+  const dataPromise = d3Fetch.csv(URL).then((res) => {
+    const data = res.map((row, index) => {
       if (index == 0) {
         columnNames = []
         columnNames.push('Program')
         columnNames.push(...Object.keys(row))
-        
       }
       // years.push(row.Year)
       years = [get(yearShowing)]
       months.push(row.Month)
-      
+
       // Validate if cells in rows are empty
       if (validateCells(row)) return {}
 
@@ -68,12 +70,12 @@ async function fetchData(URL) {
       }
     })
     return {
-      metrics: "podcasts",
+      metrics: 'podcasts',
       data: data,
       columnNames: formatColumnNames(columnNames),
       years: [get(yearShowing)],
       months: [...new Set(months)]
-    };
+    }
   })
   return dataPromise
 }
@@ -100,7 +102,7 @@ function formatColumnNames(columnNames) {
 }
 
 function format(name) {
-  return name.replaceAll("_", " ")
+  return name.replaceAll('_', ' ')
 }
 
 // function getProgramName(productName) {
@@ -115,6 +117,7 @@ function format(name) {
 //   return programName
 // }
 
+// IMPORTANT make sure to add the podcast name in the 2023 spreadsheet under the tab helper_internal_use
 function getProgramName(productName) {
   if (helperDataset.dataFormatted.length > 1) {
     const matchingElement = helperDataset.dataFormatted
@@ -124,13 +127,22 @@ function getProgramName(productName) {
       .find((element) => element !== '')
 
     if (matchingElement) {
+      console.log(matchingElement)
+      const ispProgramNames = [
+        'Transnational Threats Project',
+        'Warfare, Irregular Threats, and Terrorism Program'
+      ]
+
+      if (ispProgramNames.includes(matchingElement.program)) {
+        matchingElement.program =
+          'Warfare, Irregular Threats, and Terrorism Program'
+      }
       return matchingElement.program
     }
   }
 
   return undefined // or null, or any other appropriate value if no match is found
 }
-
 
 function getParentProgram(name) {
   if (ispSubPrograms.includes(name)) {
@@ -147,6 +159,20 @@ function getParentProgram(name) {
 
   return name
 }
+
+// function updateISPProgramName(name) {
+//   console.log(name)
+//   const ispProgramNames = [
+//     'Transnational Threats Project',
+//     'Warfare, Irregular Threats, and Terrorism Program'
+//   ]
+
+//   if (ispProgramNames.includes(name)) {
+//     return 'Warfare, Irregular Threats, and Terrorism Program'
+//   }
+
+//   return name
+// }
 
 function fixPodcastsName(name) {
   const nameMapping = {

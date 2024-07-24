@@ -176,15 +176,16 @@
             {#if $user !== 'International Security Program' && name === 'Program'}
               <!-- Skip rendering the "Program" column if currentProgram is not "ISP" -->
             {:else}
+              <!-- <th
+                class="table__cell--header"
+                scope="col"
+              > -->
               <th
-                class="table__cell--header {$user ===
-                'International Security Program'
-                  ? '--ISP'
-                  : ''}"
+                class="table__cell__header table__cell__header--{name.toLowerCase().split(' ').join('-').replace(/-\([^)]*\)$/, '')}"
                 scope="col"
               >
                 <div
-                  class="table__cell--header__container table__cell--header__container__{name
+                  class="table__cell__header__container table__cell__header__container__{name
                     .toLowerCase()
                     .split(' ')
                     .join('-')}"
@@ -228,38 +229,38 @@
         {#each filteredData as rows}
           {#if selectedTab === 'press'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--ISP"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   >{rows.program}</td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--total-mentions"
                 >{parseInt(rows.total_mentions).toLocaleString('en-US')}</td
               >
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--top-tier-mentions">
                 {parseInt(rows.top_tier_mentions).toLocaleString('en-US')}
               </td>
             </tr>
           {:else if selectedTab === 'social_media'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--ISP"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   >{rows.program}</td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--number-of-posts"
                 >{parseInt(rows.number_of_posts, 10).toLocaleString('en-US')}</td
               >
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--impressions">
                 {parseInt(rows.impressions, 10).toLocaleString('en-US')}
               </td>
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--engagements"
                 >{parseInt(rows.engagements, 10).toLocaleString('en-US')}</td
               >
             </tr>
@@ -285,28 +286,28 @@
             </tr>
           {:else if selectedTab === 'podcasts'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--ISP"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   >{rows.program}</td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--podcast"
                 >{rows.podcast}</td
               >
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--total-listens">
                 {parseInt(rows.total_listens, 10).toLocaleString('en-US')}
               </td>
             </tr>
           {:else if selectedTab === 'videos'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   ><div class="table__body__cell__title-container">
                     {rows.programsVideos.join(
                       ', '
@@ -314,7 +315,7 @@
                   </div></td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--video-title">
                 <div class="link">
                   <a
                     href={rows.permalink}
@@ -326,25 +327,25 @@
                   >
                 </div>
               </td>
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--views">
                 {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--total-watch-time"
                 >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
                   'en-US'
                 )}</td
               >
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--average-percentage-viewed"
                 >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'events'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   ><div class="table__body__cell__title-container">
                     {rows.programsVideos.join(
                       ', '
@@ -352,7 +353,7 @@
                   </div></td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--video-title">
                 <div class="link">
                   <a
                     href={rows.permalink}
@@ -364,25 +365,25 @@
                   >
                 </div>
               </td>
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--views">
                 {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--total-watch-time"
                 >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
                   'en-US'
                 )}</td
               >
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--average-percentage-viewed"
                 >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'YouTube_shorts'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   ><div class="table__body__cell__title-container">
                     {rows.programsVideos.join(
                       ', '
@@ -390,7 +391,7 @@
                   </div></td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--video-title">
                 <div class="link">
                   <a
                     href={rows.permalink}
@@ -402,25 +403,25 @@
                   >
                 </div>
               </td>
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--views">
                 {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--total-watch-time"
                 >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
                   'en-US'
                 )}</td
               >
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--average-percentage-viewed"
                 >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'podcasts_(Video)'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   ><div class="table__body__cell__title-container">
                     {rows.programsVideos.join(
                       ', '
@@ -428,7 +429,7 @@
                   </div></td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--video-title">
                 <div class="link">
                   <a
                     href={rows.permalink}
@@ -440,25 +441,25 @@
                   >
                 </div>
               </td>
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--views">
                 {parseInt(rows.views, 10).toLocaleString('en-US')}
               </td>
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--total-watch-time"
                 >{parseInt(rows.total_watch_time_minutes, 10).toLocaleString(
                   'en-US'
                 )}</td
               >
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--average-percentage-viewed"
                 >{rows.average_percentage_viewed}</td
               >
             </tr>
           {:else if selectedTab === 'publications'}
             <tr class="title table__body__cell--border">
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--month"
                 >{rows.month}</td
               >
               {#if $user === 'International Security Program'}
-                <td class="table__body__cell table__body__cell--data"
+                <td class="table__body__cell table__body__cell--data table__body__cell--program"
                   ><div class="table__body__cell__title-container">
                     {rows.programsNames.join(
                       ', '
@@ -466,7 +467,7 @@
                   </div></td
                 >
               {/if}
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--title"
                 >
                 <div class="link">
                   <a
@@ -480,10 +481,10 @@
                 </div>  
               </td
               >
-              <td class="table__body__cell table__body__cell--data">
+              <td class="table__body__cell table__body__cell--data table__body__cell--publication-type">
                 {rows.publication_type}
               </td>
-              <td class="table__body__cell table__body__cell--data"
+              <td class="table__body__cell table__body__cell--data table__body__cell--views"
                 >{parseInt(rows.views, 10).toLocaleString('en-US')}</td
               >
             </tr>

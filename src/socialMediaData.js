@@ -18,7 +18,8 @@ const ispSubPrograms = [
   'Project on Nuclear Issues',
   'Smart Women, Smart Power',
   'Transnational Threats Project',
-  'Intelligence, National Security, and Technology Program'
+  'Intelligence, National Security, and Technology Program',
+  'Warfare, Irregular Threats, and Terrorism Program'
 ]
 const mepSubPrograms = [
   'Brzezinski Chair in Global Security and Geostrategy',
@@ -53,7 +54,7 @@ async function fetchData(URL) {
 
       return {
         id: index,
-        program: row.Program,
+        program: updateProgramName(row.Program),
         parentProgram: getParentProgram(row.Program),
         number_of_posts: row.Number_of_Posts,
         impressions: row.Impressions,
@@ -96,6 +97,19 @@ function formatColumnNames(columnNames) {
 
 function format(name) {
   return name.replaceAll("_", " ")
+}
+
+function updateProgramName(name) {
+  const programNames = [
+    'Transnational Threats Project',
+    'Warfare, Irregular Threats, and Terrorism Program'
+  ]
+
+  if (programNames.includes(name)) {
+    return 'Warfare, Irregular Threats, and Terrorism Program'
+  }
+
+  return name
 }
 
 function getParentProgram(name) {

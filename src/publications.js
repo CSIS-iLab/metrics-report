@@ -101,5 +101,19 @@ function replaceAMTI(programName) {
   if (programName === 'Asia Maritime Transparency Initiative') {
     return 'Southeast Asia Program'
   }
+
+  if (programName === 'AI Governance Project') {
+    return 'Wadhwani Center for AI and Advanced Technologies'
+  }
+
+  const ispProgramNames = [
+    'Transnational Threats Project',
+    'Warfare, Irregular Threats, and Terrorism Program'
+  ]
+
+  if (ispProgramNames.includes(programName)) {
+    return 'Warfare, Irregular Threats, and Terrorism Program'
+  }
+
   return programName
 }

@@ -84,7 +84,22 @@ function getProgram(string) {
 
   // Return the program if a matching element was found, or null otherwise
   // matchingElement ? console.log('matching', matchingElement.program) : console.log('nada')
-  return matchingElement ? matchingElement.program : null
+
+  if (matchingElement) {
+    console.log(matchingElement)
+    const ispProgramNames = [
+      'Transnational Threats Project',
+      'Warfare, Irregular Threats, and Terrorism Program'
+    ]
+
+    if (ispProgramNames.includes(matchingElement.program)) {
+      matchingElement.program =
+        'Warfare, Irregular Threats, and Terrorism Program'
+    }
+    return matchingElement.program
+  }
+  return null
+  // return matchingElement ? matchingElement.program : null
 }
 
 function getProgramsArray(string) {
@@ -94,6 +109,8 @@ function getProgramsArray(string) {
   const programName = helperDataset.dataFormatted
     .filter((element) => element !== '' && array.includes(element.productName))
     .map((element) => element.program)
+
+
 
   return programName
 }
