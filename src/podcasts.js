@@ -127,7 +127,7 @@ function getProgramName(productName) {
       .find((element) => element !== '')
 
     if (matchingElement) {
-      console.log(matchingElement)
+      // console.log(matchingElement)
       const ispProgramNames = [
         'Transnational Threats Project',
         'Warfare, Irregular Threats, and Terrorism Program'

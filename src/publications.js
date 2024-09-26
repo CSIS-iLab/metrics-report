@@ -42,7 +42,9 @@ async function fetchData(URL) {
         views: Number(row.Views),
         // engagements: Number(row.Engagements),
         month: row.Month,
-        year: Number(row.Year)
+        year: Number(row.Year),
+        publicationMonth: row.Publication_Month,
+        publicationYear: Number(row.Publication_Year),
       }
     })
     return {

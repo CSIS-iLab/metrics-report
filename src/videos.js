@@ -109,7 +109,7 @@ function getProgram(string) {
   // return matchingElement ? matchingElement.program : null
 
   if (matchingElement) {
-    console.log(matchingElement)
+    // console.log(matchingElement)
     const ispProgramNames = [
       'Transnational Threats Project',
       'Warfare, Irregular Threats, and Terrorism Program'
