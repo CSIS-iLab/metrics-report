@@ -487,10 +487,10 @@
               <td class="table__body__cell table__body__cell--data table__body__cell--views"
                 >{parseInt(rows.views, 10).toLocaleString('en-US')}</td
               >
-              <td class="table__body__cell table__body__cell--data table__body__cell--views"
+              <td class="table__body__cell table__body__cell--data table__body__cell--publication-month"
                 >{rows.publicationMonth}</td
               >
-              <td class="table__body__cell table__body__cell--data table__body__cell--views"
+              <td class="table__body__cell table__body__cell--data table__body__cell--publication-year"
                 >{parseInt(rows.publicationYear, 10).toLocaleString('en-US')}</td
               >
             </tr>
