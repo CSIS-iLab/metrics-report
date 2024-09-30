@@ -253,7 +253,8 @@
           Wall Street Journal, CNN, MSNBC, The Associated Press, etc.) For a
           comprehensive list of news sources included, <a
             href="https://docs.google.com/spreadsheets/d/1ggbibHZp2RgVlkj4P9BT0BAGrI_TljKlRnyrY7McpJs/edit#gid=0"
-            target="_blank" rel="noopener noreferrer">please see here</a
+            target="_blank"
+            rel="noopener noreferrer">please see here</a
           >.
         </p>
       {:else}
@@ -290,7 +291,8 @@
           Wall Street Journal, CNN, MSNBC, The Associated Press, etc.) For a
           comprehensive list of news sources included, <a
             href="https://docs.google.com/spreadsheets/d/1ggbibHZp2RgVlkj4P9BT0BAGrI_TljKlRnyrY7McpJs/edit#gid=0"
-            target="_blank" rel="noopener noreferrer">please see here</a
+            target="_blank"
+            rel="noopener noreferrer">please see here</a
           >.
         </p>
       {/if}
@@ -460,6 +462,14 @@
     <p>
       Each row in this tab shows the number of views a publication has received
       in the associated month.
+    </p>
+    <p>
+      Publication Month and Publication Year reflect the original publication
+      date of the piece on <a
+        href="http://CSIS.org"
+        target="_blank"
+        rel="noopener noreferrer">CSIS.org</a
+      >.
     </p>
     <p>
       Data in this tab can be sorted by month, publication title, publication
