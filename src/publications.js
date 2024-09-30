@@ -42,7 +42,9 @@ async function fetchData(URL) {
         views: Number(row.Views),
         // engagements: Number(row.Engagements),
         month: row.Month,
-        year: Number(row.Year)
+        year: Number(row.Year),
+        publicationMonth: row.Publication_Month,
+        publicationYear: Number(row.Publication_Year),
       }
     })
     return {
@@ -73,10 +75,11 @@ function formatTitle(title) {
 
 function formatColumnNames(columnNames) {
   // return columnNames.map((name) => format(name))
+  // console.log(columnNames);
   return columnNames
     .sort((a, b) => (a === 'Month' ? -1 : b === 'Month' ? 1 : 0))
     .map(format)
-    .filter((name) => name !== 'Year')
+    .filter((name) => name !== 'Year' && name.trim() !== '')
 }
 
 function format(name) {
