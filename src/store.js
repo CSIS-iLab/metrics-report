@@ -3,6 +3,7 @@ import { readable, writable } from 'svelte/store'
 export const login = writable(false)
 export const user = writable('')
 export const contrasena = writable('')
+export const titleValue = writable('Metrics Dashboard | CSIS External Relations')
 export const currentYear = readable(new Date().getFullYear())
 // export const yearShowing = writable(2023)
 export const yearShowing = writable(2024) // todo: find a way to get the current year
